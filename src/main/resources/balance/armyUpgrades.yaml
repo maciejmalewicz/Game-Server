@@ -1,0 +1,75 @@
+powerInSimplicity:
+  COST:
+    METAL: 200
+    BUILDING_MATERIALS: 0
+    ELECTRICITY: 200
+  RESEARCH_TIME:
+    minutes: 0
+    seconds: 15
+  PRODUCTION_TIME_REDUCTION: 0.5
+  REQUIREMENTS: []
+
+advancedDroids:
+  COST:
+    METAL: 3000
+    BUILDING_MATERIALS: 200
+    ELECTRICITY: 3300
+  RESEARCH_TIME:
+    minutes: 1
+    seconds: 45
+  PRODUCTION_TIME_INCREASE: 0.3
+  PRODUCTION_COST_REDUCTION: 0.5
+  REQUIREMENTS: [6]
+
+assemblyLines:
+  COST:
+    METAL: 400
+    BUULDING_MATERIALS: 300
+    ELECTRICITY: 500
+  RESEARCH_TIME:
+    minutes: 0
+    seconds: 45
+  REQUIREMENTS: [0]
+
+massProduction:
+  COST:
+    METAL: 1000
+    BUILDING_MATERIALS: 700
+    ELECTRICITY: 1100
+  RESEARCH_TIME:
+    minutes: 1
+    seconds: 15
+  REQUIREMENTS: [2]
+
+tanks:
+  COST:
+    METAL: 1000
+    BUILDING_MATERIALS: 300
+    ELECTRICITY: 1000
+  RESEARCH_TIME:
+    minutes: 1
+    seconds: 0
+  REQUIREMENTS: [2]
+
+mobility:
+  COST:
+    METAL: 1200
+    BUILDING_MATERIALS: 0
+    ELECTRICITY: 1200
+  RESEARCH_TIME:
+    minutes: 1
+    seconds: 15
+  HITPOINT_BONUS: 0.5
+  REQUIREMENTS: [4]
+
+shootingWindow:
+  COST:
+    METAL: 200
+    BUILDING_MATERIALS: 300
+    ELECTRICITY: 400
+  RESEARCH_TIME:
+    minutes: 0
+    seconds: 45
+  HITPOINT_BONUS: 0.5
+  REQUIREMENTS: [0]  
+

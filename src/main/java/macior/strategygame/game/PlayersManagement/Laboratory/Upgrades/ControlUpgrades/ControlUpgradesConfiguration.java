@@ -132,4 +132,37 @@ public class ControlUpgradesConfiguration {
         System.out.println(out);
         return out;
     }
+
+    @Bean
+    public Infrastructure infrastructureBean(){
+        Map<String, Object> inside = (Map) getMainMap().get("infrastructure");
+        JSONObject jobject = new JSONObject(inside);
+
+        Gson gson = new Gson();
+        Infrastructure out = gson.fromJson(jobject.toString(), Infrastructure.class);
+        System.out.println(out);
+        return out;
+    }
+
+    @Bean
+    public ConquerAndProtect1 conquerAndProtect1Bean(){
+        Map<String, Object> inside = (Map) getMainMap().get("conquerAndProtect1");
+        JSONObject jobject = new JSONObject(inside);
+
+        Gson gson = new Gson();
+        ConquerAndProtect1 out = gson.fromJson(jobject.toString(), ConquerAndProtect1.class);
+        System.out.println(out);
+        return out;
+    }
+
+    @Bean
+    public ConquerAndProtect2 conquerAndProtect2Bean(){
+        Map<String, Object> inside = (Map) getMainMap().get("conquerAndProtect2");
+        JSONObject jobject = new JSONObject(inside);
+
+        Gson gson = new Gson();
+        ConquerAndProtect2 out = gson.fromJson(jobject.toString(), ConquerAndProtect2.class);
+        System.out.println(out);
+        return out;
+    }
 }

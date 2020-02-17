@@ -85,5 +85,34 @@ accuracy:
     seconds: 30
   REQUIREMENTS: [8]
 
+infrastructure:
+  COST:
+    METAL: 300
+    BUILDING_MATERIALS: 600
+    ELECTRICITY: 700
+  RESEARCH_TIME:
+    minutes: 1
+    seconds: 0
+  TRAVELING_TIME_REDUCTION: 0.3
+  REQUIREMENTS: [0]
 
+conquerAndProtect1:
+   COST:
+      METAL: 200
+      BUILDING_MATERIALS: 400
+      ELECTRICITY: 500
+   RESEARCH_TIME:
+      minutes: 1
+      seconds: 0
+   REQUIREMENTS: [0]
+
+conquerAndProtect2:
+   COST:
+     METAL: 800
+     BUILDING_MATERIALS: 2000
+     ELECTRICITY: 2300
+   RESEARCH_TIME:
+     minutes: 1
+     seconds: 30
+   REQUIREMENTS: [5]
 
