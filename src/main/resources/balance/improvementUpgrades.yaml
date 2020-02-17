@@ -1,0 +1,123 @@
+productionManagers1:
+  COST:
+    METAL: 30
+    BUILDING_MATERIALS: 40
+    ELECTRICITY: 120
+  RESEARCH_TIME:
+    minutes: 0
+    seconds: 30
+  PRODUCTION_BONUS: 0.2
+  REQUIREMENTS: []
+
+productionManagers2:
+  COST:
+    METAL: 150
+    BUILDING_MATERIALS: 200
+    ELECTRICITY: 600
+  RESEARCH_TIME:
+    minutes: 1
+    seconds: 30
+  PRODUCTION_BONUS: 0.3
+  REQUIREMENTS: [2, 3, 4]
+
+miningDrill:
+  COST:
+    METAL: 80
+    BUILDING_MATERIALS: 100
+    ELECTRICITY: 120
+  RESEARCH_TIME:
+    minutes: 1
+    seconds: 0
+  PRODUCTION_BONUS: 0.3
+  REQUIREMENTS: [0]
+
+excavator:
+  COST:
+    METAL: 100
+    BUILDING_MATERIALS: 80
+    ELECTRICITY: 120
+  RESEARCH_TIME:
+    minutes: 1
+    seconds: 0
+  PRODUCTION_BONUS: 0.3
+  REQUIREMENTS: [0]
+
+advancedPhysics:
+  COST:
+    METAL: 125
+    BUILDING_MATERIALS: 125
+    ELECTRICITY: 50
+  RESEARCH_TIME:
+    minutes: 1
+    seconds: 0
+  PRODUCTION_BONUS: 0.3
+  REQUIREMENTS: [0]
+
+engineeringPatterns:
+  COST:
+    METAL: 200
+    BUILDING_MATERIALS: 300
+    ELECTRICITY: 400
+  RESEARCH_TIME:
+    minutes: 1
+    seconds: 15
+  COST_REDUCTION: 0.3
+  REQUIREMENTS: [3]
+
+spaceManagement:
+  COST:
+    METAL: 100
+    BUILDING_MATERIALS: 400
+    ELECTRICITY: 200
+  RESEARCH_TIME:
+    minutes: 1
+    seconds: 0
+  REQUIREMENTS: [2]
+
+transportTrains:
+  COST:
+    METAL: 600
+    BUILDING_MATERIALS: 600
+    ELECTRICITY: 1000
+  RESEARCH_TIME:
+    minutes: 1
+    seconds: 30
+  REQUIREMENTS: [5]
+  PRODUCTION_BONUS: 0.4
+
+geology:
+  COST:
+    METAL: 500
+    BUILDING_MATERIALS: 500
+    ELECTRICITY: 700
+  RESEARCH_TIME:
+    minutes: 1
+    seconds: 15
+  REQUIREMENTS: [2, 3]
+  EXCHANGE_RATIO: 0.3
+
+architecture:
+  COST:
+    METAL: 800
+    BUILDING_MATERIALS: 1000
+    ELECTRICITY: 800
+  RESEARCH_TIME:
+    minutes: 1
+    seconds: 45
+  REQUIREMENTS: [5]
+
+managersAI:
+  COST:
+    METAL: 200
+    BUILDING_MATERIALS: 300
+    ELECTRICITY: 1500
+  RESEARCH_TIME:
+    minutes: 0
+    seconds: 30
+  REQUIREMENTS: [1]
+  BONUS_PER_MINUTE: 0.05
+  MAX_BONUS: 0.5
+
+
+
+
