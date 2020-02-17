@@ -121,4 +121,48 @@ public class ArmyUpgradesConfiguration {
         System.out.println(out);
         return out;
     }
+
+    @Bean
+    public Cannons cannonsBean(){
+        Map<String, Object> inside = (Map) getMainMap().get("cannons");
+        JSONObject jobject = new JSONObject(inside);
+
+        Gson gson = new Gson();
+        Cannons out = gson.fromJson(jobject.toString(), Cannons.class);
+        System.out.println(out);
+        return out;
+    }
+
+    @Bean
+    public CannonPlatform cannonPlatformBean(){
+        Map<String, Object> inside = (Map) getMainMap().get("cannonPlatform");
+        JSONObject jobject = new JSONObject(inside);
+
+        Gson gson = new Gson();
+        CannonPlatform out = gson.fromJson(jobject.toString(), CannonPlatform.class);
+        System.out.println(out);
+        return out;
+    }
+
+    @Bean
+    public BattleFormation battleFormationBean(){
+        Map<String, Object> inside = (Map) getMainMap().get("battleFormation");
+        JSONObject jobject = new JSONObject(inside);
+
+        Gson gson = new Gson();
+        BattleFormation out = gson.fromJson(jobject.toString(), BattleFormation.class);
+        System.out.println(out);
+        return out;
+    }
+
+    @Bean
+    public SolarPanels solarPanelsBean(){
+        Map<String, Object> inside = (Map) getMainMap().get("solarPanels");
+        JSONObject jobject = new JSONObject(inside);
+
+        Gson gson = new Gson();
+        SolarPanels out = gson.fromJson(jobject.toString(), SolarPanels.class);
+        System.out.println(out);
+        return out;
+    }
 }
