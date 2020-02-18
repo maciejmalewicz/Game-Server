@@ -22,23 +22,14 @@ public class ActivationLinkController {
     @CrossOrigin
     public int add(@RequestBody ActivationLink link){
         System.out.println("message red: " + link);
-        String mail = link.getEmail();
         int result = service.addActivationLink(link);
         return result;
+    }
 
-//        switch (result){
-//            case 1:
-//                return "Login already occupied!";
-//            case 2:
-//                return "There already exists account with this e-mail address!";
-//            case 3:
-//                return "Password too weak! It should contain at least 8 characters, including:\n"
-//                        + "- at least 1 upper case letter\n"
-//                        + "- at least 1 lower case letter\n"
-//                        + "- at least 1 digit";
-//            default:
-//                return "Well done! Activation link has been sent to " + mail + "!";
-//        }
+    @GetMapping(path = "{link}")
+    @CrossOrigin
+    public int activate(@PathVariable("link") String link){
+        return service.activate(link);
     }
 
 

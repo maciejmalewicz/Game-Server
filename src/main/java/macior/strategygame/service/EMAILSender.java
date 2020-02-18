@@ -9,16 +9,23 @@ import java.util.Properties;
 
 public class EMAILSender {
 
-    private static String address = "file:///C:/Users/grzeg/Desktop/startegy-game-client/RegistrationPage/Index.html";
+    private static String address = "http://127.0.0.1:8080//api/activationLink/";
 
-    public static void sendActivationLink(ActivationLink link) {
+    public static int sendActivationLink(ActivationLink link) {
+        String to = link.getEmail();
+        String login = link.getLogin();
+        String code = address + link.getActivationLink();
+        String messageText = "Welcome, " + login + ". Your activation link is: \n" + code + "\n"
+                    + "Enter it to create new account!\n";
+        return send("CREATING ACCOUNT", messageText, to, login);
+    }
+
+    public static int send(String topic, String messageToSend, String email, String username) {
         String host="smtp.gmail.com";
         final String user="d21gsd21gs@gmail.com";//change accordingly
         final String password="desertzmiensem123456";//change accordingly
 
-        String to = link.getEmail();//change accordingly
-        String login = link.getLogin();
-        String code = link.getActivationLink();
+        String to = email;//change accordingly
 
         //Get the session object
         Properties props = new Properties();
@@ -36,17 +43,12 @@ public class EMAILSender {
                         return new PasswordAuthentication(user,password);
                     }
                 });
-
-        //Compose the message
-
         try {
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(user));
             message.addRecipient(Message.RecipientType.TO,new InternetAddress(to));
-            message.setSubject("CREATING ACCOUNT");
-            message.setText("Welcome, " + login + ". Your activation link is: " + code + "\n"
-            + "Enter it to create new account!\n"
-            + "Enter code here: " + address);
+            message.setSubject(topic);
+            message.setText(messageToSend);
 
             System.out.println("Sending the message!");
             //send the message
@@ -54,7 +56,9 @@ public class EMAILSender {
 
             System.out.println("message sent successfully...");
 
-        } catch (MessagingException e) {e.printStackTrace();}
+        } catch (MessagingException e) {
+            return -1;
+        }
+        return 0;
     }
-
 }

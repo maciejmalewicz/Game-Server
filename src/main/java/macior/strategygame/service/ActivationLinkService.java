@@ -23,7 +23,7 @@ public class ActivationLinkService {
     }
 
     public int addActivationLink(ActivationLink link){ //0 if all is fine, 1 if login is occupied and 2 if email is used already
-        System.out.println("serviced: " + link);   //and 3 if password is wrong
+        System.out.println("serviced: " + link);   //and 3+ if password is wrong AND -1 if e-mail address is wrong
         String login = link.getLogin();
         String email = link.getEmail();
         int passwordVal;
@@ -31,17 +31,25 @@ public class ActivationLinkService {
         int userResult = userDAO.existsInUsers(login, email);
         int linkResult = activationLinkDAO.existsInLinks(login, email);
 
-        if (userResult == 2 || linkResult == 2){
+        if (userResult == 2 || linkResult == 2){ //if email is used
             return 2;
-        } else if (userResult == 1 || linkResult == 1){
+        } else if (userResult == 1 || linkResult == 1){ //if login is used
             return 1;
-        } else if ((passwordVal = PasswordValidator.isValid(link.getPassword())) != 0){
+        } else if ((passwordVal = PasswordValidator.isValid(link.getPassword())) != 0){ //if password is valid
             return passwordVal;
-        } else {
-            activationLinkDAO.add(UUID.randomUUID(), link);
-            EMAILSender.sendActivationLink(link);
-            return 0;
+        } else{ //then... try to send an e-mail
+            UUID code = UUID.randomUUID();
+            link.setActivationLink(code.toString());
+            int state = EMAILSender.sendActivationLink(link);
+            if (state == 0) { //if it goes fine, add link to the database
+                activationLinkDAO.add(link);
+            }
+            return state;
         }
+    }
+
+    public int activate(String link){
+        return activationLinkDAO.activate(link);
     }
 
 }

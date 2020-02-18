@@ -2,6 +2,7 @@ package macior.strategygame.dao.activationLinks;
 
 import macior.strategygame.dao.AbstractDAO;
 import macior.strategygame.dao.Context;
+import macior.strategygame.dao.users.UserDAO;
 import macior.strategygame.models.ActivationLink;
 import macior.strategygame.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ import java.util.UUID;
 
 @Repository("activationLinkDAO")
 public class ActivationLinkDAO extends AbstractDAO<ActivationLink> implements IActivationLinkDAO{
+
+    @Autowired
+    private UserDAO userDAO;
 
     @Autowired
     public ActivationLinkDAO(Context context){
@@ -51,10 +55,10 @@ public class ActivationLinkDAO extends AbstractDAO<ActivationLink> implements IA
         return 0;
     }
 
-    public void add(UUID id, ActivationLink link){
-        System.out.println("adding: " + link + " with uuid: " + id);
-        link.setActivationLink(id.toString());
-        System.out.println(link.getActivationLink());
+    public void add(ActivationLink link){
+        System.out.println("adding: " + link + " with uuid: " + link.getActivationLink());
+        //link.setActivationLink(id.toString());
+        //System.out.println(link.getActivationLink());
         EntityManager manager = context.entityManager();
         EntityTransaction transaction = manager.getTransaction();
         transaction.begin();
@@ -67,6 +71,28 @@ public class ActivationLinkDAO extends AbstractDAO<ActivationLink> implements IA
             transaction.rollback();
         }
         manager.clear();
+    }
+
+    public int activate(String link){
+        CriteriaBuilder criteriaBuilder = context.criteriaBuilder();
+        CriteriaQuery<ActivationLink> criteria = criteriaBuilder.createQuery(ActivationLink.class);
+        Root<ActivationLink> linkRoot = criteria.from(ActivationLink.class);
+        Predicate loginPredicate = criteriaBuilder.equal(linkRoot.get("activationLink"), link);
+        criteria.where(loginPredicate);
+        Query criteriaQuery = context.entityManager().createQuery(criteria);
+
+        List<ActivationLink> result = criteriaQuery.getResultList();
+
+        if (result.size() > 0){
+            ActivationLink linkToActivate = result.get(0);
+            delete(linkToActivate.getId());
+            User userToAdd = new User(linkToActivate);
+            userDAO.add(userToAdd);
+            return 1;
+        }
+        else {
+            return 0;
+        }
     }
 
     public Optional<ActivationLink> getById(int id){

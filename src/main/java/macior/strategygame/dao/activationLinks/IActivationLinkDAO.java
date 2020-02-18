@@ -6,5 +6,7 @@ import java.util.UUID;
 
 public interface IActivationLinkDAO {
 
-    void add(UUID id, ActivationLink link);
+    void add(ActivationLink link);
+
+    int activate(String link);
 }

@@ -29,6 +29,12 @@ public class User {
 
     public User(){}
 
+    public User(ActivationLink link){
+        login = link.getLogin();
+        password = link.getPassword();
+        email = link.getEmail();
+    }
+
 
     public int getId() {
         return id;
