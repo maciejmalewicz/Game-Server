@@ -9,13 +9,13 @@ public final class PasswordValidator {
 
     public static int isValid(String toValidate){
         if (!toValidate.matches(LENGTH_REGEX)){
-            return 3;
+            return 2;
         } else if (!toValidate.matches(LOWER_CASE_REGEX)){
-            return 4;
+            return 3;
         } else if (!toValidate.matches(UPPER_CASE_REGEX)){
-            return 5;
+            return 4;
         } else if (!toValidate.matches(DIGIT_REGEX)){
-            return 6;
+            return 5;
         } else {
             return 0;
         }
