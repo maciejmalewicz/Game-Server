@@ -6,6 +6,8 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class>macior.strategygame.models.User</class>
         <class>macior.strategygame.models.ActivationLink</class>
+        <class>macior.strategygame.models.game_history_management.GamePassed</class>
+        <class>macior.strategygame.models.game_history_management.PlayerGame</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
 
 

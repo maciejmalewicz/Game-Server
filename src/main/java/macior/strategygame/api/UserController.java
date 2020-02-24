@@ -1,6 +1,7 @@
 package macior.strategygame.api;
 
 import macior.strategygame.models.User;
+import macior.strategygame.service.PlayerGameMapperService;
 import macior.strategygame.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,10 +12,12 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     private final UserService service;
+    private final PlayerGameMapperService mapperService;
 
     @Autowired //?
-    public UserController(UserService userService){
+    public UserController(UserService userService, PlayerGameMapperService mapperService){
         service = userService;
+        this.mapperService = mapperService;
     }
 
     @PostMapping
@@ -35,15 +38,17 @@ public class UserController {
         return service.getAccount(login, password).orElse(null);
     }
 
+    @PutMapping
+    @CrossOrigin
+    public String logIn(@RequestBody User user){
+        return mapperService.logIn(user);
+    }
+
     @DeleteMapping(path = "{id}")
     public void delete(@PathVariable("id") int id){
         service.delete(id);
     }
 
-    @PutMapping
-    public void update(@RequestBody User user){
-        int id = user.getId();
-        service.update(id, user);
-    }
+
 
 }

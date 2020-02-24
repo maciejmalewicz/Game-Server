@@ -71,6 +71,7 @@ public class ActivationLinkService {
 
         //if I fail then report an error
         if (state != 0){
+            System.out.println("Problemz sending. Returning 10!");
             return 10;
         }
 

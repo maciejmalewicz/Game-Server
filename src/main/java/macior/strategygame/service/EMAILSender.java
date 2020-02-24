@@ -55,10 +55,12 @@ public class EMAILSender {
             Transport.send(message);
 
             System.out.println("message sent successfully...");
+            return 0;
 
         } catch (MessagingException e) {
-            return -1;
+            System.out.println("Sending Ended Not Good!!");
+            return 10;
         }
-        return 0;
+
     }
 }

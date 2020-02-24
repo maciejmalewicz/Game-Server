@@ -57,8 +57,6 @@ public class ActivationLinkDAO extends AbstractDAO<ActivationLink> implements IA
 
     public void add(ActivationLink link){
         System.out.println("adding: " + link + " with uuid: " + link.getActivationLink());
-        //link.setActivationLink(id.toString());
-        //System.out.println(link.getActivationLink());
         EntityManager manager = context.entityManager();
         EntityTransaction transaction = manager.getTransaction();
         transaction.begin();
@@ -88,10 +86,10 @@ public class ActivationLinkDAO extends AbstractDAO<ActivationLink> implements IA
             delete(linkToActivate.getId());
             User userToAdd = new User(linkToActivate);
             userDAO.add(userToAdd);
-            return 1;
+            return 0;
         }
         else {
-            return 0;
+            return 2;
         }
     }
 
