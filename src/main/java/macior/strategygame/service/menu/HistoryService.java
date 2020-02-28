@@ -36,9 +36,9 @@ public class HistoryService {
         }
         HistoryResponse response = new HistoryResponse();
         String newCode = mapper.updateCode(code);
+        System.out.println(newCode);
         response.setGames(units);
-        response.setNewCode(newCode);
-        //System.out.println(playersId);
+        response.setCode(newCode);
         return response;
     }
 }

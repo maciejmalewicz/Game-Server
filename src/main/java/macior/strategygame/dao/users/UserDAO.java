@@ -55,6 +55,21 @@ public class UserDAO extends AbstractDAO<User> {
         return 0;
     }
 
+    public int existsLogin(String login){
+        CriteriaBuilder criteriaBuilder = context.criteriaBuilder();
+        CriteriaQuery<User> criteria = criteriaBuilder.createQuery(User.class);
+        Root<User> userRoot = criteria.from(User.class);
+        Predicate loginPredicate = criteriaBuilder.equal(userRoot.get("login"), login);
+        criteria.where(loginPredicate);
+        Query criteriaQuery = context.entityManager().createQuery(criteria);
+        List<User> result = criteriaQuery.getResultList();
+        if (result.size() > 0){
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
 
     public Optional<User> getAccount(String login, String password){
         CriteriaBuilder criteriaBuilder = context.criteriaBuilder();

@@ -25,6 +25,9 @@ public class PlayerGame {
     @Column(name = "result")
     private double result;
 
+    @Column(name = "experience_gained")
+    private int experienceGained;
+
     public String toString(){
         return player + " " + game + " " + result;
     }
@@ -59,5 +62,13 @@ public class PlayerGame {
 
     public void setResult(double result) {
         this.result = result;
+    }
+
+    public int getExperienceGained() {
+        return experienceGained;
+    }
+
+    public void setExperienceGained(int experienceGained) {
+        this.experienceGained = experienceGained;
     }
 }

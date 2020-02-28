@@ -1,20 +1,13 @@
 package macior.strategygame.models.game_history_management;
 
+import macior.strategygame.models.ResponseBase;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class HistoryResponse {
+public class HistoryResponse extends ResponseBase {
 
-    private String newCode;
     private List<HistoryUnit> games = new ArrayList<>();
-
-    public String getNewCode() {
-        return newCode;
-    }
-
-    public void setNewCode(String newCode) {
-        this.newCode = newCode;
-    }
 
     public List<HistoryUnit> getGames() {
         return games;

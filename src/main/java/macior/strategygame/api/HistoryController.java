@@ -15,6 +15,7 @@ public class HistoryController {
     private HistoryService service;
 
     @GetMapping(path = "{code}")
+    @CrossOrigin
     public HistoryResponse getHistory(@PathVariable("code")String code){
         System.out.println(code);
         return service.getHistory(code);

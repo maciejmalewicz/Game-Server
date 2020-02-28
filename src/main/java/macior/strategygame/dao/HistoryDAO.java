@@ -46,6 +46,7 @@ public class HistoryDAO {
         for (PlayerGame pg : result){
             GamePassed game = pg.getGame();
             HistoryUnit unit = buildHistoryUnit(game);
+            unit.setExperienceGained(pg.getExperienceGained());
             out.add(unit);
         }
         return out;
@@ -64,7 +65,7 @@ public class HistoryDAO {
         }
 
         if (attendances.size() > 1){
-            PlayerGame attendance2 = attendances.get(0);
+            PlayerGame attendance2 = attendances.get(1);
             unit.setPlayer2Login(attendance2.getPlayer().getLogin());
             unit.setPlayer2Result(attendance2.getResult());
         }

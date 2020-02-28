@@ -15,6 +15,7 @@ public class HistoryUnit {
     private double player4Result;
 
     private Date date;
+    private int experienceGained;
 
     public String getPlayer1Login() {
         return player1Login;
@@ -86,5 +87,13 @@ public class HistoryUnit {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public int getExperienceGained() {
+        return experienceGained;
+    }
+
+    public void setExperienceGained(int experienceGained) {
+        this.experienceGained = experienceGained;
     }
 }

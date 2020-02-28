@@ -23,6 +23,9 @@ public final class PlayerGameMapperService {
 
     public PlayerGameMapperService(){
         System.out.println("MAPPER");
+        //todo delete this - just for tests
+        codeToId.put("an", 5);
+        idToCode.put(5, "an");
     }
 
     //logs player in and returns his access code
@@ -57,11 +60,17 @@ public final class PlayerGameMapperService {
 
     //each time we update the code when we receive a message
     public String updateCode(String code){
-        int playersId = codeToId.remove(code);
-        idToCode.remove(playersId);
-        String newCode = UUID.randomUUID().toString();
-        codeToId.put(newCode, playersId);
-        idToCode.put(playersId, newCode);
-        return newCode;
+
+        //if there is a guy like that, then change maps
+        if (codeToId.containsKey(code)){
+            int playersId = codeToId.remove(code);
+            idToCode.remove(playersId);
+            //then generate new code for him and store
+            String newCode = UUID.randomUUID().toString();
+            codeToId.put(newCode, playersId);
+            idToCode.put(playersId, newCode);
+            return newCode;
+        }
+        return "UNKNOWN CODE!";
     }
 }

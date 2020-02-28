@@ -55,6 +55,21 @@ public class ActivationLinkDAO extends AbstractDAO<ActivationLink> implements IA
         return 0;
     }
 
+    public int existsLogin(String login){
+        CriteriaBuilder criteriaBuilder = context.criteriaBuilder();
+        CriteriaQuery<ActivationLink> criteria = criteriaBuilder.createQuery(ActivationLink.class);
+        Root<ActivationLink> userRoot = criteria.from(ActivationLink.class);
+        Predicate loginPredicate = criteriaBuilder.equal(userRoot.get("login"), login);
+        criteria.where(loginPredicate);
+        Query criteriaQuery = context.entityManager().createQuery(criteria);
+        List<User> result = criteriaQuery.getResultList();
+        if (result.size() > 0){
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
     public void add(ActivationLink link){
         System.out.println("adding: " + link + " with uuid: " + link.getActivationLink());
         EntityManager manager = context.entityManager();

@@ -3,10 +3,11 @@ package macior.strategygame.models;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity(name = "user_registered")
 
-public class User {
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,6 +34,24 @@ public class User {
         login = link.getLogin();
         password = link.getPassword();
         email = link.getEmail();
+    }
+
+    public User cloneWithLogin(String login){
+        User out = new User();
+        out.setId(this.id);
+        out.setLogin(login);
+        out.setPassword(this.password);
+        out.setEmail(this.email);
+        return out;
+    }
+
+    public User cloneWithPassword(String password){
+        User out = new User();
+        out.setId(this.id);
+        out.setLogin(this.login);
+        out.setPassword(password);
+        out.setEmail(this.email);
+        return out;
     }
 
 

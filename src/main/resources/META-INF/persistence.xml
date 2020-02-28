@@ -8,6 +8,9 @@
         <class>macior.strategygame.models.ActivationLink</class>
         <class>macior.strategygame.models.game_history_management.GamePassed</class>
         <class>macior.strategygame.models.game_history_management.PlayerGame</class>
+        <class>macior.strategygame.models.settings_management.Settings</class>
+        <class>macior.strategygame.models.account_management.LoginCode</class>
+        <class>macior.strategygame.models.account_management.PasswordCode</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
 
 
