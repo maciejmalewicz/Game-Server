@@ -3,6 +3,8 @@ package macior.strategygame.service;
 import macior.strategygame.dao.activationLinks.ActivationLinkDAO;
 import macior.strategygame.dao.users.UserDAO;
 import macior.strategygame.models.ActivationLink;
+import macior.strategygame.service.utilities.EMAILSender;
+import macior.strategygame.service.utilities.PasswordValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -21,6 +23,8 @@ public class ActivationLinkService {
         this.activationLinkDAO = activationLinkDAO;
         this.userDAO = userDAO;
     }
+
+
 
     public int addActivationLink(ActivationLink link){ //0 if all is fine, plus some errors :)
         System.out.println("serviced: " + link);

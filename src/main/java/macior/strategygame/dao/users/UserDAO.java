@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -67,6 +68,22 @@ public class UserDAO extends AbstractDAO<User> {
             return 1;
         } else {
             return 0;
+        }
+    }
+
+    public User getByLogin(String login){
+        CriteriaBuilder criteriaBuilder = context.criteriaBuilder();
+        CriteriaQuery<User> criteria = criteriaBuilder.createQuery(User.class);
+        Root<User> userRoot = criteria.from(User.class);
+        Predicate loginPredicate = criteriaBuilder.equal(userRoot.get("login"), login);
+        criteria.where(loginPredicate);
+        Query criteriaQuery = context.entityManager().createQuery(criteria);
+        try {
+            Object o = criteriaQuery.getSingleResult();
+            User user = (User)o;
+            return user;
+        } catch (NoResultException exc) {
+            return null;
         }
     }
 

@@ -11,6 +11,8 @@
         <class>macior.strategygame.models.settings_management.Settings</class>
         <class>macior.strategygame.models.account_management.LoginCode</class>
         <class>macior.strategygame.models.account_management.PasswordCode</class>
+        <class>macior.strategygame.models.friends.Friendship</class>
+        <class>macior.strategygame.models.friends.Invitation</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
 
 

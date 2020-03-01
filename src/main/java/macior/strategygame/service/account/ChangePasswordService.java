@@ -5,9 +5,8 @@ import macior.strategygame.dao.users.UserDAO;
 import macior.strategygame.models.User;
 import macior.strategygame.models.account_management.PasswordCode;
 import macior.strategygame.models.account_management.StatusResponse;
-import macior.strategygame.service.EMAILSender;
-import macior.strategygame.service.PasswordValidator;
-import macior.strategygame.service.PlayerGameMapperService;
+import macior.strategygame.service.utilities.PasswordValidator;
+import macior.strategygame.service.utilities.PlayerGameMapperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -81,11 +80,13 @@ public class ChangePasswordService {
 
         PasswordCode passwordCode = passwordDAO.getCode(activationCode).orElse(null);
         if (passwordCode == null){
+            response.setStatus(-2);
             return response;
         }
 
         int result = passwordDAO.deletePassword(passwordCode);
         if (result != 0){
+            response.setStatus(-3);
             return response;
         }
 

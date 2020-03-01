@@ -1,4 +1,4 @@
-package macior.strategygame.service;
+package macior.strategygame.service.utilities;
 
 public final class PasswordValidator {
 

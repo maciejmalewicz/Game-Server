@@ -14,11 +14,13 @@ public class ChangeLoginController {
     private ChangeLoginService service;
 
     @PostMapping(path = "{code}")
+    @CrossOrigin
     public StatusResponse addCode(@RequestBody ChangeInput login, @PathVariable("code") String code){
         return service.addCode(login.getText(), code);
     }
 
     @PutMapping(path = "{code}")
+    @CrossOrigin
     public StatusResponse activateCode(@RequestBody ChangeInput input, @PathVariable("code") String code){
         return service.activateCode(input.getText(), code);
     }

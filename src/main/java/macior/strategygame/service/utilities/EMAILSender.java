@@ -1,4 +1,4 @@
-package macior.strategygame.service;
+package macior.strategygame.service.utilities;
 
 import macior.strategygame.models.ActivationLink;
 import macior.strategygame.models.User;

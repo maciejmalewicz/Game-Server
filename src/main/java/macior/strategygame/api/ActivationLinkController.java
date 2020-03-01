@@ -2,9 +2,7 @@ package macior.strategygame.api;
 
 import macior.strategygame.models.ActivationLink;
 import macior.strategygame.service.ActivationLinkService;
-import macior.strategygame.service.PasswordValidator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("api/activationLink")

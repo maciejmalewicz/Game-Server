@@ -6,8 +6,7 @@ import macior.strategygame.dao.users.UserDAO;
 import macior.strategygame.models.User;
 import macior.strategygame.models.account_management.StatusResponse;
 import macior.strategygame.models.account_management.LoginCode;
-import macior.strategygame.service.EMAILSender;
-import macior.strategygame.service.PlayerGameMapperService;
+import macior.strategygame.service.utilities.PlayerGameMapperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -51,6 +50,11 @@ public class ChangeLoginService {
         }
         loginCode.setUser(user);
 
+        if (login.isEmpty() || login.isBlank()){
+            response.setStatus(1);
+            return response;
+        }
+
         if (isLoginOccupied(login)){
             response.setStatus(-2);
             return response;
@@ -90,9 +94,11 @@ public class ChangeLoginService {
 
         LoginCode selectedCode = changeLoginDAO.getCode(loginCode).orElse(null);
         if (selectedCode == null){
+            response.setStatus(-2);
             return response;
         }
 
+        response.setStatus(-3);
         int result = changeLoginDAO.deleteLogin(selectedCode);
         if (result == -1){
             return response;

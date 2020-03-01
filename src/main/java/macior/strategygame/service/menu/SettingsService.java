@@ -1,12 +1,11 @@
 package macior.strategygame.service.menu;
 
 import macior.strategygame.dao.SettingsDAO;
-import macior.strategygame.dao.users.UserDAO;
 import macior.strategygame.models.User;
 import macior.strategygame.models.settings_management.GetSettingsResponse;
 import macior.strategygame.models.settings_management.Settings;
 import macior.strategygame.models.settings_management.SettingsResponse;
-import macior.strategygame.service.PlayerGameMapperService;
+import macior.strategygame.service.utilities.PlayerGameMapperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;

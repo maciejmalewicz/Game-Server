@@ -1,0 +1,7 @@
+select user_registered.login
+from user_registered, friendship
+where (user_registered.id_user = friendship.first_friend
+or user_registered.id_user = friendship.second_friend)
+and (friendship.first_friend = ?
+or friendship.second_friend = ?)
+and user_registered.id_user != ?;

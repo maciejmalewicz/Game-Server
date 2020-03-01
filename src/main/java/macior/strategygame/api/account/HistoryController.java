@@ -1,4 +1,4 @@
-package macior.strategygame.api;
+package macior.strategygame.api.account;
 
 import macior.strategygame.models.game_history_management.HistoryResponse;
 import macior.strategygame.service.menu.HistoryService;
