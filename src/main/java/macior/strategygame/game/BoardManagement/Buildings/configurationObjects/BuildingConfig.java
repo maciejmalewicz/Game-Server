@@ -4,9 +4,10 @@ package macior.strategygame.game.BoardManagement.Buildings.configurationObjects;
 import macior.strategygame.game.Utilities.ResourceSet;
 import macior.strategygame.game.Utilities.Time;
 
+
+
 public class BuildingConfig {
 
-    public int MIN_LEVEL;
     public int MAX_LEVEL;
 
     public ResourceSet LEVEL1_COST;
@@ -18,6 +19,4 @@ public class BuildingConfig {
     public Time LEVEL2_BUILDING_TIME;
     public Time LEVEL3_BUILDING_TIME;
     public Time LEVEL4_BUILDING_TIME;
-
-    public int level = MIN_LEVEL;
 }

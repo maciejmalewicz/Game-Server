@@ -23,26 +23,9 @@ public class ArmyUpgradesConfiguration {
     //lazy evaluation
     private HashMap<String, Object> getMainMap(){
         if (mainMap == null){
-            Yaml yaml = new Yaml();
-            try {
-                InputStream in = getClass().getClassLoader().getResourceAsStream("balance/armyUpgrades.yaml");
-                BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-                String s;
-                StringBuilder builder = new StringBuilder();
-                while ((s = reader.readLine()) != null) {
-                    builder.append(s);
-                    builder.append('\n');
-                }
-
-                String yamlString = builder.toString();
-                mainMap = yaml.load(yamlString);
-
-                System.out.println(mainMap);
-            } catch (Exception exc){
-                exc.printStackTrace();
-            }
+            mainMap = BeanFactory.buildMap("balance/armyUpgrades.yaml");
+            System.out.println(mainMap);
         }
-
         return mainMap;
     }
 

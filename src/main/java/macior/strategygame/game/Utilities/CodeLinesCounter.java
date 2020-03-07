@@ -15,7 +15,6 @@ public class CodeLinesCounter {
         for (File f : file.listFiles()){
             treatRecursively(f);
         }
-
         return counter;
     }
 
