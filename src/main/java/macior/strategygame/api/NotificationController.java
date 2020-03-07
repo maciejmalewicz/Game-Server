@@ -1,6 +1,6 @@
 package macior.strategygame.api;
 
-import macior.strategygame.models.ResponseBase;
+import macior.strategygame.models.NotificationResponse;
 import macior.strategygame.service.utilities.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +14,7 @@ public class NotificationController {
 
     @CrossOrigin
     @PutMapping(path = "{code}")
-    public ResponseBase notify(@PathVariable("code") String code){
+    public NotificationResponse notify(@PathVariable("code") String code){
         return service.notify(code);
     }
 }

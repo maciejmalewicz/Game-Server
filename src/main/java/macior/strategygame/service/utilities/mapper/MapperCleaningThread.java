@@ -1,5 +1,6 @@
-package macior.strategygame.service.utilities;
+package macior.strategygame.service.utilities.mapper;
 
+import macior.strategygame.service.utilities.mapper.PlayerGameMapperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

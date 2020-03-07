@@ -6,7 +6,7 @@ import macior.strategygame.dao.users.UserDAO;
 import macior.strategygame.models.User;
 import macior.strategygame.models.account_management.StatusResponse;
 import macior.strategygame.models.account_management.LoginCode;
-import macior.strategygame.service.utilities.PlayerGameMapperService;
+import macior.strategygame.service.utilities.mapper.PlayerGameMapperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;

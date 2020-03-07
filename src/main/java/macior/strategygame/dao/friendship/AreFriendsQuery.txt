@@ -1,0 +1,4 @@
+select count(id_friendship)
+from friendship
+where (first_friend = ? and second_friend = ?)
+or (first_friend = ? and second_friend = ?);

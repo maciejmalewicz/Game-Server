@@ -5,7 +5,7 @@ import macior.strategygame.models.User;
 import macior.strategygame.models.settings_management.GetSettingsResponse;
 import macior.strategygame.models.settings_management.Settings;
 import macior.strategygame.models.settings_management.SettingsResponse;
-import macior.strategygame.service.utilities.PlayerGameMapperService;
+import macior.strategygame.service.utilities.mapper.PlayerGameMapperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;

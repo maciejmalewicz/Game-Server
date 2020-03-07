@@ -13,14 +13,12 @@ public class Friendship implements Serializable {
     @Column(name = "id_friendship")
     private int id;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @MapsId
-    @JoinColumn(name = "first_player")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "first_friend")
     private User firstFriend;
 
-    @OneToOne
-    @MapsId
-    @JoinColumn(name = "second_player")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "second_friend")
     private User secondFriend;
 
     public int getId() {

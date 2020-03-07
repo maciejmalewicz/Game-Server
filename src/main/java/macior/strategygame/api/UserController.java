@@ -1,7 +1,7 @@
 package macior.strategygame.api;
 
 import macior.strategygame.models.User;
-import macior.strategygame.service.utilities.PlayerGameMapperService;
+import macior.strategygame.service.utilities.mapper.PlayerGameMapperService;
 import macior.strategygame.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
