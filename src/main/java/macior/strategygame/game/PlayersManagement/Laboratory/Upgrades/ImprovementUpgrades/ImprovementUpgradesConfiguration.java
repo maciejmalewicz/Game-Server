@@ -1,6 +1,7 @@
 package macior.strategygame.game.PlayersManagement.Laboratory.Upgrades.ImprovementUpgrades;
 
 import com.google.gson.Gson;
+import macior.strategygame.game.Utilities.BeanFactory;
 import org.json.JSONObject;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -44,121 +45,55 @@ public class ImprovementUpgradesConfiguration {
 
     @Bean
     public ProductionManagers1 productionManagersBean(){
-        Map<String, Object> inside = (Map) getMainMap().get("productionManagers1");
-        JSONObject jobject = new JSONObject(inside);
-
-        Gson gson = new Gson();
-        ProductionManagers1 out = gson.fromJson(jobject.toString(), ProductionManagers1.class);
-        System.out.println(out);
-        return out;
+        return new BeanFactory<ProductionManagers1>().getBean(getMainMap(), ProductionManagers1.class);
     }
 
     @Bean
     public ProductionManagers2 productionMangers2Bean(){
-        Map<String, Object> inside = (Map) getMainMap().get("productionManagers2");
-        JSONObject jobject = new JSONObject(inside);
-
-        Gson gson = new Gson();
-        ProductionManagers2 out = gson.fromJson(jobject.toString(), ProductionManagers2.class);
-        System.out.println(out);
-        return out;
+        return new BeanFactory<ProductionManagers2>().getBean(getMainMap(), ProductionManagers2.class);
     }
 
     @Bean
     public MiningDrill miningDrillBean(){
-        Map<String, Object> inside = (Map) getMainMap().get("miningDrill");
-        JSONObject jobject = new JSONObject(inside);
-
-        Gson gson = new Gson();
-        MiningDrill out = gson.fromJson(jobject.toString(), MiningDrill.class);
-        System.out.println(out);
-        return out;
+        return new BeanFactory<MiningDrill>().getBean(getMainMap(), MiningDrill.class);
     }
 
     @Bean
     public Excavator excavatorBean(){
-        Map<String, Object> inside = (Map) getMainMap().get("excavator");
-        JSONObject jobject = new JSONObject(inside);
-
-        Gson gson = new Gson();
-        Excavator out = gson.fromJson(jobject.toString(), Excavator.class);
-        System.out.println(out);
-        return out;
+        return new BeanFactory<Excavator>().getBean(getMainMap(), Excavator.class);
     }
     @Bean
     public AdvancedPhysics advancedPhysicsBean(){
-        Map<String, Object> inside = (Map) getMainMap().get("advancedPhysics");
-        JSONObject jobject = new JSONObject(inside);
-
-        Gson gson = new Gson();
-        AdvancedPhysics out = gson.fromJson(jobject.toString(), AdvancedPhysics.class);
-        System.out.println(out);
-        return out;
+        return new BeanFactory<AdvancedPhysics>().getBean(getMainMap(), AdvancedPhysics.class);
     }
 
     @Bean
     public EngineeringPatterns engineeringPatternsBean(){
-        Map<String, Object> inside = (Map) getMainMap().get("engineeringPatterns");
-        JSONObject jobject = new JSONObject(inside);
-
-        Gson gson = new Gson();
-        EngineeringPatterns out = gson.fromJson(jobject.toString(), EngineeringPatterns.class);
-        System.out.println(out);
-        return out;
+        return new BeanFactory<EngineeringPatterns>().getBean(getMainMap(), EngineeringPatterns.class);
     }
 
     @Bean
     public SpaceManagement spaceManagementBean(){
-        Map<String, Object> inside = (Map) getMainMap().get("spaceManagement");
-        JSONObject jobject = new JSONObject(inside);
-
-        Gson gson = new Gson();
-        SpaceManagement out = gson.fromJson(jobject.toString(), SpaceManagement.class);
-        System.out.println(out);
-        return out;
+        return new BeanFactory<SpaceManagement>().getBean(getMainMap(), SpaceManagement.class);
     }
 
     @Bean
     public TransportTrains transportTrainsBean(){
-        Map<String, Object> inside = (Map) getMainMap().get("transportTrains");
-        JSONObject jobject = new JSONObject(inside);
-
-        Gson gson = new Gson();
-        TransportTrains out = gson.fromJson(jobject.toString(), TransportTrains.class);
-        System.out.println(out);
-        return out;
+        return new BeanFactory<TransportTrains>().getBean(getMainMap(), TransportTrains.class);
     }
 
     @Bean
     public Geology geologyBean(){
-        Map<String, Object> inside = (Map) getMainMap().get("geology");
-        JSONObject jobject = new JSONObject(inside);
-
-        Gson gson = new Gson();
-        Geology out = gson.fromJson(jobject.toString(), Geology.class);
-        System.out.println(out);
-        return out;
+        return new BeanFactory<Geology>().getBean(getMainMap(), Geology.class);
     }
 
     @Bean
     public Architecture architectureBean(){
-        Map<String, Object> inside = (Map) getMainMap().get("architecture");
-        JSONObject jobject = new JSONObject(inside);
-
-        Gson gson = new Gson();
-        Architecture out = gson.fromJson(jobject.toString(), Architecture.class);
-        System.out.println(out);
-        return out;
+        return new BeanFactory<Architecture>().getBean(getMainMap(), Architecture.class);
     }
 
     @Bean
     public ManagersAI managersAIBean(){
-        Map<String, Object> inside = (Map) getMainMap().get("managersAI");
-        JSONObject jobject = new JSONObject(inside);
-
-        Gson gson = new Gson();
-        ManagersAI out = gson.fromJson(jobject.toString(), ManagersAI.class);
-        System.out.println(out);
-        return out;
+        return new BeanFactory<ManagersAI>().getBean(getMainMap(), ManagersAI.class);
     }
 }

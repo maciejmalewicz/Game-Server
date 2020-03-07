@@ -2,6 +2,7 @@ package macior.strategygame.game.PlayersManagement.Laboratory.Upgrades.ArmyUpgra
 
 import com.google.gson.Gson;
 import macior.strategygame.game.PlayersManagement.Laboratory.Upgrades.ControlUpgrades.Minesweepers;
+import macior.strategygame.game.Utilities.BeanFactory;
 import org.json.JSONObject;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -47,122 +48,56 @@ public class ArmyUpgradesConfiguration {
 
     @Bean
     public PowerInSimplicity powerInSimplicityBean(){
-        Map<String, Object> inside = (Map) getMainMap().get("powerInSimplicity");
-        JSONObject jobject = new JSONObject(inside);
-
-        Gson gson = new Gson();
-        PowerInSimplicity out = gson.fromJson(jobject.toString(), PowerInSimplicity.class);
-        System.out.println(out);
-        return out;
+        return new BeanFactory<PowerInSimplicity>().getBean(getMainMap(), PowerInSimplicity.class);
     }
 
     @Bean
     public AdvancedDroids advancedDroidsBean(){
-        Map<String, Object> inside = (Map) getMainMap().get("advancedDroids");
-        JSONObject jobject = new JSONObject(inside);
-
-        Gson gson = new Gson();
-        AdvancedDroids out = gson.fromJson(jobject.toString(), AdvancedDroids.class);
-        System.out.println(out);
-        return out;
+        return new BeanFactory<AdvancedDroids>().getBean(getMainMap(), AdvancedDroids.class);
     }
 
     @Bean
     public AssemblyLines assemblyLinesBean(){
-        Map<String, Object> inside = (Map) getMainMap().get("assemblyLines");
-        JSONObject jobject = new JSONObject(inside);
-
-        Gson gson = new Gson();
-        AssemblyLines out = gson.fromJson(jobject.toString(), AssemblyLines.class);
-        System.out.println(out);
-        return out;
+        return new BeanFactory<AssemblyLines>().getBean(getMainMap(), AssemblyLines.class);
     }
 
     @Bean
     public MassProduction massProductionBean(){
-        Map<String, Object> inside = (Map) getMainMap().get("massProduction");
-        JSONObject jobject = new JSONObject(inside);
-
-        Gson gson = new Gson();
-        MassProduction out = gson.fromJson(jobject.toString(), MassProduction.class);
-        System.out.println(out);
-        return out;
+        return new BeanFactory<MassProduction>().getBean(getMainMap(), MassProduction.class);
     }
 
     @Bean
     public Tanks tanksBean(){
-        Map<String, Object> inside = (Map) getMainMap().get("tanks");
-        JSONObject jobject = new JSONObject(inside);
-
-        Gson gson = new Gson();
-        Tanks out = gson.fromJson(jobject.toString(), Tanks.class);
-        System.out.println(out);
-        return out;
+        return new BeanFactory<Tanks>().getBean(getMainMap(), Tanks.class);
     }
 
     @Bean
     public Mobility mobilityBean(){
-        Map<String, Object> inside = (Map) getMainMap().get("mobility");
-        JSONObject jobject = new JSONObject(inside);
-
-        Gson gson = new Gson();
-        Mobility out = gson.fromJson(jobject.toString(), Mobility.class);
-        System.out.println(out);
-        return out;
+        return new BeanFactory<Mobility>().getBean(getMainMap(), Mobility.class);
     }
 
     @Bean
     public ShootingWindow shootingWindowBean(){
-        Map<String, Object> inside = (Map) getMainMap().get("shootingWindow");
-        JSONObject jobject = new JSONObject(inside);
-
-        Gson gson = new Gson();
-        ShootingWindow out = gson.fromJson(jobject.toString(), ShootingWindow.class);
-        System.out.println(out);
-        return out;
+        return new BeanFactory<ShootingWindow>().getBean(getMainMap(), ShootingWindow.class);
     }
 
     @Bean
     public Cannons cannonsBean(){
-        Map<String, Object> inside = (Map) getMainMap().get("cannons");
-        JSONObject jobject = new JSONObject(inside);
-
-        Gson gson = new Gson();
-        Cannons out = gson.fromJson(jobject.toString(), Cannons.class);
-        System.out.println(out);
-        return out;
+        return new BeanFactory<Cannons>().getBean(getMainMap(), Cannons.class);
     }
 
     @Bean
     public CannonPlatform cannonPlatformBean(){
-        Map<String, Object> inside = (Map) getMainMap().get("cannonPlatform");
-        JSONObject jobject = new JSONObject(inside);
-
-        Gson gson = new Gson();
-        CannonPlatform out = gson.fromJson(jobject.toString(), CannonPlatform.class);
-        System.out.println(out);
-        return out;
+        return new BeanFactory<CannonPlatform>().getBean(getMainMap(), CannonPlatform.class);
     }
 
     @Bean
     public BattleFormation battleFormationBean(){
-        Map<String, Object> inside = (Map) getMainMap().get("battleFormation");
-        JSONObject jobject = new JSONObject(inside);
-
-        Gson gson = new Gson();
-        BattleFormation out = gson.fromJson(jobject.toString(), BattleFormation.class);
-        System.out.println(out);
-        return out;
+        return new BeanFactory<BattleFormation>().getBean(getMainMap(), BattleFormation.class);
     }
 
     @Bean
     public SolarPanels solarPanelsBean(){
-        Map<String, Object> inside = (Map) getMainMap().get("solarPanels");
-        JSONObject jobject = new JSONObject(inside);
-
-        Gson gson = new Gson();
-        SolarPanels out = gson.fromJson(jobject.toString(), SolarPanels.class);
-        System.out.println(out);
-        return out;
+        return new BeanFactory<SolarPanels>().getBean(getMainMap(), SolarPanels.class);
     }
 }

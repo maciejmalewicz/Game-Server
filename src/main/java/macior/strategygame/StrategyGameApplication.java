@@ -13,11 +13,11 @@ public class StrategyGameApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(StrategyGameApplication.class, args);
-		TimeManager manager = new TimeManager();
-		Game game = new Game();
-		GameUpdater updater = new GameUpdater();
-		game.setTimeManager(manager);
-		updater.setGame(game);
-		updater.launch();
+//		TimeManager manager = new TimeManager();
+//		Game game = new Game();
+//		GameUpdater updater = new GameUpdater();
+//		game.setTimeManager(manager);
+//		updater.setGame(game);
+//		updater.launch();
 	}
 }
