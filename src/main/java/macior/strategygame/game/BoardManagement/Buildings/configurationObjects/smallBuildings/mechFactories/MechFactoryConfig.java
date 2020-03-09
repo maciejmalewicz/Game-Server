@@ -3,4 +3,6 @@ package macior.strategygame.game.BoardManagement.Buildings.configurationObjects.
 import macior.strategygame.game.BoardManagement.Buildings.configurationObjects.smallBuildings.SmallBuildingConfig;
 
 public class MechFactoryConfig extends SmallBuildingConfig {
+
+
 }

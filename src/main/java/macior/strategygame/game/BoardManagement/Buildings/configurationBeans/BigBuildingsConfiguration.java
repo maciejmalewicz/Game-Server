@@ -63,6 +63,7 @@ public class BigBuildingsConfiguration {
                 BigElectricityFactoryConfig.class);
     }
 
-    //todo: this thing is done, now the same for small buildings :D and configuration will be set
+    //todo: this thing is done, now the same for small buildings (including walls) :D
+    // and configuration will be set
     //todo: next, do resources updates and connect with angular page
 }
