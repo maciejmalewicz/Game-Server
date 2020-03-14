@@ -1,5 +1,6 @@
 package macior.strategygame.game;
 
+import macior.strategygame.game.BoardManagement.Board;
 import macior.strategygame.game.PlayersManagement.PlayersSet;
 
 public class Game {
@@ -7,6 +8,24 @@ public class Game {
     private PlayersSet playersSet;
     private TimeManager timeManager;
     private GameUpdater gameUpdater;
+    private Board board;
+    private PlayersIncomeHandler incomeHandler;
+
+    public Board getBoard() {
+        return board;
+    }
+
+    public void setBoard(Board board) {
+        this.board = board;
+    }
+
+    public PlayersIncomeHandler getIncomeHandler() {
+        return incomeHandler;
+    }
+
+    public void setIncomeHandler(PlayersIncomeHandler incomeHandler) {
+        this.incomeHandler = incomeHandler;
+    }
 
     public PlayersSet getPlayersSet() {
         return playersSet;

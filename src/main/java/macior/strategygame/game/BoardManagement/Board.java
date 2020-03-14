@@ -2,8 +2,13 @@ package macior.strategygame.game.BoardManagement;
 
 
 import macior.strategygame.game.PlayersManagement.Player;
+import macior.strategygame.models.game.AreaUnitMessage;
+import macior.strategygame.models.game.BoardMessage;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class Board {
+
+    private AreaUnitConverter areaUnitConverter;
 
     private AreaUnit[][] areaUnits = new AreaUnit[BoardSettings.BOARD_ROWS][BoardSettings.BOARD_COLUMNS];
 
@@ -52,7 +57,27 @@ public class Board {
         areaUnits[location.getRow()][location.getColumn()] = unit;
     }
 
-//    public void printBuildings(){
+    public BoardMessage toMessage(Player requestor){
+        BoardMessage message = new BoardMessage();
+        message.units = new AreaUnitMessage[areaUnits.length][areaUnits[0].length];
+        for (int i = 0; i < areaUnits.length; i++){
+            for (int j = 0; j < areaUnits[i].length; j++){
+
+                message.units[i][j] = areaUnitConverter.convert(requestor, areaUnits[i][j]);
+            }
+        }
+        return message;
+    }
+
+    public AreaUnitConverter getAreaUnitConverter() {
+        return areaUnitConverter;
+    }
+
+    public void setAreaUnitConverter(AreaUnitConverter areaUnitConverter) {
+        this.areaUnitConverter = areaUnitConverter;
+    }
+
+    //    public void printBuildings(){
 //        for (AreaUnit[] row : areaUnits){
 //            for (AreaUnit unit : row){
 //                if (unit.getClass() == BossAreaUnit.class){

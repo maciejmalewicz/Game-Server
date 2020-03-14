@@ -3,7 +3,9 @@ package macior.strategygame.game.BoardManagement.Buildings.configurationBeans;
 import macior.strategygame.game.BoardManagement.Buildings.buildings.smallBuildings.resourceFactories.SmallElectricityFactory;
 import macior.strategygame.game.BoardManagement.Buildings.configurationObjects.smallBuildings.ObservatoryConfig;
 import macior.strategygame.game.BoardManagement.Buildings.configurationObjects.smallBuildings.WallsConfig;
+import macior.strategygame.game.BoardManagement.Buildings.configurationObjects.smallBuildings.mechFactories.CannonFactoryConfig;
 import macior.strategygame.game.BoardManagement.Buildings.configurationObjects.smallBuildings.mechFactories.DroidFactoryConfig;
+import macior.strategygame.game.BoardManagement.Buildings.configurationObjects.smallBuildings.mechFactories.TankFactoryConfig;
 import macior.strategygame.game.BoardManagement.Buildings.configurationObjects.smallBuildings.resourceFactories.SmallBuildingMaterialsFactoryConfig;
 import macior.strategygame.game.BoardManagement.Buildings.configurationObjects.smallBuildings.resourceFactories.SmallElectricityFactoryConfig;
 import macior.strategygame.game.BoardManagement.Buildings.configurationObjects.smallBuildings.resourceFactories.SmallMetalFactoryConfig;
@@ -53,8 +55,21 @@ public class SmallBuildingsConfiguration {
 
     @Bean
     public DroidFactoryConfig droidFactoryBean(){
-        DroidFactoryConfig c = new BeanFactory<DroidFactoryConfig>().getBean(getMainMap(), DroidFactoryConfig.class);
+        return new BeanFactory<DroidFactoryConfig>().getBean(getMainMap(), DroidFactoryConfig.class);
+    }
+
+
+    @Bean
+    public TankFactoryConfig tankFactoryBean(){
+        return new BeanFactory<TankFactoryConfig>().getBean(getMainMap(), TankFactoryConfig.class);
+    }
+
+    @Bean
+    public CannonFactoryConfig cannonFactoryBean(){
+        CannonFactoryConfig c = new BeanFactory<CannonFactoryConfig>().getBean(getMainMap(), CannonFactoryConfig.class);
         return c;
-    } //todo 2 other factories
+    }
+
+
 
 }

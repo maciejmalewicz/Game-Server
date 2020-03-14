@@ -7,6 +7,7 @@ public class GameUpdater extends Thread {
     private Game game;
     private boolean isLaunched;
 
+
     private long toWait;
 
     public Game getGame() {
@@ -20,6 +21,9 @@ public class GameUpdater extends Thread {
     public void update(){
         //todo all the mechanics that happen every second
         System.out.println("Updating");
+        game.getIncomeHandler().refreshIncomes();
+        game.getIncomeHandler().addNewResources();
+        System.out.println(game.getPlayersSet().getPlayer1().getResources());
         System.out.println(new Date().getTime());
     }
 

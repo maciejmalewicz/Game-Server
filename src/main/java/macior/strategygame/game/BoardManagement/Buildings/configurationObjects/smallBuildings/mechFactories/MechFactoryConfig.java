@@ -4,5 +4,4 @@ import macior.strategygame.game.BoardManagement.Buildings.configurationObjects.s
 
 public class MechFactoryConfig extends SmallBuildingConfig {
 
-
 }

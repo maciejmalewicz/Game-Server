@@ -18,7 +18,7 @@ productionManagers2:
     minutes: 1
     seconds: 30
   PRODUCTION_BONUS: 0.3
-  REQUIREMENTS: [2, 3, 4]
+  REQUIREMENTS: [24, 25, 26]
 
 miningDrill:
   COST:
@@ -29,7 +29,7 @@ miningDrill:
     minutes: 1
     seconds: 0
   PRODUCTION_BONUS: 0.3
-  REQUIREMENTS: [0]
+  REQUIREMENTS: [22]
 
 excavator:
   COST:
@@ -40,7 +40,7 @@ excavator:
     minutes: 1
     seconds: 0
   PRODUCTION_BONUS: 0.3
-  REQUIREMENTS: [0]
+  REQUIREMENTS: [22]
 
 advancedPhysics:
   COST:
@@ -51,7 +51,7 @@ advancedPhysics:
     minutes: 1
     seconds: 0
   PRODUCTION_BONUS: 0.3
-  REQUIREMENTS: [0]
+  REQUIREMENTS: [22]
 
 engineeringPatterns:
   COST:
@@ -62,7 +62,7 @@ engineeringPatterns:
     minutes: 1
     seconds: 15
   COST_REDUCTION: 0.3
-  REQUIREMENTS: [3]
+  REQUIREMENTS: [25]
 
 spaceManagement:
   COST:
@@ -72,7 +72,7 @@ spaceManagement:
   RESEARCH_TIME:
     minutes: 1
     seconds: 0
-  REQUIREMENTS: [2]
+  REQUIREMENTS: [24]
 
 transportTrains:
   COST:
@@ -82,7 +82,7 @@ transportTrains:
   RESEARCH_TIME:
     minutes: 1
     seconds: 30
-  REQUIREMENTS: [5]
+  REQUIREMENTS: [27]
   PRODUCTION_BONUS: 0.4
 
 geology:
@@ -93,7 +93,7 @@ geology:
   RESEARCH_TIME:
     minutes: 1
     seconds: 15
-  REQUIREMENTS: [2, 3]
+  REQUIREMENTS: [24, 25]
   EXCHANGE_RATIO: 0.3
 
 architecture:
@@ -104,7 +104,7 @@ architecture:
   RESEARCH_TIME:
     minutes: 1
     seconds: 45
-  REQUIREMENTS: [5]
+  REQUIREMENTS: [27]
 
 managersAI:
   COST:
@@ -114,7 +114,7 @@ managersAI:
   RESEARCH_TIME:
     minutes: 0
     seconds: 30
-  REQUIREMENTS: [1]
+  REQUIREMENTS: [23]
   BONUS_PER_MINUTE: 0.05
   MAX_BONUS: 0.5
 

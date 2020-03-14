@@ -3,6 +3,6 @@ package macior.strategygame.game.BoardManagement.Buildings.buildings.bigBuilding
 import macior.strategygame.game.BoardManagement.Buildings.Resources;
 import macior.strategygame.game.BoardManagement.Buildings.buildings.Building;
 
-public class BigBuilding extends Building {
+public abstract class BigBuilding extends Building {
 
 }

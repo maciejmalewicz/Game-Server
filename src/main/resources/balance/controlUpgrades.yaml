@@ -18,7 +18,7 @@ conquerorsLand:
     minutes: 1
     seconds: 0
   PRODUCTION_BONUS: 0.3
-  REQUIREMENTS: [0]
+  REQUIREMENTS: [11]
 
 treasureHaunters:
   COST:
@@ -29,7 +29,7 @@ treasureHaunters:
     minutes: 1
     seconds: 30
   PRODUCTION_PER_AREA_UNIT: 1
-  REQUIREMENTS: [1]
+  REQUIREMENTS: [12]
 
 buildingEngineers:
   COST:
@@ -40,7 +40,7 @@ buildingEngineers:
     minutes: 0
     seconds: 45
   BUILDING_TIME_REDUCTION: 0.4
-  REQUIREMENTS: [8]
+  REQUIREMENTS: [19]
 
 scrapDrones:
   COST:
@@ -51,7 +51,7 @@ scrapDrones:
     minutes: 1
     seconds: 45
   BUILDING_TIME_REDUCTION: 0.5
-  REQUIREMENTS: [1]
+  REQUIREMENTS: [12]
 
 fortress:
   COST:
@@ -62,7 +62,7 @@ fortress:
     minutes: 1
     seconds: 0
   HITPOINT_BONUS: 0.7
-  REQUIREMENTS: [9]
+  REQUIREMENTS: [20]
 
 pyrotechnics:
   COST:
@@ -73,7 +73,7 @@ pyrotechnics:
     minutes: 2
     seconds: 0
   ROCKET_RELOADING_TIME_REDUCTION: 0.5
-  REQUIREMENTS: [3, 10]
+  REQUIREMENTS: [14, 21]
 
 accuracy:
   COST:
@@ -83,7 +83,7 @@ accuracy:
   RESEARCH_TIME:
     minutes: 1
     seconds: 30
-  REQUIREMENTS: [8]
+  REQUIREMENTS: [19]
 
 infrastructure:
   COST:
@@ -94,7 +94,7 @@ infrastructure:
     minutes: 1
     seconds: 0
   TRAVELING_TIME_REDUCTION: 0.3
-  REQUIREMENTS: [0]
+  REQUIREMENTS: [11]
 
 conquerAndProtect1:
    COST:
@@ -104,7 +104,7 @@ conquerAndProtect1:
    RESEARCH_TIME:
       minutes: 1
       seconds: 0
-   REQUIREMENTS: [0]
+   REQUIREMENTS: [11]
 
 conquerAndProtect2:
    COST:
@@ -114,5 +114,5 @@ conquerAndProtect2:
    RESEARCH_TIME:
      minutes: 1
      seconds: 30
-   REQUIREMENTS: [5]
+   REQUIREMENTS: [16]
 

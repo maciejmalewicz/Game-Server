@@ -2,5 +2,5 @@ package macior.strategygame.game.BoardManagement.Buildings.buildings.smallBuildi
 
 import macior.strategygame.game.BoardManagement.Buildings.buildings.smallBuildings.SmallBuilding;
 
-public class MechFactory extends SmallBuilding {
+public abstract class MechFactory extends SmallBuilding {
 }

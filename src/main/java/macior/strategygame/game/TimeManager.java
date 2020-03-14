@@ -1,19 +1,27 @@
 package macior.strategygame.game;
 
+import macior.strategygame.game.Utilities.Time;
+
 import java.util.Date;
 
 public class TimeManager {
 
     private Date initiationDate;
     private long initiationMiliseconds;
-    public byte minutesPassed = 0;
-    public byte secondsPassed = 0;
+    private short secondsFromStart = 0;
+    //public byte minutesPassed = 0;
+    //public byte secondsPassed = 0;
 
     public TimeManager(){
         Date now = new Date();
         long time = now.getTime();// + 60000L; todo set back
         initiationDate = new Date(time); //sets starting game time for one minute from the beginning
         initiationMiliseconds = initiationDate.getTime();
+    }
+
+    public short getSecondsFromStart(){
+        return secondsFromStart;
+
     }
 
     public Date getInitiationDate() {
@@ -26,23 +34,30 @@ public class TimeManager {
 
     @Override
     public String toString(){
-        return minutesPassed + ":" + secondsPassed;
+        //return minutesPassed + ":" + secondsPassed;
+        return secondsFromStart/60 + ":" + secondsFromStart%60;
     }
 
     public void nextSecond(){
-        if (secondsPassed < 59){
-            secondsPassed++;
-        } else {
-            secondsPassed = 0;
-            minutesPassed++;
-        }
+//        if (secondsPassed < 59){
+//            secondsPassed++;
+//        } else {
+//            secondsPassed = 0;
+//            minutesPassed++;
+//        }
+        secondsFromStart++;
     }
 
     private long getMiliseconds(){
-        return this.minutesPassed*60000L + this.secondsPassed*1000L;
+        return this.secondsFromStart*1000L;
+        //return this.minutesPassed*60000L + this.secondsPassed*1000L;
     }
 
     public long getTimeToWait(){
-        return getMiliseconds() + initiationMiliseconds - new Date().getTime();
+        long toWait =  getMiliseconds() + initiationMiliseconds - new Date().getTime();
+        if (toWait < 0){
+            return 0;
+        }
+        return toWait;
     }
 }

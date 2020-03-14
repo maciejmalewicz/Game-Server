@@ -36,8 +36,18 @@ public final class PlayerGameMapperService {
         System.out.println("MAPPER");
         //todo delete this - just for tests
         //codeToId.put("an", 5);
-        //codeToIdDate.put("an", new IDData(5));
-        //idToCode.put(5, "an");
+        codeToIdDate.put("an", new IDData(5));
+        idToCode.put(5, "an");
+        idToInbox.put(5, new PlayersInbox());
+        codeToIdDate.put("bn", new IDData(4));
+        idToCode.put(4, "bn");
+        idToInbox.put(4, new PlayersInbox());
+        codeToIdDate.put("cn", new IDData(7));
+        idToCode.put(7, "cn");
+        idToInbox.put(7, new PlayersInbox());
+        codeToIdDate.put("dn", new IDData(9));
+        idToCode.put(9, "dn");
+        idToInbox.put(9, new PlayersInbox());
     }
 
     public boolean isActive(int id){
@@ -145,6 +155,10 @@ public final class PlayerGameMapperService {
 
     }
 
+    public int getIdByPlayer(Player player){
+        return playerToId.getOrDefault(player, -1);
+    }
+
     public void clearOldCodes(){
         System.out.println(codeToIdDate);
         System.out.println(idToCode);
@@ -175,6 +189,10 @@ public final class PlayerGameMapperService {
         if (player != null){
             this.playerToId.remove(player);
         }
+    }
+
+    public Player getPlayerById(int id){
+        return idToPlayer.getOrDefault(id, null);
     }
 
     public boolean isPLaying(int id){

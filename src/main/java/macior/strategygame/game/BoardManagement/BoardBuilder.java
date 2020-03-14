@@ -5,16 +5,33 @@ import macior.strategygame.game.BoardManagement.Buildings.buildings.bigBuildings
 import macior.strategygame.game.BoardManagement.Buildings.buildings.bigBuildings.resourceFactories.BigBuildingMaterialsFactory;
 import macior.strategygame.game.BoardManagement.Buildings.buildings.bigBuildings.resourceFactories.BigElectricityFactory;
 import macior.strategygame.game.BoardManagement.Buildings.buildings.bigBuildings.resourceFactories.BigMetalFactory;
+import macior.strategygame.game.BoardManagement.Buildings.buildings.smallBuildings.Walls;
 import macior.strategygame.game.PlayersManagement.Player;
+import macior.strategygame.game.PlayersManagement.PlayersSet;
 import macior.strategygame.game.Utilities.RandomGenerator;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class BoardBuilder {
+
+    @Autowired
+    private AreaUnitConverter areaUnitConverter;
+
+    public Board buildBoard(PlayersSet set){
+        Player player1 = set.getPlayer1();
+        Player player2 = set.getPlayer2();
+        Player player3 = set.getPlayer3();
+        Player player4 = set.getPlayer4();
+        return buildBoard(player1, player2, player3, player4);
+    }
 
     public Board buildBoard(Player player1, Player player2, Player player3, Player player4){
         Board out = new Board();
+        out.setAreaUnitConverter(this.areaUnitConverter);
         setPLayers(out, player1, player2, player3, player4);
         swapPlayers(out);
         createAreaUnits(out);
@@ -22,7 +39,20 @@ public class BoardBuilder {
         createFreeBuildings(out);
         createRockets(out);
         createBoss(out);
+        addTestObjects(out); //todo remove
         return out;
+    }
+
+    private void addTestObjects(Board board){
+        Location location = new Location(0, 0);
+        Walls walls1 = new Walls();
+        walls1.LEVEL = 2;
+        board.getAreaUnit(location).setWalls(walls1);
+        location.setColumn(10);
+        location.setRow(0);
+        Walls walls2 = new Walls();
+        walls2.LEVEL = 1;
+        board.getAreaUnit(location).setWalls(walls2);
     }
 
     private void createBoss(Board board){

@@ -18,6 +18,10 @@ public class ResourceSet {
         ELECTRICITY += electricity;
     }
 
+    public void addResources(ResourceSet setToAdd){
+        addResources(setToAdd.METAL, setToAdd.BUILDING_MATERIALS, setToAdd.ELECTRICITY);
+    }
+
     @Override
     public String toString(){
         return "METAL: " + METAL + " BM: " + BUILDING_MATERIALS + " ELECTRICITY: " + ELECTRICITY;

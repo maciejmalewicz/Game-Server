@@ -2,5 +2,5 @@ package macior.strategygame.game.BoardManagement.Buildings.buildings.smallBuildi
 
 import macior.strategygame.game.BoardManagement.Buildings.buildings.Building;
 
-public class SmallBuilding extends Building {
+public abstract class SmallBuilding extends Building {
 }

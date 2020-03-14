@@ -7,9 +7,19 @@ import macior.strategygame.game.Utilities.ResourceSet;
 
 public class Player {
 
+    private String nick;
     private PlayersUpgradesSet upgradesSet = new PlayersUpgradesSet();
     private ResourceSet resources = new ResourceSet(0, 0, 0);
+    private ResourceSet income = new ResourceSet(0, 0, 0); //todo maybe change
     private Game game;
+
+    public ResourceSet getIncome() {
+        return income;
+    }
+
+    public void setIncome(ResourceSet income) {
+        this.income = income;
+    }
 
     public PlayersUpgradesSet getUpgradesSet() {
         return upgradesSet;
@@ -33,5 +43,13 @@ public class Player {
 
     public void setGame(Game game) {
         this.game = game;
+    }
+
+    public String getNick() {
+        return nick;
+    }
+
+    public void setNick(String nick) {
+        this.nick = nick;
     }
 }
