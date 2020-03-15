@@ -6,6 +6,8 @@ import macior.strategygame.models.ResponseBase;
 
 public class GameChanges extends ResponseBase {
 
+
+    private byte status = 0;
     private ResourceSet resources;
     private short timeFromStart;
 
@@ -23,5 +25,13 @@ public class GameChanges extends ResponseBase {
 
     public void setTimeFromStart(short timeFromStart) {
         this.timeFromStart = timeFromStart;
+    }
+
+    public byte getStatus() {
+        return status;
+    }
+
+    public void setStatus(byte status) {
+        this.status = status;
     }
 }

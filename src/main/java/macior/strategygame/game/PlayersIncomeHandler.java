@@ -52,7 +52,7 @@ public class PlayersIncomeHandler {
     }
 
     public void addIncomeFromUnit(AreaUnit unit, ResourceSet resources, PlayersUpgradesSet upgrades){
-        resources.addResources(15, 15, 15);
+        resources.addResources(5, 5, 5);
         //todo all this complex stuff
     }
 
