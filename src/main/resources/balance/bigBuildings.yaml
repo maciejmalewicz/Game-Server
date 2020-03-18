@@ -1,33 +1,5 @@
 rocketConfig:
   MAX_LEVEL: 1
-  LEVEL1_COST:
-    METAL: 0
-    BUILDING_MATERIALS: 0
-    ELECTRICITY: 0
-  LEVEL2_COST:
-    METAL: 0
-    BUILDING_MATERIALS: 0
-    ELECTRICITY: 0
-  LEVEL3_COST:
-    METAL: 0
-    BUILDING_MATERIALS: 0
-    ELECTRICITY: 0
-  LEVEL4_COST:
-    METAL: 0
-    BUILDING_MATERIALS: 0
-    ELECTRICITY: 0
-  LEVEL1_BUILDING_TIME:
-    minutes: 0
-    seconds: 0
-  LEVEL2_BUILDING_TIME:
-    minutes: 0
-    seconds: 0
-  LEVEL3_BUILDING_TIME:
-    minutes: 0
-    seconds: 0
-  LEVEL4_BUILDING_TIME:
-    minutes: 0
-    seconds: 0
   LEVEL2_TOWER_RELOADING_TIME:
     minutes: 0
     seconds: 40

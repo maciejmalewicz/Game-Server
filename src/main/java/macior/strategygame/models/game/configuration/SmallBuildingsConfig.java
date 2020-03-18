@@ -26,7 +26,7 @@ public class SmallBuildingsConfig {
 
     @Autowired
     @Qualifier("smallElectricityFactoryBean")
-    private SmallElectricityFactoryConfig electricityFactoryConfig;
+    private SmallElectricityFactoryConfig smallElectricityFactoryConfig;
 
     @Autowired
     @Qualifier("wallsBean")
@@ -56,8 +56,8 @@ public class SmallBuildingsConfig {
         return smallBuildingMaterialsFactoryConfig;
     }
 
-    public SmallElectricityFactoryConfig getElectricityFactoryConfig() {
-        return electricityFactoryConfig;
+    public SmallElectricityFactoryConfig getSmallElectricityFactoryConfig() {
+        return smallElectricityFactoryConfig;
     }
 
     public WallsConfig getWallsConfig() {

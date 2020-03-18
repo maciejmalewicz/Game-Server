@@ -23,6 +23,7 @@ public class GameUpdater extends Thread {
         System.out.println("Updating");
         game.getIncomeHandler().refreshIncomes();
         game.getIncomeHandler().addNewResources();
+        game.getEventHandler().triggerEvents();
         System.out.println(game.getPlayersSet().getPlayer1().getResources());
         System.out.println(new Date().getTime());
     }

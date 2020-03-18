@@ -1,11 +1,13 @@
 package macior.strategygame.game.BoardManagement;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Location {
 
     private int row;
     private int column;
 
-    public Location(int row, int column){
+    public Location(@JsonProperty("row") int row, @JsonProperty("column") int column){
         this.row = row;
         this.column = column;
     }

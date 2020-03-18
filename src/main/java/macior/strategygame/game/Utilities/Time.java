@@ -51,6 +51,10 @@ public class Time {
         this.seconds = seconds;
     }
 
+    public int toSeconds(){
+        return minutes*60 + seconds;
+    }
+
     @Override
     public String toString(){
         return minutes + ":" + seconds;

@@ -4,6 +4,7 @@ import macior.strategygame.game.BoardManagement.Board;
 import macior.strategygame.game.BoardManagement.BoardBuilder;
 import macior.strategygame.game.PlayersManagement.Player;
 import macior.strategygame.game.PlayersManagement.PlayersSet;
+import macior.strategygame.game.PostponedEvents.EventHandler;
 import macior.strategygame.game.Utilities.Time;
 import macior.strategygame.models.User;
 import macior.strategygame.queue.UsersSet;
@@ -32,6 +33,9 @@ public class GameBuilder {
 
         TimeManager manager = new TimeManager();
         game.setTimeManager(manager);
+
+        EventHandler eventHandler = new EventHandler(game);
+        game.setEventHandler(eventHandler);
 
         Board board = boardBuilder.buildBoard(playersSet);
         game.setBoard(board);

@@ -6,6 +6,8 @@ import java.util.Date;
 
 public class TimeManager {
 
+    private static int GAME_DURATION = 3600; //in seconds
+
     private Date initiationDate;
     private long initiationMiliseconds;
     private short secondsFromStart = 0;
@@ -60,4 +62,13 @@ public class TimeManager {
         }
         return toWait;
     }
+
+    public int getPostponedEventTime(int postponingDuration){
+        int time = this.secondsFromStart + postponingDuration;
+        if (time > GAME_DURATION){
+            return -1;
+        }
+        return this.secondsFromStart + postponingDuration;
+    }
+
 }
