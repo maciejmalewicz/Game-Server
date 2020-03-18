@@ -2,9 +2,12 @@ package macior.strategygame.service.game.playersControlls;
 
 import macior.strategygame.game.BoardManagement.AreaUnit;
 import macior.strategygame.game.BoardManagement.Buildings.buildings.Building;
+import macior.strategygame.game.BoardManagement.Buildings.buildings.UnderConstructionBuilding;
+import macior.strategygame.game.BoardManagement.Buildings.buildings.smallBuildings.SmallBuilding;
 import macior.strategygame.game.BoardManagement.Buildings.configurationObjects.BuildingConfig;
 import macior.strategygame.game.BoardManagement.Location;
 import macior.strategygame.game.PlayersManagement.Player;
+import macior.strategygame.game.PostponedEvents.BuildingConstructionEvent;
 import macior.strategygame.game.Utilities.ResourceSet;
 import macior.strategygame.models.game.configuration.SmallBuildingsConfig;
 import macior.strategygame.models.game.playersControls.BuildingRequest;
@@ -73,10 +76,20 @@ public class BuildNewBuildingService {
             return timeResponse;
         }
 
+        //if everything goes fine:
+
+        //pay for building
+        payForBuilding(player, priceToPay);
+
+        //affect the board with new toy-building
+        UnderConstructionBuilding wrapper = setConstructionWrapper(request, player);
+
+        //add to upcoming events, so it becomes a real building later
+        addToEvents(wrapper, player, timeWhenFinishes);
+
         //if everything goes fine
         timeResponse.setStatus(0);
         return timeResponse;
-
     }
 
     private boolean isRequestOK(BuildingRequest request){
@@ -124,6 +137,26 @@ public class BuildNewBuildingService {
         BuildingConfig config = buildingsMapper.getConfiguration(request.getBuilding());
         int seconds = config.LEVEL1_BUILDING_TIME.toSeconds();
         return player.getGame().getTimeManager().getPostponedEventTime(seconds);
+    }
+
+    private void payForBuilding(Player player, ResourceSet toPay){
+        player.getResources().substractResources(toPay);
+    }
+
+    //binds wrapper to place in area unit in game
+    private UnderConstructionBuilding setConstructionWrapper(BuildingRequest request, Player player){
+        SmallBuilding beingBuilt = buildingsMapper.getSmallBuilding(request.getBuilding());
+        AreaUnit areaUnit = player.getGame().getBoard().getAreaUnit(request.getLocation());
+        UnderConstructionBuilding wrapper =
+                new UnderConstructionBuilding(beingBuilt, areaUnit, request.getBuilding());
+        //where and what is being added
+        areaUnit.setBuilding(request.getPlace(), wrapper);
+        return wrapper;
+    }
+
+    private void addToEvents(UnderConstructionBuilding building, Player player, int finishTime){
+        BuildingConstructionEvent eventToAdd = new BuildingConstructionEvent(finishTime, building);
+        player.getGame().getEventHandler().addEvent(eventToAdd);
     }
 
 }

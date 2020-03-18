@@ -4,7 +4,7 @@ package macior.strategygame.game.PostponedEvents;
 public class PostponedPrinter extends PostponedEvent {
 
     public PostponedPrinter(int time){
-        this.setFinishingTime(time);
+        super(time);
     }
 
     @Override

@@ -6,6 +6,10 @@ public abstract class PostponedEvent implements Comparable<PostponedEvent>{
 
     private int finishingTime;
 
+    public PostponedEvent(int time){
+        this.finishingTime = time;
+    }
+
     public int getFinishingTime() {
         return finishingTime;
     }

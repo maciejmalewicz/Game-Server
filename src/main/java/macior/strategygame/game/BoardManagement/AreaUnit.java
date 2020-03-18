@@ -1,6 +1,7 @@
 package macior.strategygame.game.BoardManagement;
 
 
+import macior.strategygame.game.BoardManagement.Buildings.buildings.Building;
 import macior.strategygame.game.BoardManagement.Buildings.buildings.bigBuildings.BigBuilding;
 import macior.strategygame.game.BoardManagement.Buildings.buildings.smallBuildings.SmallBuilding;
 import macior.strategygame.game.BoardManagement.Buildings.buildings.smallBuildings.Walls;
@@ -81,4 +82,22 @@ public class AreaUnit {
     public void setEastBuilding(SmallBuilding eastBuilding) {
         this.eastBuilding = eastBuilding;
     }
+
+    public void setBuilding(int index, Building building){
+        switch (index){
+            case 1:
+                setBigBuilding((BigBuilding) building);
+            case 2:
+                setNorthBuilding((SmallBuilding) building);
+            case 3:
+                setSouthBuilding((SmallBuilding) building);
+            case 4:
+                setWestBuilding((SmallBuilding) building);
+            case 5:
+                setEastBuilding((SmallBuilding) building);
+            case 6:
+                setWalls((Walls) building);
+        }
+    }
+
 }

@@ -24,6 +24,12 @@ public class ResourceSet {
         addResources(setToAdd.METAL, setToAdd.BUILDING_MATERIALS, setToAdd.ELECTRICITY);
     }
 
+    public void substractResources(ResourceSet setToSubstract){
+        METAL -= setToSubstract.METAL;
+        BUILDING_MATERIALS -= setToSubstract.BUILDING_MATERIALS;
+        ELECTRICITY -= setToSubstract.ELECTRICITY;
+    }
+
     @Override
     public String toString(){
         return "METAL: " + METAL + " BM: " + BUILDING_MATERIALS + " ELECTRICITY: " + ELECTRICITY;
