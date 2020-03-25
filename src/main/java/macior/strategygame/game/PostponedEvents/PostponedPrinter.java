@@ -1,5 +1,7 @@
 package macior.strategygame.game.PostponedEvents;
 
+import macior.strategygame.game.PlayersManagement.Notifications.NotificationBase;
+
 //test object
 public class PostponedPrinter extends PostponedEvent {
 
@@ -8,8 +10,13 @@ public class PostponedPrinter extends PostponedEvent {
     }
 
     @Override
-    public void happen() {
+    public void doHappen() {
         System.out.println("Dupa " + this.getFinishingTime());
+    }
+
+    @Override
+    public NotificationBase doNotification() {
+        return null;
     }
 
     @Override

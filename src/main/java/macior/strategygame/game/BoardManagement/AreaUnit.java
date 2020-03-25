@@ -6,24 +6,38 @@ import macior.strategygame.game.BoardManagement.Buildings.buildings.bigBuildings
 import macior.strategygame.game.BoardManagement.Buildings.buildings.smallBuildings.SmallBuilding;
 import macior.strategygame.game.BoardManagement.Buildings.buildings.smallBuildings.Walls;
 import macior.strategygame.game.PlayersManagement.Player;
+import macior.strategygame.game.PostponedEvents.BuildingConstructionEvent;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AreaUnit {
 
     private Player owner = null;
     private Location location = null;
-    private BigBuilding bigBuilding = null;
-    private Walls walls = null;
+    private Building bigBuilding = null;
+    private Building walls = null;
 
-    private SmallBuilding northBuilding = null;
-    private SmallBuilding southBuilding = null;
-    private SmallBuilding westBuilding = null;
-    private SmallBuilding eastBuilding = null;
+    private Building northBuilding = null;
+    private Building southBuilding = null;
+    private Building westBuilding = null;
+    private Building eastBuilding = null;
 
-    public Walls getWalls() {
+    private BuildingQueue buildingQueue = new BuildingQueue();
+
+    public BuildingQueue getBuildingQueue() {
+        return buildingQueue;
+    }
+
+    public void setBuildingQueue(BuildingQueue buildingQueue) {
+        this.buildingQueue = buildingQueue;
+    }
+
+    public Building getWalls() {
         return walls;
     }
 
-    public void setWalls(Walls walls) {
+    public void setWalls(Building walls) {
         this.walls = walls;
     }
 
@@ -43,60 +57,66 @@ public class AreaUnit {
         this.location = location;
     }
 
-    public BigBuilding getBigBuilding() {
+    public Building getBigBuilding() {
         return bigBuilding;
     }
 
-    public void setBigBuilding(BigBuilding bigBuilding) {
+    public void setBigBuilding(Building bigBuilding) {
         this.bigBuilding = bigBuilding;
     }
 
-    public SmallBuilding getNorthBuilding() {
+    public Building getNorthBuilding() {
         return northBuilding;
     }
 
-    public void setNorthBuilding(SmallBuilding northBuilding) {
+    public void setNorthBuilding(Building northBuilding) {
         this.northBuilding = northBuilding;
     }
 
-    public SmallBuilding getSouthBuilding() {
+    public Building getSouthBuilding() {
         return southBuilding;
     }
 
-    public void setSouthBuilding(SmallBuilding southBuilding) {
+    public void setSouthBuilding(Building southBuilding) {
         this.southBuilding = southBuilding;
     }
 
-    public SmallBuilding getWestBuilding() {
+    public Building getWestBuilding() {
         return westBuilding;
     }
 
-    public void setWestBuilding(SmallBuilding westBuilding) {
+    public void setWestBuilding(Building westBuilding) {
         this.westBuilding = westBuilding;
     }
 
-    public SmallBuilding getEastBuilding() {
+    public Building getEastBuilding() {
         return eastBuilding;
     }
 
-    public void setEastBuilding(SmallBuilding eastBuilding) {
+    public void setEastBuilding(Building eastBuilding) {
         this.eastBuilding = eastBuilding;
     }
 
     public void setBuilding(int index, Building building){
         switch (index){
             case 1:
-                setBigBuilding((BigBuilding) building);
+                setBigBuilding( building);
+                break;
             case 2:
-                setNorthBuilding((SmallBuilding) building);
+                setNorthBuilding(building);
+                break;
             case 3:
-                setSouthBuilding((SmallBuilding) building);
+                setSouthBuilding(building);
+                break;
             case 4:
-                setWestBuilding((SmallBuilding) building);
+                setWestBuilding(building);
+                break;
             case 5:
-                setEastBuilding((SmallBuilding) building);
+                setEastBuilding(building);
+                break;
             case 6:
-                setWalls((Walls) building);
+                setWalls(building);
+                break;
         }
     }
 

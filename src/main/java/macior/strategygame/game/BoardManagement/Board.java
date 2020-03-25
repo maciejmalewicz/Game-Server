@@ -51,7 +51,8 @@ public class Board {
 
     public AreaUnit getAreaUnit(Location location){
         if (location.getRow() >= BoardSettings.BOARD_ROWS ||
-        location.getRow() < 0 || location.getColumn() > BoardSettings.BOARD_COLUMNS
+        location.getRow() < 0 ||
+        location.getColumn() > BoardSettings.BOARD_COLUMNS
         || location.getColumn() < 0){
             return null;
         }
@@ -115,7 +116,7 @@ public class Board {
 //            for (AreaUnit unit : row){
 //                System.out.println(unit);
 //                try {
-//                    System.out.println(unit.getLocation());
+//                    System.out.println(unit.getAreaUnit());
 //                } catch (NullPointerException exc){
 //                    System.out.println(":(");
 //                }

@@ -7,7 +7,7 @@ public class Location {
     private int row;
     private int column;
 
-    public Location(@JsonProperty("row") int row, @JsonProperty("column") int column){
+    public Location(@JsonProperty("row") int row, @JsonProperty("col") int column){
         this.row = row;
         this.column = column;
     }

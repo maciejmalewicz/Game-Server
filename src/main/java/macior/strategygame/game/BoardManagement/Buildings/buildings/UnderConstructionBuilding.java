@@ -1,20 +1,18 @@
 package macior.strategygame.game.BoardManagement.Buildings.buildings;
 
 import macior.strategygame.game.BoardManagement.AreaUnit;
-import macior.strategygame.game.BoardManagement.Buildings.buildings.smallBuildings.SmallBuilding;
-import macior.strategygame.game.BoardManagement.Location;
 
 public class UnderConstructionBuilding extends Building{
 
     //what will be generated after building
     private Building buildingUnderConstruction;
-    private AreaUnit location;
+    private AreaUnit areaUnit;
     private int place;
 
     public UnderConstructionBuilding(Building underConstruction,
-                                     AreaUnit location, int place){
+                                     AreaUnit areaUnit, int place){
         buildingUnderConstruction = underConstruction;
-        this.location = location;
+        this.areaUnit = areaUnit;
         this.place = place;
     }
 
@@ -23,8 +21,16 @@ public class UnderConstructionBuilding extends Building{
     }
 
     public void unpackBuilding(){
-        location.setBuilding(place, buildingUnderConstruction);
+        areaUnit.setBuilding(place, buildingUnderConstruction);
         System.out.println();
+    }
+
+    public AreaUnit getAreaUnit() {
+        return areaUnit;
+    }
+
+    public int getPlace() {
+        return place;
     }
 
     @Override

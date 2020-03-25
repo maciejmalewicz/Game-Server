@@ -1,5 +1,6 @@
 package macior.strategygame.service.game;
 
+import macior.strategygame.game.PlayersManagement.Notifications.NotificationsInbox;
 import macior.strategygame.game.PlayersManagement.Player;
 import macior.strategygame.game.Utilities.ResourceSet;
 import macior.strategygame.models.game.GameChanges;
@@ -41,6 +42,10 @@ public class GameChangesService {
 
         ResourceSet resources = player.getResources();
         response.setResources(resources);
+
+        NotificationsInbox inbox = player.getInbox().clone();
+        player.getInbox().clearNotifications();
+        response.setInbox(inbox);
 
         //todo all other updates
     }

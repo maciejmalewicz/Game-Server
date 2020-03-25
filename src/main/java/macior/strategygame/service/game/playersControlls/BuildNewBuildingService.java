@@ -112,6 +112,7 @@ public class BuildNewBuildingService {
 
 
     private boolean isPlayersFieldOK(Player player, BuildingRequest request){
+        System.out.println(request.getLocation());
         AreaUnit unit = player.getGame().getBoard().getAreaUnit(request.getLocation());
         if (unit == null){
             return false;
@@ -148,14 +149,16 @@ public class BuildNewBuildingService {
         SmallBuilding beingBuilt = buildingsMapper.getSmallBuilding(request.getBuilding());
         AreaUnit areaUnit = player.getGame().getBoard().getAreaUnit(request.getLocation());
         UnderConstructionBuilding wrapper =
-                new UnderConstructionBuilding(beingBuilt, areaUnit, request.getBuilding());
+                new UnderConstructionBuilding(beingBuilt, areaUnit, request.getPlace());
         //where and what is being added
         areaUnit.setBuilding(request.getPlace(), wrapper);
         return wrapper;
     }
 
+    //we have 2 event lists: main and area unit
     private void addToEvents(UnderConstructionBuilding building, Player player, int finishTime){
         BuildingConstructionEvent eventToAdd = new BuildingConstructionEvent(finishTime, building);
+        building.getAreaUnit().getBuildingQueue().pushEvent(eventToAdd);
         player.getGame().getEventHandler().addEvent(eventToAdd);
     }
 

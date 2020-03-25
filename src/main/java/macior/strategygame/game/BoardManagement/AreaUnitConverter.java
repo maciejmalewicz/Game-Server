@@ -1,6 +1,7 @@
 package macior.strategygame.game.BoardManagement;
 
 import macior.strategygame.dao.users.UserDAO;
+import macior.strategygame.game.BoardManagement.Buildings.buildings.Building;
 import macior.strategygame.game.BoardManagement.Buildings.buildings.bigBuildings.BigBuilding;
 import macior.strategygame.game.BoardManagement.Buildings.buildings.smallBuildings.SmallBuilding;
 import macior.strategygame.game.BoardManagement.Buildings.buildings.smallBuildings.Walls;
@@ -27,32 +28,32 @@ public class AreaUnitConverter {
 
     public AreaUnitMessage convertOwnedAreaUnit(AreaUnit unit){
         OwnedAreaUnitMessage out = new OwnedAreaUnitMessage();
-        BigBuilding bigBuilding = unit.getBigBuilding();
+        Building bigBuilding = unit.getBigBuilding();
         if (bigBuilding != null){
             out.MAIN_BUILDING = bigBuilding.toMessage();
         }
 
-        SmallBuilding northBuilding = unit.getNorthBuilding();
+        Building northBuilding = unit.getNorthBuilding();
         if (northBuilding != null){
             out.NORTH_BUILDING = northBuilding.toMessage();
         }
 
-        SmallBuilding southBuilding = unit.getSouthBuilding();
+        Building southBuilding = unit.getSouthBuilding();
         if (southBuilding != null){
             out.SOUTH_BUILDING = southBuilding.toMessage();
         }
 
-        SmallBuilding westBuilding = unit.getWestBuilding();
+        Building westBuilding = unit.getWestBuilding();
         if (westBuilding != null){
             out.WEST_BUILDING = westBuilding.toMessage();
         }
 
-        SmallBuilding eastBuilding = unit.getEastBuilding();
+        Building eastBuilding = unit.getEastBuilding();
         if (eastBuilding != null){
             out.EAST_BUILDING = eastBuilding.toMessage();
         }
 
-        Walls walls = unit.getWalls();
+        Building walls = unit.getWalls();
         if (walls != null){
             out.WALLS = (WallsMessage) walls.toMessage();
         }
@@ -62,12 +63,14 @@ public class AreaUnitConverter {
             out.OWNER = owner.getNick();
         }
 
+        out.BUILDING_QUEUE = unit.getBuildingQueue();
+
         return out;
     }
 
     public AreaUnitMessage convertOtherAreaUnit(AreaUnit unit){
         AreaUnitMessage out = new AreaUnitMessage();
-        BigBuilding bigBuilding = unit.getBigBuilding();
+        Building bigBuilding = unit.getBigBuilding();
         if (bigBuilding != null){
             out.MAIN_BUILDING = unit.getBigBuilding().toMessage();
         }

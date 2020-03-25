@@ -1,5 +1,6 @@
 package macior.strategygame.models.game;
 
+import macior.strategygame.game.BoardManagement.BuildingQueue;
 import macior.strategygame.game.BoardManagement.Buildings.buildings.smallBuildings.Walls;
 
 public class AreaUnitMessage {

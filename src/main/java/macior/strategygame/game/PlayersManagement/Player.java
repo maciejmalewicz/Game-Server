@@ -3,6 +3,7 @@ package macior.strategygame.game.PlayersManagement;
 
 import macior.strategygame.game.Game;
 import macior.strategygame.game.PlayersManagement.Laboratory.PlayersUpgradesSet;
+import macior.strategygame.game.PlayersManagement.Notifications.NotificationsInbox;
 import macior.strategygame.game.Utilities.ResourceSet;
 
 public class Player {
@@ -12,6 +13,11 @@ public class Player {
     private ResourceSet resources = new ResourceSet(0, 0, 0);
     private ResourceSet income = new ResourceSet(0, 0, 0); //todo maybe change
     private Game game;
+    private NotificationsInbox inbox = new NotificationsInbox();
+
+    public NotificationsInbox getInbox() {
+        return inbox;
+    }
 
     public ResourceSet getIncome() {
         return income;
