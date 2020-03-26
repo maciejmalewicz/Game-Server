@@ -3,12 +3,13 @@ package macior.strategygame.game.PlayersManagement.Notifications;
 import com.sun.xml.bind.v2.schemagen.xmlschema.LocalAttribute;
 import macior.strategygame.game.BoardManagement.Buildings.buildings.Building;
 import macior.strategygame.game.BoardManagement.Location;
+import macior.strategygame.models.game.BuildingMessage;
 
 public class FinishedBuildingNotification extends NotificationBase {
 
     private Location location;
     private int place;
-    private Building building;
+    private BuildingMessage building;
 
     public FinishedBuildingNotification(){
         super();
@@ -30,11 +31,11 @@ public class FinishedBuildingNotification extends NotificationBase {
         this.place = place;
     }
 
-    public Building getBuilding() {
+    public BuildingMessage getBuilding() {
         return building;
     }
 
-    public void setBuilding(Building building) {
+    public void setBuilding(BuildingMessage building) {
         this.building = building;
     }
 

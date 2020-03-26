@@ -12,6 +12,17 @@ public class GameConfiguration {
     @Autowired
     private SmallBuildingsConfig smallBuildingsConfig;
 
+    @Autowired
+    private UpgradesConfig upgradesConfig;
+
+    public UpgradesConfig getUpgradesConfig() {
+        return upgradesConfig;
+    }
+
+    public void setUpgradesConfig(UpgradesConfig upgradesConfig) {
+        this.upgradesConfig = upgradesConfig;
+    }
+
     public BigBuildingsConfig getBigBuildingsConfig() {
         return bigBuildingsConfig;
     }

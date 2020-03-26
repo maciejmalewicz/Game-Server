@@ -23,7 +23,7 @@ public class BuildingConstructionEvent extends PostponedEvent {
     @Override
     protected NotificationBase doNotification() {
         FinishedBuildingNotification notification = new FinishedBuildingNotification();
-        notification.setBuilding(building.getBuildingUnderConstruction());
+        notification.setBuilding(building.getBuildingUnderConstruction().toMessage());
         notification.setLocation(building.getAreaUnit().getLocation());
         notification.setPlace(building.getPlace());
 

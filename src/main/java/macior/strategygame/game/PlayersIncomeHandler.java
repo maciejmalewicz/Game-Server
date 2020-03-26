@@ -3,21 +3,30 @@ package macior.strategygame.game;
 import macior.strategygame.game.BoardManagement.AreaUnit;
 import macior.strategygame.game.BoardManagement.Board;
 import macior.strategygame.game.BoardManagement.BoardSettings;
+import macior.strategygame.game.BoardManagement.Buildings.buildings.Building;
+import macior.strategygame.game.BoardManagement.Buildings.buildings.smallBuildings.resourceFactories.SmallFactory;
 import macior.strategygame.game.BoardManagement.Location;
 import macior.strategygame.game.PlayersManagement.Laboratory.PlayersUpgradesSet;
 import macior.strategygame.game.PlayersManagement.Player;
 import macior.strategygame.game.Utilities.ResourceSet;
+import macior.strategygame.models.game.configuration.GameConfiguration;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class PlayersIncomeHandler {
 
     private Board board;
 
+    @Autowired
+    private GameConfiguration config;
+
     public void refreshIncomes(){
+        //preparation
         ResourceSet player1Income = new ResourceSet(0, 0, 0);
         ResourceSet player2Income = new ResourceSet(0, 0, 0);
         ResourceSet player3Income = new ResourceSet(0, 0, 0);
         ResourceSet player4Income = new ResourceSet(0, 0, 0);
         Location currentLocation = new Location(0, 0);
+        //get incomes from single area units
         for (int i = 0; i < BoardSettings.BOARD_ROWS; i++){
             for (int j = 0; j < BoardSettings.BOARD_COLUMNS; j++){
                 currentLocation.setRow(i);
@@ -54,6 +63,20 @@ public class PlayersIncomeHandler {
     public void addIncomeFromUnit(AreaUnit unit, ResourceSet resources, PlayersUpgradesSet upgrades){
         resources.addResources(5, 5, 5);
         //todo all this complex stuff
+    }
+
+    public void addIncomeOfBuilding(Building building, PlayersUpgradesSet upgrades, ResourceSet toChange){
+        if (building == null){ //nothing is built
+            return;
+        }
+        if (upgrades.upgraded(13)){ //conquerors land upgraded
+
+            toChange.addResources(2, 2, 2); //todo do this!!!
+        }
+        if (building instanceof SmallFactory){
+
+        }
+
     }
 
     public void addNewResources(){

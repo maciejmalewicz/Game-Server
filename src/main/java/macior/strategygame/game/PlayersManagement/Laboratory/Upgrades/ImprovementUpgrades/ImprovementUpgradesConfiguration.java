@@ -32,7 +32,7 @@ public class ImprovementUpgradesConfiguration {
     }
 
     @Bean
-    public ProductionManagers2 productionMangers2Bean(){
+    public ProductionManagers2 productionManagers2Bean(){
         return new BeanFactory<ProductionManagers2>().getBean(getMainMap(), ProductionManagers2.class);
     }
 
