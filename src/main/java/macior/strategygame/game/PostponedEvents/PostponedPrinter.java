@@ -1,6 +1,7 @@
 package macior.strategygame.game.PostponedEvents;
 
 import macior.strategygame.game.PlayersManagement.Notifications.NotificationBase;
+import macior.strategygame.models.game.messages.event_messages.PostponedEventMessage;
 
 //test object
 public class PostponedPrinter extends PostponedEvent {

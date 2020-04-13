@@ -7,6 +7,7 @@ import macior.strategygame.game.PlayersManagement.PlayersSet;
 import macior.strategygame.game.PostponedEvents.EventHandler;
 import macior.strategygame.game.Utilities.Time;
 import macior.strategygame.models.User;
+import macior.strategygame.models.game.configuration.GameConfiguration;
 import macior.strategygame.queue.UsersSet;
 import macior.strategygame.service.utilities.mapper.PlayerGameMapperService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ public class GameBuilder {
 
     @Autowired
     private BoardBuilder boardBuilder;
+
+    @Autowired
+    private GameConfiguration gameConfiguration;
 
     public Game buildGame(UsersSet set){
         return buildGame(set.getUser1(), set.getUser2(), set.getUser3(), set.getUser4());
@@ -47,7 +51,7 @@ public class GameBuilder {
         updater.setGame(game);
         game.setGameUpdater(updater);
 
-        PlayersIncomeHandler handler = new PlayersIncomeHandler();
+        PlayersIncomeHandler handler = new PlayersIncomeHandler(gameConfiguration);
         handler.setBoard(board);
         game.setIncomeHandler(handler);
 
@@ -72,4 +76,27 @@ public class GameBuilder {
     }
 
 
+    public PlayerGameMapperService getMapper() {
+        return mapper;
+    }
+
+    public void setMapper(PlayerGameMapperService mapper) {
+        this.mapper = mapper;
+    }
+
+    public BoardBuilder getBoardBuilder() {
+        return boardBuilder;
+    }
+
+    public void setBoardBuilder(BoardBuilder boardBuilder) {
+        this.boardBuilder = boardBuilder;
+    }
+
+    public GameConfiguration getGameConfiguration() {
+        return gameConfiguration;
+    }
+
+    public void setGameConfiguration(GameConfiguration gameConfiguration) {
+        this.gameConfiguration = gameConfiguration;
+    }
 }

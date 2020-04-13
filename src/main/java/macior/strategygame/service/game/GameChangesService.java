@@ -3,12 +3,10 @@ package macior.strategygame.service.game;
 import macior.strategygame.game.PlayersManagement.Notifications.NotificationsInbox;
 import macior.strategygame.game.PlayersManagement.Player;
 import macior.strategygame.game.Utilities.ResourceSet;
-import macior.strategygame.models.game.GameChanges;
+import macior.strategygame.models.game.messages.GameChanges;
 import macior.strategygame.service.utilities.mapper.PlayerGameMapperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
 
 @Service
 public class GameChangesService {
@@ -43,8 +41,7 @@ public class GameChangesService {
         ResourceSet resources = player.getResources();
         response.setResources(resources);
 
-        NotificationsInbox inbox = player.getInbox().clone();
-        player.getInbox().clearNotifications();
+        NotificationsInbox inbox = player.getInbox().cloneAndClear();
         response.setInbox(inbox);
 
         //todo all other updates

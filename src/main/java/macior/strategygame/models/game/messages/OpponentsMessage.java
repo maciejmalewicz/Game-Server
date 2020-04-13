@@ -1,4 +1,4 @@
-package macior.strategygame.models.game;
+package macior.strategygame.models.game.messages;
 
 public class OpponentsMessage {
 

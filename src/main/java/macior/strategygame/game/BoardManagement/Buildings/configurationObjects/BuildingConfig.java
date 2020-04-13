@@ -19,4 +19,32 @@ public class BuildingConfig {
     public Time LEVEL2_BUILDING_TIME;
     public Time LEVEL3_BUILDING_TIME;
     public Time LEVEL4_BUILDING_TIME;
+
+    public ResourceSet getCost(int level){
+        switch (level){
+            case 1:
+                return LEVEL1_COST;
+            case 2:
+                return LEVEL2_COST;
+            case 3:
+                return LEVEL3_COST;
+            case 4:
+                return LEVEL4_COST;
+        }
+        return null;
+    }
+
+    public Time getTime(int level){
+        switch (level){
+            case 1:
+                return LEVEL1_BUILDING_TIME;
+            case 2:
+                return LEVEL2_BUILDING_TIME;
+            case 3:
+                return LEVEL3_BUILDING_TIME;
+            case 4:
+                return LEVEL4_BUILDING_TIME;
+        }
+        return null;
+    }
 }

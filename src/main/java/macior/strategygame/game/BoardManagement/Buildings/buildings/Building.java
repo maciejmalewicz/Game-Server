@@ -1,16 +1,24 @@
 package macior.strategygame.game.BoardManagement.Buildings.buildings;
 
-import macior.strategygame.models.game.BuildingMessage;
+import macior.strategygame.models.game.messages.BuildingMessage;
 
 public abstract class Building {
 
-    public int LEVEL = 1;
+    public int LEVEL;
+
+    public Building(){
+        this.LEVEL = 1;
+    }
 
     protected abstract String getLabel();
 
+    public void setLevel(int level){
+        LEVEL = level;
+    }
+
     public BuildingMessage toMessage(){
         BuildingMessage message = new BuildingMessage();
-        message.LEVEL = this.LEVEL;
+        message.LEVEL = LEVEL;
         message.LABEL = getLabel();
         return message;
     }

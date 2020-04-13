@@ -2,9 +2,8 @@ package macior.strategygame.game.BoardManagement;
 
 
 import macior.strategygame.game.PlayersManagement.Player;
-import macior.strategygame.models.game.AreaUnitMessage;
-import macior.strategygame.models.game.BoardMessage;
-import org.springframework.beans.factory.annotation.Autowired;
+import macior.strategygame.models.game.messages.AreaUnitMessage;
+import macior.strategygame.models.game.messages.BoardMessage;
 
 public class Board {
 
@@ -52,7 +51,7 @@ public class Board {
     public AreaUnit getAreaUnit(Location location){
         if (location.getRow() >= BoardSettings.BOARD_ROWS ||
         location.getRow() < 0 ||
-        location.getColumn() > BoardSettings.BOARD_COLUMNS
+        location.getColumn() >= BoardSettings.BOARD_COLUMNS
         || location.getColumn() < 0){
             return null;
         }

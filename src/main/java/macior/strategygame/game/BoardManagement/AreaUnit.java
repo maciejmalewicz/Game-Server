@@ -120,4 +120,23 @@ public class AreaUnit {
         }
     }
 
+    public int getPlace(Building building){
+        if (building == getBigBuilding()){
+            return 1;
+        }
+        if (building == getNorthBuilding()){
+            return 2;
+        }
+        if (building == getSouthBuilding()){
+            return 3;
+        }
+        if (building == getWestBuilding()){
+            return 4;
+        }
+        if (building == getEastBuilding()){
+            return 5;
+        }
+        return -1;
+    }
+
 }

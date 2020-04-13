@@ -1,16 +1,16 @@
 package macior.strategygame.game.PlayersManagement.Notifications;
 
 import macior.strategygame.game.BoardManagement.Location;
-import macior.strategygame.models.game.messages.BuildingMessage;
 
-public class FinishedBuildingNotification extends NotificationBase {
+public class FinishedUpgradeNotification extends NotificationBase{
 
     private Location location;
     private int place;
-    private BuildingMessage building;
+    private int level;
 
-    public FinishedBuildingNotification(){
-        super();
+    @Override
+    public String initializeLabel() {
+        return "FINISHED_UPGRADE";
     }
 
     public Location getLocation() {
@@ -29,16 +29,11 @@ public class FinishedBuildingNotification extends NotificationBase {
         this.place = place;
     }
 
-    public BuildingMessage getBuilding() {
-        return building;
+    public int getLevel() {
+        return level;
     }
 
-    public void setBuilding(BuildingMessage building) {
-        this.building = building;
-    }
-
-    @Override
-    public String initializeLabel() {
-        return "FINISHED_BUILDING";
+    public void setLevel(int level) {
+        this.level = level;
     }
 }

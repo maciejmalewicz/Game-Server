@@ -1,5 +1,10 @@
 package macior.strategygame.game.PlayersManagement;
 
+import macior.strategygame.game.PlayersManagement.Notifications.NotificationBase;
+import macior.strategygame.game.PlayersManagement.Notifications.NotificationsInbox;
+
+import java.util.List;
+
 public class PlayersSet {
 
     private Player player1;
@@ -44,5 +49,12 @@ public class PlayersSet {
 
     public void setPlayer4(Player player4) {
         this.player4 = player4;
+    }
+
+    public void notifyAllPlayers(NotificationBase notification){
+        player1.getInbox().addNotification(notification);
+        player2.getInbox().addNotification(notification);
+        player3.getInbox().addNotification(notification);
+        player4.getInbox().addNotification(notification);
     }
 }

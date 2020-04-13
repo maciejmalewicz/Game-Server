@@ -1,36 +1,41 @@
 package macior.strategygame.game.BoardManagement;
 
+import macior.strategygame.game.BoardManagement.Buildings.buildings.Building;
+import macior.strategygame.game.PostponedEvents.BuildingConcernedEvent;
 import macior.strategygame.game.PostponedEvents.BuildingConstructionEvent;
 import macior.strategygame.game.PostponedEvents.PostponedEvent;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class BuildingQueue {
 
-    private List<BuildingConstructionEvent> events = new ArrayList<>();
+    //private List<BuildingConcernedEvent> events = new ArrayList<>();
+    private TreeSet<BuildingConcernedEvent> events = new TreeSet<>();
 
-    public void pushEvent(BuildingConstructionEvent event){
-        for (int i = events.size()-1; i >= 0; i--){
-            if (events.get(i).getFinishingTime() < event.getFinishingTime()){
-                events.add(i+1, event);
-                return;
-            }
-        }
-        events.add(0, event);
+    public synchronized void pushEvent(BuildingConcernedEvent event){
+        System.out.println(events.add(event));
     }
 
-    public void removeEvent(BuildingConstructionEvent event){
+    public synchronized void removeEvent(BuildingConcernedEvent event){
         events.remove(event);
     }
 
-    public List<BuildingConstructionEvent> getEvents() {
+    public TreeSet<BuildingConcernedEvent> getEvents() {
         return events;
     }
 
-    public void setEvents(List<BuildingConstructionEvent> events) {
+    public void setEvents(TreeSet<BuildingConcernedEvent> events) {
         this.events = events;
+    }
+
+    public synchronized BuildingConcernedEvent getLastEventConcerningBuilding(Building building){
+        Iterator<BuildingConcernedEvent> iterator = events.descendingIterator();
+        while (iterator.hasNext()){
+            BuildingConcernedEvent event = iterator.next();
+            if (event.getBuilding() == building){
+                return event;
+            }
+        }
+        return null;
     }
 }

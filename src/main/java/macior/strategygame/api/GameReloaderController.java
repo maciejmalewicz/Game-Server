@@ -1,7 +1,7 @@
 package macior.strategygame.api;
 
 import macior.strategygame.models.account_management.StatusResponse;
-import macior.strategygame.models.game.GameStateResponse;
+import macior.strategygame.models.game.messages.GameStateResponse;
 import macior.strategygame.service.GameReloaderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

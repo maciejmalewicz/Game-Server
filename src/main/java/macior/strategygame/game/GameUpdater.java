@@ -20,12 +20,12 @@ public class GameUpdater extends Thread {
 
     public void update(){
         //todo all the mechanics that happen every second
-        System.out.println("Updating");
+        //System.out.println("Updating");
         game.getIncomeHandler().refreshIncomes();
         game.getIncomeHandler().addNewResources();
         game.getEventHandler().triggerEvents();
-        System.out.println(game.getPlayersSet().getPlayer1().getResources());
-        System.out.println(new Date().getTime());
+        //System.out.println(game.getPlayersSet().getPlayer1().getResources());
+        //System.out.println(new Date().getTime());
     }
 
     public void launch(){
@@ -40,6 +40,7 @@ public class GameUpdater extends Thread {
             game.getTimeManager().nextSecond();
             toWait = game.getTimeManager().getTimeToWait();
             System.out.println("to wait: " + toWait);
+            System.out.println("SIZE: " + game.getEventHandler().getUpcomingEvents().size());
             try {
                 Thread.sleep(toWait);
             } catch (InterruptedException exc){

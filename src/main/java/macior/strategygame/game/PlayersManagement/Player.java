@@ -15,6 +15,16 @@ public class Player {
     private Game game;
     private NotificationsInbox inbox = new NotificationsInbox();
 
+    private double bonusFromAI = 0;
+
+    public double getBonusFromAI() {
+        return bonusFromAI;
+    }
+
+    public void setBonusFromAI(double bonusFromAI) {
+        this.bonusFromAI = bonusFromAI;
+    }
+
     public NotificationsInbox getInbox() {
         return inbox;
     }

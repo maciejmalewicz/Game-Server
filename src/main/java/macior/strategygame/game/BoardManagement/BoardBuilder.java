@@ -53,6 +53,10 @@ public class BoardBuilder {
         Walls walls2 = new Walls();
         walls2.LEVEL = 1;
         board.getAreaUnit(location).setWalls(walls2);
+        System.out.println(board.getPlayer1().getNick());
+        System.out.println(board.getPlayer2().getNick());
+        System.out.println(board.getPlayer3().getNick());
+        System.out.println(board.getPlayer4().getNick());
     }
 
     private void createBoss(Board board){

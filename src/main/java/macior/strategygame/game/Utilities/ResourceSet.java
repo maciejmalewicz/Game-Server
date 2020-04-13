@@ -1,6 +1,7 @@
 package macior.strategygame.game.Utilities;
 
 import macior.strategygame.game.PlayersManagement.Player;
+import macior.strategygame.game.RatioSet;
 
 public class ResourceSet {
 
@@ -22,6 +23,18 @@ public class ResourceSet {
 
     public void addResources(ResourceSet setToAdd){
         addResources(setToAdd.METAL, setToAdd.BUILDING_MATERIALS, setToAdd.ELECTRICITY);
+    }
+
+    public void multiplyResources(double ratio){
+        METAL = (int)(METAL*ratio);
+        BUILDING_MATERIALS = (int)(BUILDING_MATERIALS*ratio);
+        ELECTRICITY = (int)(ELECTRICITY*ratio);
+    }
+
+    public void multiplyResources(RatioSet ratios){
+        METAL = (int)(METAL*ratios.metalRatio);
+        BUILDING_MATERIALS = (int)(BUILDING_MATERIALS*ratios.buildingMaterialsRatio);
+        ELECTRICITY = (int)(ELECTRICITY*ratios.electricityRatio);
     }
 
     public void substractResources(ResourceSet setToSubstract){

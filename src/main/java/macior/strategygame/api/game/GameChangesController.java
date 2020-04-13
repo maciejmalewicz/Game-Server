@@ -1,6 +1,6 @@
 package macior.strategygame.api.game;
 
-import macior.strategygame.models.game.GameChanges;
+import macior.strategygame.models.game.messages.GameChanges;
 import macior.strategygame.service.game.GameChangesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

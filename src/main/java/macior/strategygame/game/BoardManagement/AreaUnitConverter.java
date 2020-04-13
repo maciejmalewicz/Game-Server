@@ -1,18 +1,15 @@
 package macior.strategygame.game.BoardManagement;
 
-import macior.strategygame.dao.users.UserDAO;
 import macior.strategygame.game.BoardManagement.Buildings.buildings.Building;
-import macior.strategygame.game.BoardManagement.Buildings.buildings.bigBuildings.BigBuilding;
-import macior.strategygame.game.BoardManagement.Buildings.buildings.smallBuildings.SmallBuilding;
-import macior.strategygame.game.BoardManagement.Buildings.buildings.smallBuildings.Walls;
 import macior.strategygame.game.PlayersManagement.Player;
-import macior.strategygame.models.game.AreaUnitMessage;
-import macior.strategygame.models.game.OwnedAreaUnitMessage;
-import macior.strategygame.models.game.WallsMessage;
-import macior.strategygame.service.utilities.mapper.PlayerGameMapperService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import macior.strategygame.game.PostponedEvents.BuildingConcernedEvent;
+import macior.strategygame.models.game.messages.AreaUnitMessage;
+import macior.strategygame.models.game.messages.BuildingQueueMessage;
+import macior.strategygame.models.game.messages.OwnedAreaUnitMessage;
+import macior.strategygame.models.game.messages.WallsMessage;
 import org.springframework.stereotype.Component;
+
+import java.util.Collections;
 
 @Component
 public class AreaUnitConverter {
@@ -63,7 +60,12 @@ public class AreaUnitConverter {
             out.OWNER = owner.getNick();
         }
 
-        out.BUILDING_QUEUE = unit.getBuildingQueue();
+        out.BUILDING_QUEUE = new BuildingQueueMessage();
+        for (BuildingConcernedEvent event: unit.getBuildingQueue().getEvents()){
+            int place = unit.getPlace(event.getBuilding());
+            out.BUILDING_QUEUE.add(event.toMessage(place));
+        }
+        Collections.sort(out.BUILDING_QUEUE.getEvents());
 
         return out;
     }

@@ -1,4 +1,4 @@
-package macior.strategygame.models.game;
+package macior.strategygame.models.game.messages;
 
 import macior.strategygame.game.PlayersManagement.Notifications.NotificationsInbox;
 import macior.strategygame.game.Utilities.ResourceSet;

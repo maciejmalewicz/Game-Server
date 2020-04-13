@@ -17,7 +17,6 @@ public class BuildNewBuildingController {
     @PostMapping(path = "{code}")
     @CrossOrigin
     public TimeResponse buildNew(@PathVariable("code") String code, @RequestBody BuildingRequest request){
-        System.out.println(request);
         return service.buildNew(request, code);
     }
 }

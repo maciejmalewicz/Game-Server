@@ -2,8 +2,8 @@ package macior.strategygame.game.BoardManagement;
 
 import macior.strategygame.game.Game;
 import macior.strategygame.game.PlayersManagement.Player;
-import macior.strategygame.models.game.GameStateResponse;
-import macior.strategygame.models.game.OpponentsMessage;
+import macior.strategygame.models.game.messages.GameStateResponse;
+import macior.strategygame.models.game.messages.OpponentsMessage;
 import org.springframework.stereotype.Component;
 
 @Component

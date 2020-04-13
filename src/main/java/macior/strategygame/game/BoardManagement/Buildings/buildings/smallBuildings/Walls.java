@@ -1,7 +1,7 @@
 package macior.strategygame.game.BoardManagement.Buildings.buildings.smallBuildings;
 
-import macior.strategygame.models.game.BuildingMessage;
-import macior.strategygame.models.game.WallsMessage;
+import macior.strategygame.models.game.messages.BuildingMessage;
+import macior.strategygame.models.game.messages.WallsMessage;
 
 public class Walls extends SmallBuilding {
 

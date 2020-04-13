@@ -1,6 +1,8 @@
 package macior.strategygame.game.BoardManagement.Buildings.buildings;
 
 import macior.strategygame.game.BoardManagement.AreaUnit;
+import macior.strategygame.models.game.messages.BuildingMessage;
+import macior.strategygame.models.game.messages.UnderConstructionBuildingMessage;
 
 public class UnderConstructionBuilding extends Building{
 
@@ -34,7 +36,16 @@ public class UnderConstructionBuilding extends Building{
     }
 
     @Override
+    public BuildingMessage toMessage(){
+        UnderConstructionBuildingMessage message = new UnderConstructionBuildingMessage();
+        message.LABEL = getLabel();
+        message.LEVEL = this.LEVEL;
+        message.setBuildingUnderConstruction(buildingUnderConstruction.toMessage());
+        return message;
+    }
+
+    @Override
     protected String getLabel() {
-        return "UNDER CONSTRUCTION: " + buildingUnderConstruction.getLabel();
+        return "UNDER_CONSTRUCTION_BUILDING";
     }
 }

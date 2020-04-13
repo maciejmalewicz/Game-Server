@@ -71,4 +71,9 @@ public class TimeManager {
         return this.secondsFromStart + postponingDuration;
     }
 
+    //if player will make it before game ends
+    public boolean canStillBuild(int time){
+        return time <= GAME_DURATION;
+    }
+
 }

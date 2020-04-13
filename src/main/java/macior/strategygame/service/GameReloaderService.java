@@ -4,7 +4,7 @@ import macior.strategygame.game.BoardManagement.GameConverter;
 import macior.strategygame.game.Game;
 import macior.strategygame.game.PlayersManagement.Player;
 import macior.strategygame.models.account_management.StatusResponse;
-import macior.strategygame.models.game.GameStateResponse;
+import macior.strategygame.models.game.messages.GameStateResponse;
 import macior.strategygame.service.utilities.mapper.PlayerGameMapperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,11 +1,13 @@
 package macior.strategygame.game.PostponedEvents;
 
 import macior.strategygame.game.PlayersManagement.Notifications.NotificationBase;
+import macior.strategygame.models.game.messages.event_messages.PostponedEventMessage;
 
 public abstract class PostponedEvent implements Comparable<PostponedEvent>{
 
     protected abstract NotificationBase doNotification();
     protected abstract void doHappen();
+
 
 
     public void happen(){

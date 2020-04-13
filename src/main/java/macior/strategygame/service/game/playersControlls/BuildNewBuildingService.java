@@ -12,8 +12,10 @@ import macior.strategygame.game.Utilities.ResourceSet;
 import macior.strategygame.models.game.configuration.SmallBuildingsConfig;
 import macior.strategygame.models.game.playersControls.BuildingRequest;
 import macior.strategygame.models.game.playersControls.TimeResponse;
+import macior.strategygame.service.UserValidationService;
 import macior.strategygame.service.utilities.mapper.PlayerGameMapperService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.SortedSet;
@@ -27,19 +29,26 @@ public class BuildNewBuildingService {
     @Autowired
     private BuildingsPlacesMapperService buildingsMapper;
 
+    @Autowired
+    private UserValidationService validationService;
+
     public TimeResponse buildNew(BuildingRequest request, String code){
-        int id  = mapper.getId(code);
+        //int id  = mapper.getId(code);
         TimeResponse timeResponse = new TimeResponse();
 
         //unknown user
+//        if (id == -1){
+//            timeResponse.setStatus(-1);
+//            timeResponse.setCode("UNKNOWN CODE");
+//            return timeResponse;
+//        }
+//
+//        String newCode = mapper.updateCode(code);
+//        timeResponse.setCode(newCode);
+        int id = validationService.validateAndGetId(code, timeResponse);
         if (id == -1){
-            timeResponse.setStatus(-1);
-            timeResponse.setCode("UNKNOWN CODE");
             return timeResponse;
         }
-
-        String newCode = mapper.updateCode(code);
-        timeResponse.setCode(newCode);
 
         //if not playing any game
         Player player = mapper.getPlayerById(id);
@@ -112,7 +121,6 @@ public class BuildNewBuildingService {
 
 
     private boolean isPlayersFieldOK(Player player, BuildingRequest request){
-        System.out.println(request.getLocation());
         AreaUnit unit = player.getGame().getBoard().getAreaUnit(request.getLocation());
         if (unit == null){
             return false;
@@ -155,8 +163,10 @@ public class BuildNewBuildingService {
         return wrapper;
     }
 
-    //we have 2 event lists: main and area unit
-    private void addToEvents(UnderConstructionBuilding building, Player player, int finishTime){
+
+    @Async//we have 2 event lists: main and area unit
+    private synchronized void addToEvents(UnderConstructionBuilding building, Player player, int finishTime){
+        System.out.println("ADDING!");
         BuildingConstructionEvent eventToAdd = new BuildingConstructionEvent(finishTime, building);
         building.getAreaUnit().getBuildingQueue().pushEvent(eventToAdd);
         player.getGame().getEventHandler().addEvent(eventToAdd);
