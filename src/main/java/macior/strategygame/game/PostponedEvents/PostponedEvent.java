@@ -7,6 +7,7 @@ public abstract class PostponedEvent implements Comparable<PostponedEvent>{
 
     protected abstract NotificationBase doNotification();
     protected abstract void doHappen();
+    protected byte id;
 
 
 
@@ -29,8 +30,20 @@ public abstract class PostponedEvent implements Comparable<PostponedEvent>{
         this.finishingTime = finishingTime;
     }
 
+    public byte getId() {
+        return id;
+    }
+
+    public void setId(byte id) {
+        this.id = id;
+    }
+
     @Override
     public int compareTo(PostponedEvent other) {
-        return finishingTime - other.finishingTime;
+        int result = finishingTime - other.finishingTime;
+        if (result != 0){
+            return result;
+        }
+        return id - other.id;
     }
 }

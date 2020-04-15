@@ -15,6 +15,7 @@ import macior.strategygame.game.BoardManagement.Buildings.buildings.smallBuildin
 import macior.strategygame.game.BoardManagement.Buildings.buildings.smallBuildings.resourceFactories.SmallMetalFactory;
 import macior.strategygame.game.BoardManagement.Location;
 import macior.strategygame.game.PlayersManagement.Laboratory.PlayersUpgradesSet;
+import macior.strategygame.game.PlayersManagement.Laboratory.Upgrades.Upgrades;
 import macior.strategygame.game.PlayersManagement.Player;
 import macior.strategygame.game.Utilities.ResourceSet;
 import macior.strategygame.models.game.configuration.BigBuildingsConfig;
@@ -85,24 +86,24 @@ public class PlayersIncomeHandler {
         double bonusRatio;
         ImprovementUpgradesConfig ic = config.getUpgradesConfig().getImprovementUpgradesConfig();
         //production managers
-        if (upgradesSet.upgraded(22)){
+        if (upgradesSet.upgraded(Upgrades.PRODUCTION_MANAGERS_I)){
             bonusRatio = ic.getProductionManagers1().PRODUCTION_BONUS;
             ratios.increaseRatios(bonusRatio);
         }
-        if (upgradesSet.upgraded(23)){
+        if (upgradesSet.upgraded(Upgrades.PRODUCTION_MANAGERS_II)){
             bonusRatio = ic.getProductionManagers2().PRODUCTION_BONUS;
             ratios.increaseRatios(bonusRatio);
         }
         //for single resources
-        if (upgradesSet.upgraded(24)){
+        if (upgradesSet.upgraded(Upgrades.MINING_DRILL)){
             bonusRatio = ic.getMiningDrill().PRODUCTION_BONUS;
             ratios.metalRatio += bonusRatio;
         }
-        if (upgradesSet.upgraded(25)){
+        if (upgradesSet.upgraded(Upgrades.EXCAVATOR)){
             bonusRatio = ic.getExcavator().PRODUCTION_BONUS;
             ratios.buildingMaterialsRatio += bonusRatio;
         }
-        if (upgradesSet.upgraded(26)){
+        if (upgradesSet.upgraded(Upgrades.ADVANCED_PHYSICS)){
             bonusRatio = ic.getAdvancedPhysics().PRODUCTION_BONUS;
             ratios.electricityRatio += bonusRatio;
         }
@@ -111,8 +112,7 @@ public class PlayersIncomeHandler {
     }
 
     private void addIncomeFromUnit(AreaUnit unit, ResourceSet resources, PlayersUpgradesSet upgrades){
-        //resources.addResources(1, 1, 1);
-        if (upgrades.upgraded(13)){ //treasure haunters upgraded
+        if (upgrades.upgraded(Upgrades.TREASURE_HAUNTERS)){
             int amount = config.getUpgradesConfig().getControlUpgradesConfig()
                     .getTreasureHaunters().PRODUCTION_PER_AREA_UNIT;
             resources.addResources(amount, amount, amount);
@@ -156,21 +156,24 @@ public class PlayersIncomeHandler {
             int production = sbc.getSmallMetalFactoryConfig().getProduction(building.LEVEL);
             toAdd.addResources(production, 0, 0);
             //check transport trains condition - main building must be corresponding factory and trains must be upgraded
-            if (mainBuilding != null && upgradesSet.upgraded(29) && mainBuilding instanceof BigMetalFactory){
+            if (mainBuilding != null && upgradesSet.upgraded(Upgrades.TRANSPORT_TRAINS)
+                    && mainBuilding instanceof BigMetalFactory){
                 toAdd.multiplyResources(ratio);
             }
         }
         if (building instanceof SmallBuildingMaterialsFactory){
             int production = sbc.getSmallBuildingMaterialsFactoryConfig().getProduction(building.LEVEL);
             toAdd.addResources(0, production, 0);
-            if (mainBuilding != null && upgradesSet.upgraded(29) && mainBuilding instanceof BigBuildingMaterialsFactory){
+            if (mainBuilding != null && upgradesSet.upgraded(Upgrades.TRANSPORT_TRAINS)
+                    && mainBuilding instanceof BigBuildingMaterialsFactory){
                 toAdd.multiplyResources(ratio);
             }
         }
         if (building instanceof SmallElectricityFactory){
             int production = sbc.getSmallElectricityFactoryConfig().getProduction(building.LEVEL);
             toAdd.addResources(0, 0, production);
-            if (mainBuilding != null && upgradesSet.upgraded(29) && mainBuilding instanceof BigElectricityFactory){
+            if (mainBuilding != null && upgradesSet.upgraded(Upgrades.TRANSPORT_TRAINS)
+                    && mainBuilding instanceof BigElectricityFactory){
                 toAdd.multiplyResources(ratio);
             }
         }
@@ -193,7 +196,7 @@ public class PlayersIncomeHandler {
             toAdd.addResources(0, 0, production);
         }
         //handling conquerors land upgrade
-        if (upgrades.upgraded(12)){
+        if (upgrades.upgraded(Upgrades.CONQUERORS_LAND)){
             double ratio = 1 + config.getUpgradesConfig().getControlUpgradesConfig()
                     .getConquerorsLand().PRODUCTION_BONUS;
             toAdd.multiplyResources(ratio);

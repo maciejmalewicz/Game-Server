@@ -2,6 +2,7 @@ package macior.strategygame.game;
 
 import macior.strategygame.game.BoardManagement.Board;
 import macior.strategygame.game.PlayersManagement.PlayersSet;
+import macior.strategygame.game.PostponedEvents.EventFactory;
 import macior.strategygame.game.PostponedEvents.EventHandler;
 
 public class Game {
@@ -12,6 +13,7 @@ public class Game {
     private Board board;
     private PlayersIncomeHandler incomeHandler;
     private EventHandler eventHandler;
+    private EventFactory eventFactory;
 
     public EventHandler getEventHandler() {
         return eventHandler;
@@ -59,6 +61,14 @@ public class Game {
 
     public void setGameUpdater(GameUpdater gameUpdater) {
         this.gameUpdater = gameUpdater;
+    }
+
+    public EventFactory getEventFactory() {
+        return eventFactory;
+    }
+
+    public void setEventFactory(EventFactory eventFactory) {
+        this.eventFactory = eventFactory;
     }
 }
 

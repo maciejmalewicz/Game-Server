@@ -4,6 +4,7 @@ import macior.strategygame.game.BoardManagement.Board;
 import macior.strategygame.game.BoardManagement.BoardBuilder;
 import macior.strategygame.game.PlayersManagement.Player;
 import macior.strategygame.game.PlayersManagement.PlayersSet;
+import macior.strategygame.game.PostponedEvents.EventFactory;
 import macior.strategygame.game.PostponedEvents.EventHandler;
 import macior.strategygame.game.Utilities.Time;
 import macior.strategygame.models.User;
@@ -40,6 +41,8 @@ public class GameBuilder {
 
         EventHandler eventHandler = new EventHandler(game);
         game.setEventHandler(eventHandler);
+
+        game.setEventFactory(new EventFactory());
 
         Board board = boardBuilder.buildBoard(playersSet);
         game.setBoard(board);

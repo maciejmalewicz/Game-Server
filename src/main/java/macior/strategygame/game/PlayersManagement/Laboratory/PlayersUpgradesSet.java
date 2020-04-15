@@ -5,13 +5,14 @@ import macior.strategygame.game.PlayersManagement.Laboratory.Upgrades.ArmyUpgrad
 import macior.strategygame.game.PlayersManagement.Laboratory.Upgrades.ControlUpgrades.ControlUpgradeFinder;
 import macior.strategygame.game.PlayersManagement.Laboratory.Upgrades.ImprovementUpgrades.ImprovementUpgradesFinder;
 import macior.strategygame.game.PlayersManagement.Laboratory.Upgrades.Upgrade;
+import macior.strategygame.game.PlayersManagement.Laboratory.Upgrades.Upgrades;
 
 public class PlayersUpgradesSet {
 
     private boolean[] upgrades = new boolean[33];
 
     public PlayersUpgradesSet(){
-        int[] upgraded = {29};
+        int[] upgraded = {Upgrades.BUILDING_ENGINEERS, Upgrades.SCRAP_DRONES};
         for (int a: upgraded){
             upgrades[a] = true;
         }

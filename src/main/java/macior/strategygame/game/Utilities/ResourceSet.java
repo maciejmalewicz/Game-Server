@@ -1,5 +1,6 @@
 package macior.strategygame.game.Utilities;
 
+import macior.strategygame.game.PlayersManagement.Laboratory.Upgrades.Upgrades;
 import macior.strategygame.game.PlayersManagement.Player;
 import macior.strategygame.game.RatioSet;
 
@@ -50,7 +51,7 @@ public class ResourceSet {
 
     //dependent on: Geology with index: 30
     public ResourceSet canPurchase(Player buyer){ //return cost of item or null if can't purchase
-        if (buyer.getUpgradesSet().upgraded(30)){
+        if (buyer.getUpgradesSet().upgraded(Upgrades.GEOLOGY)){
             return canBePurchasedWithGeology(buyer.getResources());
         } else {
             return canBePurchasedWithoutGeology(buyer.getResources());

@@ -4,13 +4,17 @@ import macior.strategygame.game.BoardManagement.AreaUnit;
 import macior.strategygame.game.BoardManagement.BuildingQueue;
 import macior.strategygame.game.BoardManagement.Buildings.buildings.Building;
 import macior.strategygame.game.BoardManagement.Buildings.buildings.UnderConstructionBuilding;
+import macior.strategygame.game.BoardManagement.Buildings.buildings.smallBuildings.Observatory;
 import macior.strategygame.game.BoardManagement.Buildings.configurationObjects.BuildingConfig;
 import macior.strategygame.game.BoardManagement.Buildings.configurationObjects.smallBuildings.resourceFactories.SmallFactoryConfig;
 import macior.strategygame.game.PlayersManagement.Laboratory.PlayersUpgradesSet;
+import macior.strategygame.game.PlayersManagement.Laboratory.Upgrades.ControlUpgrades.ScrapDrones;
+import macior.strategygame.game.PlayersManagement.Laboratory.Upgrades.Upgrades;
 import macior.strategygame.game.PlayersManagement.Player;
 import macior.strategygame.game.PostponedEvents.BuildingConcernedEvent;
 import macior.strategygame.game.PostponedEvents.BuildingConstructionEvent;
 import macior.strategygame.game.PostponedEvents.BuildingUpgradeEvent;
+import macior.strategygame.game.PostponedEvents.EventFactory;
 import macior.strategygame.game.TimeManager;
 import macior.strategygame.game.Utilities.ResourceSet;
 import macior.strategygame.models.game.configuration.GameConfiguration;
@@ -86,7 +90,9 @@ public class UpgradeBuildingService {
         int levelToUpgrade = currentUpgradingLevel+1;
 
         //when is building going to be build
-        int finishingTime = getTime(toUpgrade, levelToUpgrade, event, player.getGame().getTimeManager());
+        int finishingTime = getTime(toUpgrade, levelToUpgrade, event,
+                player.getGame().getTimeManager(), player.getUpgradesSet());
+
         if (finishingTime == -1){
             response.setStatus(-6);
             return response;
@@ -105,7 +111,8 @@ public class UpgradeBuildingService {
         payThePrice(priceToPay, player);
 
         //we start up event, so it will be handled later
-        BuildingUpgradeEvent upgradeEvent = new BuildingUpgradeEvent(finishingTime, toUpgrade,
+        EventFactory factory = player.getGame().getEventFactory();
+        BuildingUpgradeEvent upgradeEvent = factory.generateBuildingUpgradeEvent(finishingTime, toUpgrade,
                 levelToUpgrade, areaUnit, request.getPlace());
         setEvent(upgradeEvent, player, areaUnit);
 
@@ -182,7 +189,7 @@ public class UpgradeBuildingService {
             return level;
         }
         //handle small factories
-        if (!upgrades.upgraded(28)){ //space management not upgraded
+        if (!upgrades.upgraded(Upgrades.SPACE_MANAGEMENT)){ //space management not upgraded
             return --level;
         }
         return level;
@@ -191,9 +198,10 @@ public class UpgradeBuildingService {
 
     //time
 
-    private int getTime(Building toUpgrade, int level, BuildingConcernedEvent event, TimeManager timeManager){
+    private int getTime(Building toUpgrade, int level, BuildingConcernedEvent event, TimeManager timeManager, PlayersUpgradesSet upgrades){
         int currentFinishingTime = getCurrentFinishingTime(event, timeManager);
         int basicTime = getBasicTime(toUpgrade, level);
+        basicTime = applyDurationBonuses(basicTime, toUpgrade, upgrades);
         return getActualFinishingTime(currentFinishingTime, basicTime, timeManager);
     }
 
@@ -201,6 +209,31 @@ public class UpgradeBuildingService {
     private int getBasicTime(Building toUpgrade, int level){
         BuildingConfig config = buildingsMapper.getConfiguration(toUpgrade);
         return config.getTime(level).toSeconds();
+    }
+
+    //applyDurationBonuses
+    private int applyDurationBonuses(int duration, Building building, PlayersUpgradesSet upgrades){
+        double discount = 0.0;
+        if (isDroneTower(building) && upgrades.upgraded(Upgrades.SCRAP_DRONES)){
+            discount += configuration.getUpgradesConfig().getControlUpgradesConfig()
+                    .getScrapDrones().BUILDING_TIME_REDUCTION;
+        }
+        if (upgrades.upgraded(Upgrades.BUILDING_ENGINEERS)){
+            discount += configuration.getUpgradesConfig().getControlUpgradesConfig()
+                    .getBuildingEngineers().BUILDING_TIME_REDUCTION;
+        }
+        return (int)(duration*(1-discount));
+    }
+
+    private boolean isDroneTower(Building building){
+        if (building.getClass() == Observatory.class){
+            return true;
+        }
+        if (building.getClass() == UnderConstructionBuilding.class){
+            UnderConstructionBuilding b = (UnderConstructionBuilding)building;
+            return b.getBuildingUnderConstruction().getClass() == Observatory.class;
+        }
+        return false;
     }
 
     //get time when all currently lasting upgrades finish
@@ -229,7 +262,7 @@ public class UpgradeBuildingService {
     //calculates price that has to be paid, including engineering patterns upgrade
     private ResourceSet getPrice(BuildingConfig config, int level, PlayersUpgradesSet upgrades) {
         ResourceSet basePrice = config.getCost(level);
-        if (upgrades.upgraded(27)) {
+        if (upgrades.upgraded(Upgrades.ENGINEERING_PATTERNS)) {
             double discount = configuration.getUpgradesConfig().getImprovementUpgradesConfig()
                     .getEngineeringPatterns().COST_REDUCTION;
             discount = 1 - discount;

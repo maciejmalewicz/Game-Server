@@ -12,6 +12,7 @@ public class GameConverter { //mother converter UPDATING response
     public GameStateResponse convert(Game game, Player caller, GameStateResponse target){
         target.setOpponentsMessage(getOpponents(game.getBoard(), caller));
         target.setBoardMessage(game.getBoard().toMessage(caller));
+        target.setUpgradesMessage(caller.getUpgradesSet());
         return target;
     }
 

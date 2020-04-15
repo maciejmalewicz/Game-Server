@@ -6,9 +6,13 @@ import macior.strategygame.game.BoardManagement.Buildings.buildings.UnderConstru
 import macior.strategygame.game.BoardManagement.Buildings.buildings.smallBuildings.SmallBuilding;
 import macior.strategygame.game.BoardManagement.Buildings.configurationObjects.BuildingConfig;
 import macior.strategygame.game.BoardManagement.Location;
+import macior.strategygame.game.PlayersManagement.Laboratory.PlayersUpgradesSet;
+import macior.strategygame.game.PlayersManagement.Laboratory.Upgrades.Upgrades;
 import macior.strategygame.game.PlayersManagement.Player;
 import macior.strategygame.game.PostponedEvents.BuildingConstructionEvent;
+import macior.strategygame.game.PostponedEvents.EventFactory;
 import macior.strategygame.game.Utilities.ResourceSet;
+import macior.strategygame.models.game.configuration.GameConfiguration;
 import macior.strategygame.models.game.configuration.SmallBuildingsConfig;
 import macior.strategygame.models.game.playersControls.BuildingRequest;
 import macior.strategygame.models.game.playersControls.TimeResponse;
@@ -31,6 +35,9 @@ public class BuildNewBuildingService {
 
     @Autowired
     private UserValidationService validationService;
+
+    @Autowired
+    private GameConfiguration configuration;
 
     public TimeResponse buildNew(BuildingRequest request, String code){
         //int id  = mapper.getId(code);
@@ -59,6 +66,11 @@ public class BuildNewBuildingService {
 
         if (!isRequestOK(request)){
             timeResponse.setStatus(-100);
+            return timeResponse;
+        }
+
+        if (!areUpgradesCompleted(request, player.getUpgradesSet())){
+            timeResponse.setStatus(-7);
             return timeResponse;
         }
 
@@ -145,7 +157,21 @@ public class BuildNewBuildingService {
     private int getTimeWhenFinishes(Player player, BuildingRequest request){
         BuildingConfig config = buildingsMapper.getConfiguration(request.getBuilding());
         int seconds = config.LEVEL1_BUILDING_TIME.toSeconds();
+        seconds = applyDurationDiscounts(seconds, request, player.getUpgradesSet());
         return player.getGame().getTimeManager().getPostponedEventTime(seconds);
+    }
+
+    private int applyDurationDiscounts(int time, BuildingRequest request, PlayersUpgradesSet upgrades){
+        double discount = 0.0;
+        if (request.getBuilding() == 4 && upgrades.upgraded(Upgrades.SCRAP_DRONES)){
+            discount += configuration.getUpgradesConfig().getControlUpgradesConfig()
+                    .getScrapDrones().BUILDING_TIME_REDUCTION;
+        }
+        if (upgrades.upgraded(Upgrades.BUILDING_ENGINEERS)){
+            discount += configuration.getUpgradesConfig().getControlUpgradesConfig()
+                    .getBuildingEngineers().BUILDING_TIME_REDUCTION;
+        }
+        return (int)((1-discount)*time);
     }
 
     private void payForBuilding(Player player, ResourceSet toPay){
@@ -164,12 +190,22 @@ public class BuildNewBuildingService {
     }
 
 
-    @Async//we have 2 event lists: main and area unit
+    //we have 2 event lists: main and area unit
     private synchronized void addToEvents(UnderConstructionBuilding building, Player player, int finishTime){
-        System.out.println("ADDING!");
-        BuildingConstructionEvent eventToAdd = new BuildingConstructionEvent(finishTime, building);
+        EventFactory factory = player.getGame().getEventFactory();
+        BuildingConstructionEvent eventToAdd = factory.generateBuildingConstructionEvent(finishTime, building);
         building.getAreaUnit().getBuildingQueue().pushEvent(eventToAdd);
         player.getGame().getEventHandler().addEvent(eventToAdd);
+    }
+
+    private boolean areUpgradesCompleted(BuildingRequest request, PlayersUpgradesSet upgrades){
+        if (request.getBuilding() == 6){
+            return upgrades.upgraded(Upgrades.TANKS);
+        }
+        if (request.getBuilding() == 7){
+            return upgrades.upgraded(Upgrades.CANNONS);
+        }
+        return true;
     }
 
 }

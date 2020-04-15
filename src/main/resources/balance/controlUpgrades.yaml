@@ -39,7 +39,7 @@ buildingEngineers:
   RESEARCH_TIME:
     minutes: 0
     seconds: 45
-  BUILDING_TIME_REDUCTION: 0.4
+  BUILDING_TIME_REDUCTION: 0.3
   REQUIREMENTS: [19]
 
 scrapDrones:
@@ -50,7 +50,7 @@ scrapDrones:
   RESEARCH_TIME:
     minutes: 1
     seconds: 45
-  BUILDING_TIME_REDUCTION: 0.5
+  BUILDING_TIME_REDUCTION: 0.4
   REQUIREMENTS: [12]
 
 fortress:
