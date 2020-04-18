@@ -2,7 +2,7 @@ package macior.strategygame.models;
 
 import java.util.List;
 
-public class StringListResponse extends ResponseBase{
+public class StringListResponse extends StatusResponse {
 
     private List<String> strings;
 

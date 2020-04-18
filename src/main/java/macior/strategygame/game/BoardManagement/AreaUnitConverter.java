@@ -2,7 +2,7 @@ package macior.strategygame.game.BoardManagement;
 
 import macior.strategygame.game.BoardManagement.Buildings.buildings.Building;
 import macior.strategygame.game.PlayersManagement.Player;
-import macior.strategygame.game.PostponedEvents.BuildingConcernedEvent;
+import macior.strategygame.game.PostponedEvents.buildingConcernedEvents.BuildingConcernedEvent;
 import macior.strategygame.models.game.messages.AreaUnitMessage;
 import macior.strategygame.models.game.messages.BuildingQueueMessage;
 import macior.strategygame.models.game.messages.OwnedAreaUnitMessage;

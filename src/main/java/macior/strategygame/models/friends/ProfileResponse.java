@@ -1,11 +1,11 @@
 package macior.strategygame.models.friends;
 
-import macior.strategygame.models.ResponseBase;
+import macior.strategygame.models.StatusResponse;
 import macior.strategygame.models.game_history_management.HistoryUnit;
 
 import java.util.List;
 
-public class ProfileResponse extends ResponseBase {
+public class ProfileResponse extends StatusResponse {
 
     private String login;
     private long experience;

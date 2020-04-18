@@ -12,7 +12,8 @@ public class PlayersUpgradesSet {
     private boolean[] upgrades = new boolean[33];
 
     public PlayersUpgradesSet(){
-        int[] upgraded = {Upgrades.BUILDING_ENGINEERS, Upgrades.SCRAP_DRONES};
+        int[] upgraded = {Upgrades.BUILDING_ENGINEERS, Upgrades.SCRAP_DRONES,
+        Upgrades.TANKS};
         for (int a: upgraded){
             upgrades[a] = true;
         }

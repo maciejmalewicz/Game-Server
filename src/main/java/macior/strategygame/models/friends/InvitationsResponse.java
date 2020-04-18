@@ -1,10 +1,10 @@
 package macior.strategygame.models.friends;
 
-import macior.strategygame.models.ResponseBase;
+import macior.strategygame.models.StatusResponse;
 
 import java.util.List;
 
-public class InvitationsResponse extends ResponseBase {
+public class InvitationsResponse extends StatusResponse {
 
     private List<String> invitationsSent;
     private List<String> invitationsReceived;

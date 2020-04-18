@@ -2,7 +2,7 @@ package macior.strategygame.models;
 
 import macior.strategygame.service.utilities.mapper.PlayersInbox;
 
-public class NotificationResponse extends ResponseBase {
+public class NotificationResponse extends StatusResponse {
 
     private PlayersInbox inbox;
 

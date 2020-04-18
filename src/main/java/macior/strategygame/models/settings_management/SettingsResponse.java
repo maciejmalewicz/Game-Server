@@ -1,8 +1,8 @@
 package macior.strategygame.models.settings_management;
 
-import macior.strategygame.models.ResponseBase;
+import macior.strategygame.models.StatusResponse;
 
-public class SettingsResponse extends ResponseBase {
+public class SettingsResponse extends StatusResponse {
 
     private int status;
 

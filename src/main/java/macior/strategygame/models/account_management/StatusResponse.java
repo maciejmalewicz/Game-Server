@@ -1,8 +1,6 @@
 package macior.strategygame.models.account_management;
 
-import macior.strategygame.models.ResponseBase;
-
-public class StatusResponse extends ResponseBase {
+public class StatusResponse extends macior.strategygame.models.StatusResponse {
 
     private int status;
 

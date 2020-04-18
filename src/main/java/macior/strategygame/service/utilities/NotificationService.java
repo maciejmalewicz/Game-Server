@@ -1,7 +1,6 @@
 package macior.strategygame.service.utilities;
 
 import macior.strategygame.models.NotificationResponse;
-import macior.strategygame.models.ResponseBase;
 import macior.strategygame.service.utilities.mapper.PlayerGameMapperService;
 import macior.strategygame.service.utilities.mapper.PlayersInbox;
 import org.springframework.beans.factory.annotation.Autowired;

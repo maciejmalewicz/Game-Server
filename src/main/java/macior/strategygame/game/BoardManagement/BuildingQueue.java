@@ -1,9 +1,7 @@
 package macior.strategygame.game.BoardManagement;
 
 import macior.strategygame.game.BoardManagement.Buildings.buildings.Building;
-import macior.strategygame.game.PostponedEvents.BuildingConcernedEvent;
-import macior.strategygame.game.PostponedEvents.BuildingConstructionEvent;
-import macior.strategygame.game.PostponedEvents.PostponedEvent;
+import macior.strategygame.game.PostponedEvents.buildingConcernedEvents.BuildingConcernedEvent;
 
 import java.util.*;
 

@@ -1,10 +1,11 @@
-package macior.strategygame.game.PostponedEvents;
+package macior.strategygame.game.PostponedEvents.buildingConcernedEvents;
 
 import macior.strategygame.game.BoardManagement.AreaUnit;
 import macior.strategygame.game.BoardManagement.Buildings.buildings.Building;
 import macior.strategygame.game.BoardManagement.Buildings.buildings.bigBuildings.BigBuilding;
 import macior.strategygame.game.PlayersManagement.Notifications.FinishedUpgradeNotification;
 import macior.strategygame.game.PlayersManagement.Notifications.NotificationBase;
+import macior.strategygame.game.PostponedEvents.buildingConcernedEvents.BuildingConcernedEvent;
 import macior.strategygame.models.game.messages.BuildingMessage;
 import macior.strategygame.models.game.messages.event_messages.BuildingConcernedEventMessage;
 import macior.strategygame.models.game.messages.event_messages.BuildingUpgradeEventMessage;

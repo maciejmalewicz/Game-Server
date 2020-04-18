@@ -1,6 +1,6 @@
 package macior.strategygame.models;
 
-public class ResponseBase {
+public class StatusResponse {
 
     private String code;
 

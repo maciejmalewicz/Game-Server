@@ -1,6 +1,6 @@
 package macior.strategygame.service;
 
-import macior.strategygame.models.ResponseBase;
+import macior.strategygame.models.StatusResponse;
 import macior.strategygame.service.utilities.mapper.PlayerGameMapperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ public class UserValidationService {
     //returns players id, so it can be used later
     //in general, after invoking this function we shouldn't care about code and we should have id
     //of a user
-    public int validateAndGetId(String code, ResponseBase toChange){
+    public int validateAndGetId(String code, StatusResponse toChange){
         int id = mapper.getId(code);
         if (id == -1){
             toChange.setCode("UNKNOWN CODE");

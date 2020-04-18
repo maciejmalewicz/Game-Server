@@ -24,7 +24,6 @@ public class UnderConstructionBuilding extends Building{
 
     public void unpackBuilding(){
         areaUnit.setBuilding(place, buildingUnderConstruction);
-        System.out.println();
     }
 
     public AreaUnit getAreaUnit() {

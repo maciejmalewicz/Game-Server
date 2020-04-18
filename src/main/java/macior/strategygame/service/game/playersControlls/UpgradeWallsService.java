@@ -1,13 +1,17 @@
 package macior.strategygame.service.game.playersControlls;
 
 import macior.strategygame.game.BoardManagement.AreaUnit;
+import macior.strategygame.game.BoardManagement.Buildings.buildings.Building;
+import macior.strategygame.game.BoardManagement.Buildings.buildings.UnderConstructionBuilding;
 import macior.strategygame.game.BoardManagement.Buildings.buildings.smallBuildings.Walls;
 import macior.strategygame.game.BoardManagement.Buildings.configurationObjects.smallBuildings.WallsConfig;
 import macior.strategygame.game.BoardManagement.Location;
 import macior.strategygame.game.PlayersManagement.Laboratory.PlayersUpgradesSet;
 import macior.strategygame.game.PlayersManagement.Laboratory.Upgrades.Upgrades;
 import macior.strategygame.game.PlayersManagement.Player;
-import macior.strategygame.game.PostponedEvents.BuildingConcernedEvent;
+import macior.strategygame.game.PostponedEvents.EventFactory;
+import macior.strategygame.game.PostponedEvents.buildingConcernedEvents.BuildingConcernedEvent;
+import macior.strategygame.game.PostponedEvents.buildingConcernedEvents.WallsUpgradeEvent;
 import macior.strategygame.game.Utilities.ResourceSet;
 import macior.strategygame.models.game.configuration.GameConfiguration;
 import macior.strategygame.models.game.playersControls.TimeResponse;
@@ -75,9 +79,9 @@ public class UpgradeWallsService {
 
         payThePrice(price, player);
 
-
-        //todo: start events and add under construction buildings
-        //todo: also on frontend
+        Building building = getBuilding(level, unit);
+        addToEvents(level, unit, timeWhenFinishes, building);
+        //todo: test and fix bugs - there will be some
         return response;
 
     }
@@ -142,9 +146,23 @@ public class UpgradeWallsService {
         buyer.getResources().substractResources(price);
     }
 
-    private BuildingConcernedEvent getEvent(int level, Location location, int time){
-        //todo
-        return null;
+    //sets up under construction building too
+    private Building getBuilding(int level, AreaUnit unit){
+        if (level == 1){
+            Walls walls = new Walls();
+            UnderConstructionBuilding building = new UnderConstructionBuilding(walls, unit, 6);
+            unit.setWalls(building);
+            return building;
+        } else {
+            return unit.getWalls();
+        }
+    }
+
+    private void addToEvents(int level, AreaUnit unit, int time, Building building){
+        EventFactory factory = unit.getOwner().getGame().getEventFactory();
+        WallsUpgradeEvent event = factory.generateWallsUpgradeEvent(time, building, level, unit);
+        unit.getBuildingQueue().pushEvent(event);
+        unit.getOwner().getGame().getEventHandler().addEvent(event);
     }
 
 

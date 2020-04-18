@@ -1,8 +1,7 @@
 package macior.strategygame.models.game.messages.event_messages;
 
-import macior.strategygame.game.PostponedEvents.BuildingConcernedEvent;
-import macior.strategygame.game.PostponedEvents.BuildingConstructionEvent;
-import macior.strategygame.game.PostponedEvents.BuildingUpgradeEvent;
+import macior.strategygame.game.PostponedEvents.buildingConcernedEvents.BuildingConstructionEvent;
+import macior.strategygame.game.PostponedEvents.buildingConcernedEvents.BuildingUpgradeEvent;
 import macior.strategygame.models.game.messages.BuildingMessage;
 
 public class EventsMessagesConverter {

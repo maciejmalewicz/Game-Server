@@ -5,24 +5,19 @@ import macior.strategygame.game.BoardManagement.Buildings.buildings.Building;
 import macior.strategygame.game.BoardManagement.Buildings.buildings.UnderConstructionBuilding;
 import macior.strategygame.game.BoardManagement.Buildings.buildings.smallBuildings.SmallBuilding;
 import macior.strategygame.game.BoardManagement.Buildings.configurationObjects.BuildingConfig;
-import macior.strategygame.game.BoardManagement.Location;
 import macior.strategygame.game.PlayersManagement.Laboratory.PlayersUpgradesSet;
 import macior.strategygame.game.PlayersManagement.Laboratory.Upgrades.Upgrades;
 import macior.strategygame.game.PlayersManagement.Player;
-import macior.strategygame.game.PostponedEvents.BuildingConstructionEvent;
+import macior.strategygame.game.PostponedEvents.buildingConcernedEvents.BuildingConstructionEvent;
 import macior.strategygame.game.PostponedEvents.EventFactory;
 import macior.strategygame.game.Utilities.ResourceSet;
 import macior.strategygame.models.game.configuration.GameConfiguration;
-import macior.strategygame.models.game.configuration.SmallBuildingsConfig;
 import macior.strategygame.models.game.playersControls.BuildingRequest;
 import macior.strategygame.models.game.playersControls.TimeResponse;
 import macior.strategygame.service.UserValidationService;
 import macior.strategygame.service.utilities.mapper.PlayerGameMapperService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-
-import java.util.SortedSet;
 
 @Service
 public class BuildNewBuildingService {

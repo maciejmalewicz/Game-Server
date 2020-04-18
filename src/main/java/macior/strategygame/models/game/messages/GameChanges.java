@@ -2,10 +2,9 @@ package macior.strategygame.models.game.messages;
 
 import macior.strategygame.game.PlayersManagement.Notifications.NotificationsInbox;
 import macior.strategygame.game.Utilities.ResourceSet;
-import macior.strategygame.game.Utilities.Time;
-import macior.strategygame.models.ResponseBase;
+import macior.strategygame.models.StatusResponse;
 
-public class GameChanges extends ResponseBase {
+public class GameChanges extends StatusResponse {
 
 
     private byte status = 0;

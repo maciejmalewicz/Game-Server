@@ -1,10 +1,10 @@
 package macior.strategygame.dao.friendship;
 
-import macior.strategygame.models.ResponseBase;
+import macior.strategygame.models.StatusResponse;
 
 import java.util.List;
 
-public class FriendsResponse extends ResponseBase {
+public class FriendsResponse extends StatusResponse {
 
     private List<Friend> friends;
 

@@ -2,14 +2,7 @@ package macior.strategygame.game.BoardManagement;
 
 
 import macior.strategygame.game.BoardManagement.Buildings.buildings.Building;
-import macior.strategygame.game.BoardManagement.Buildings.buildings.bigBuildings.BigBuilding;
-import macior.strategygame.game.BoardManagement.Buildings.buildings.smallBuildings.SmallBuilding;
-import macior.strategygame.game.BoardManagement.Buildings.buildings.smallBuildings.Walls;
 import macior.strategygame.game.PlayersManagement.Player;
-import macior.strategygame.game.PostponedEvents.BuildingConstructionEvent;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class AreaUnit {
 

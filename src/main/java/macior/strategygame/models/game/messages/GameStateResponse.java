@@ -1,9 +1,9 @@
 package macior.strategygame.models.game.messages;
 
 import macior.strategygame.game.PlayersManagement.Laboratory.PlayersUpgradesSet;
-import macior.strategygame.models.ResponseBase;
+import macior.strategygame.models.StatusResponse;
 
-public class GameStateResponse extends ResponseBase {
+public class GameStateResponse extends StatusResponse {
 
     private BoardMessage boardMessage;
     private OpponentsMessage opponentsMessage;
