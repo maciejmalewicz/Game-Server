@@ -1,6 +1,7 @@
 package macior.strategygame.service.chainOfResponsibility.nodes;
 
-import macior.strategygame.models.account_management.StatusResponse;
+import macior.strategygame.game.PlayersManagement.Player;
+import macior.strategygame.service.chainOfResponsibility.models.BuildNewBuildingModel;
 import macior.strategygame.service.chainOfResponsibility.models.ChainModel;
 import macior.strategygame.service.chainOfResponsibility.models.PlayerChangesModel;
 import macior.strategygame.service.utilities.errors.GameErrors;
@@ -9,31 +10,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CodeChangingNode extends Node{
+public class PlayerRetrievingNode extends Node{
 
     @Autowired
     private PlayerGameMapperService mapper;
 
     @Autowired
-    private PlayerRetrievingNode playerRetriever;
+    private RequestsValidator requestsValidator;
+
 
     @Override
     protected Node getNext(ChainModel model) {
-        if (model instanceof PlayerChangesModel){
-            return this.playerRetriever;
-        }
-        return null;
+        return requestsValidator;
     }
 
     @Override
     protected void applyChanges(ChainModel model) {
-        int id = mapper.getId(model.CODE);
-        if (id == -1){
-            model.RESPONSE.setStatus(GameErrors.ACCESS_DENIED);
-            model.RESPONSE.setCode("UNKNOWN CODE");
+        Player player = mapper.getPlayerById(model.ID);
+        if (player == null){
+            model.RESPONSE.setStatus(GameErrors.GAME_NOT_FOUND);
         }
-        String newCode = mapper.updateCode(model.CODE);
-        model.RESPONSE.setCode(newCode);
-        model.ID = id;
+        ((PlayerChangesModel) model).PLAYER = player;
+        System.out.println();
     }
 }

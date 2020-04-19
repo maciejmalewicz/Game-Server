@@ -1,6 +1,6 @@
 package macior.strategygame.models.game.playersControls;
 
-import macior.strategygame.models.StatusResponse;
+import macior.strategygame.models.account_management.StatusResponse;
 
 public class TimeResponse extends StatusResponse {
 
