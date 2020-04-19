@@ -14,19 +14,8 @@ public class CodeChangingNode extends Node{
     @Autowired
     private PlayerGameMapperService mapper;
 
-    @Autowired
-    private PlayerRetrievingNode playerRetriever;
-
     @Override
-    protected Node getNext(ChainModel model) {
-        if (model instanceof PlayerChangesModel){
-            return this.playerRetriever;
-        }
-        return null;
-    }
-
-    @Override
-    protected void applyChanges(ChainModel model) {
+    public void applyChanges(ChainModel model) {
         int id = mapper.getId(model.CODE);
         if (id == -1){
             model.RESPONSE.setStatus(GameErrors.ACCESS_DENIED);

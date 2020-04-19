@@ -15,17 +15,9 @@ public class PlayerRetrievingNode extends Node{
     @Autowired
     private PlayerGameMapperService mapper;
 
-    @Autowired
-    private RequestsValidator requestsValidator;
-
 
     @Override
-    protected Node getNext(ChainModel model) {
-        return requestsValidator;
-    }
-
-    @Override
-    protected void applyChanges(ChainModel model) {
+    public void applyChanges(ChainModel model) {
         Player player = mapper.getPlayerById(model.ID);
         if (player == null){
             model.RESPONSE.setStatus(GameErrors.GAME_NOT_FOUND);

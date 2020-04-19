@@ -3,15 +3,14 @@ package macior.strategygame.api.tests;
 import macior.strategygame.models.account_management.StatusResponse;
 import macior.strategygame.models.game.playersControls.BuildingRequest;
 import macior.strategygame.models.game.playersControls.TimeResponse;
+import macior.strategygame.service.chainOfResponsibility.ChainOfResponsibility;
 import macior.strategygame.service.chainOfResponsibility.models.BuildNewBuildingModel;
 import macior.strategygame.service.chainOfResponsibility.models.ChainModel;
 import macior.strategygame.service.chainOfResponsibility.models.PlayerChangesModel;
-import macior.strategygame.service.chainOfResponsibility.nodes.CodeChangingNode;
+import macior.strategygame.service.chainOfResponsibility.nodes.*;
+import macior.strategygame.service.chainOfResponsibility.nodes.buildNewBuilding.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("api/test")
 @RestController
@@ -20,12 +19,45 @@ public class FakeController {
     @Autowired
     CodeChangingNode node;
 
+    private ChainOfResponsibility chain;
+
+    @Autowired
+    public FakeController(CodeChangingNode codeChangingNode,
+                          PlayerRetrievingNode playerRetrievingNode,
+                          BuildNewBuildingRequestValidator buildNewBuildingRequestValidator,
+                          NewBuildingsUpgradesValidator newBuildingsUpgradesValidator,
+                          AreaUnitValidator areaUnitValidator,
+                          IsPlaceEmptyValidator isPlaceEmptyValidator,
+                          BuildNewBuildingTimeGetter timeGetter,
+                          TimeValidator timeValidator,
+                          BuildingPriceGetter buildingPriceGetter,
+                          PaymentExecutor paymentExecutor,
+                          BuildNewBuildingWrapperSetter wrapperSetter,
+                          BuildNewBuildingEventStarter eventStarter){
+        chain = new ChainOfResponsibility(
+                new Node[]{
+                        codeChangingNode,
+                        playerRetrievingNode,
+                        buildNewBuildingRequestValidator,
+                        newBuildingsUpgradesValidator,
+                        areaUnitValidator,
+                        isPlaceEmptyValidator,
+                        timeGetter,
+                        timeValidator,
+                        buildingPriceGetter,
+                        paymentExecutor,
+                        wrapperSetter,
+                        eventStarter //todo - change it to service!!! Works <3
+                }
+        );
+    }
+
     @GetMapping(path = "{code}")
-    public StatusResponse get(@PathVariable("code") String code){
+    public StatusResponse get(@PathVariable("code") String code, @RequestBody BuildingRequest request){
         BuildNewBuildingModel model = new BuildNewBuildingModel();
         model.CODE = code;
         model.RESPONSE = new TimeResponse();
-        model.REQUEST = new BuildingRequest(null, 0, 0);
-        return node.invoke(model);
+        model.REQUEST = request;
+        return chain.execute(model);
     }
 }

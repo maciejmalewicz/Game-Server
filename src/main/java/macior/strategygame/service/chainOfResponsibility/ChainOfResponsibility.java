@@ -14,7 +14,11 @@ public class ChainOfResponsibility {
 
     public StatusResponse execute(ChainModel model){
         for (Node node: nodes){
-            node.invoke(model);
+            node.applyChanges(model);
+            if (model.RESPONSE.getStatus() != 0){
+                return model.RESPONSE;
+            }
         }
+        return model.RESPONSE;
     }
 }
