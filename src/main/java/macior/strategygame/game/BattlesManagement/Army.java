@@ -2,9 +2,9 @@ package macior.strategygame.game.BattlesManagement;
 
 public class Army {
 
-    private int droids = 0;
-    private int tanks = 0;
-    private int cannons = 0;
+    private int droids = 10;
+    private int tanks = 20;
+    private int cannons = 50;
 
     public void addDroids(int number){
         droids += number;

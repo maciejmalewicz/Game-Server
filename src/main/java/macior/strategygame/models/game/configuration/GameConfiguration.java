@@ -15,6 +15,9 @@ public class GameConfiguration {
     @Autowired
     private UpgradesConfig upgradesConfig;
 
+    @Autowired
+    private ArmyBalanceConfig armyBalanceConfig;
+
     public UpgradesConfig getUpgradesConfig() {
         return upgradesConfig;
     }
@@ -37,5 +40,13 @@ public class GameConfiguration {
 
     public void setSmallBuildingsConfig(SmallBuildingsConfig smallBuildingsConfig) {
         this.smallBuildingsConfig = smallBuildingsConfig;
+    }
+
+    public ArmyBalanceConfig getArmyBalanceConfig() {
+        return armyBalanceConfig;
+    }
+
+    public void setArmyBalanceConfig(ArmyBalanceConfig armyBalanceConfig) {
+        this.armyBalanceConfig = armyBalanceConfig;
     }
 }

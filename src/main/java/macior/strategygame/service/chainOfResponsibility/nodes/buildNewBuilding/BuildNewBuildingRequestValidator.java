@@ -13,7 +13,7 @@ public class BuildNewBuildingRequestValidator extends Node {
 
     @Override
     public void applyChanges(ChainModel model) {
-        BuildingRequest request = ((BuildNewBuildingModel)model).REQUEST;
+        BuildingRequest request = (BuildingRequest) ((BuildNewBuildingModel)model).REQUEST;
         if (request == null){
             setError(model);
             return;

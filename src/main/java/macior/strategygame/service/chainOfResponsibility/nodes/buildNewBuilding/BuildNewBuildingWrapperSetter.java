@@ -21,7 +21,7 @@ public class BuildNewBuildingWrapperSetter extends Node {
     @Override
     public void applyChanges(ChainModel model) {
         BuildNewBuildingModel buildingModel = (BuildNewBuildingModel)model;
-        BuildingRequest request = buildingModel.REQUEST;
+        BuildingRequest request = (BuildingRequest) buildingModel.REQUEST;
         Player player = buildingModel.PLAYER;
 
         SmallBuilding beingBuilt = mapper.getSmallBuilding(request.getBuilding());

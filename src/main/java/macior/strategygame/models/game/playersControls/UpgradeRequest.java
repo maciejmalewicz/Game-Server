@@ -3,10 +3,9 @@ package macior.strategygame.models.game.playersControls;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import macior.strategygame.game.BoardManagement.Location;
 
-public class UpgradeRequest {
+public class UpgradeRequest extends AreaConcernedRequest {
 
-    //where
-    private Location location;
+
     //what? north? south? main?
     private int place;
 

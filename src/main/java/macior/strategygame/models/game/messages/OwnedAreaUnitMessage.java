@@ -1,5 +1,6 @@
 package macior.strategygame.models.game.messages;
 
+import macior.strategygame.game.BattlesManagement.Army;
 import macior.strategygame.game.BoardManagement.BuildingQueue;
 
 public class OwnedAreaUnitMessage extends AreaUnitMessage {
@@ -10,5 +11,6 @@ public class OwnedAreaUnitMessage extends AreaUnitMessage {
     public BuildingMessage EAST_BUILDING;
     public WallsMessage WALLS;
     public BuildingQueueMessage BUILDING_QUEUE;
+    public Army ARMY;
 
 }

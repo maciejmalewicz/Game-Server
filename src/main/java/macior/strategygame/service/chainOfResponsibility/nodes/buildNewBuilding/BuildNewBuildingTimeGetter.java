@@ -6,6 +6,7 @@ import macior.strategygame.game.PlayersManagement.Laboratory.Upgrades.Upgrades;
 import macior.strategygame.game.PlayersManagement.Player;
 import macior.strategygame.models.game.configuration.GameConfiguration;
 import macior.strategygame.models.game.playersControls.BuildingRequest;
+import macior.strategygame.models.game.playersControls.TimeResponse;
 import macior.strategygame.service.chainOfResponsibility.models.BuildNewBuildingModel;
 import macior.strategygame.service.chainOfResponsibility.models.ChainModel;
 import macior.strategygame.service.chainOfResponsibility.nodes.Node;
@@ -29,14 +30,20 @@ public class BuildNewBuildingTimeGetter extends Node {
     @Override
     public void applyChanges(ChainModel model) {
         BuildNewBuildingModel buildingModel = (BuildNewBuildingModel)model;
-        buildingModel.FINISHING_TIME = getTimeWhenFinishes(buildingModel.PLAYER, buildingModel.REQUEST);
+        BuildingRequest request = (BuildingRequest)buildingModel.REQUEST;
+        //updating model
+        buildingModel.FINISHING_TIME = getTimeWhenFinishes(buildingModel.PLAYER, request);
+        //updating response
+        TimeResponse response = (TimeResponse)buildingModel.RESPONSE;
+        response.setFinishingTime(buildingModel.FINISHING_TIME);
     }
 
     private int getTimeWhenFinishes(Player player, BuildingRequest request){
         BuildingConfig config = buildingsMapper.getConfiguration(request.getBuilding());
         int seconds = config.LEVEL1_BUILDING_TIME.toSeconds();
         seconds = applyDurationDiscounts(seconds, request, player.getUpgradesSet());
-        return player.getGame().getTimeManager().getPostponedEventTime(seconds);
+        int sec = player.getGame().getTimeManager().getPostponedEventTime(seconds);
+        return sec;
     }
 
     private int applyDurationDiscounts(int time, BuildingRequest request, PlayersUpgradesSet upgrades){

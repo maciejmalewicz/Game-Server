@@ -1,6 +1,7 @@
 package macior.strategygame.game.BoardManagement;
 
 
+import macior.strategygame.game.BattlesManagement.Army;
 import macior.strategygame.game.BoardManagement.Buildings.buildings.Building;
 import macior.strategygame.game.PlayersManagement.Player;
 
@@ -15,6 +16,8 @@ public class AreaUnit {
     private Building southBuilding = null;
     private Building westBuilding = null;
     private Building eastBuilding = null;
+
+    private Army army = new Army();
 
     private BuildingQueue buildingQueue = new BuildingQueue();
 
@@ -88,6 +91,14 @@ public class AreaUnit {
 
     public void setEastBuilding(Building eastBuilding) {
         this.eastBuilding = eastBuilding;
+    }
+
+    public Army getArmy() {
+        return army;
+    }
+
+    public void setArmy(Army army) {
+        this.army = army;
     }
 
     public void setBuilding(int index, Building building){

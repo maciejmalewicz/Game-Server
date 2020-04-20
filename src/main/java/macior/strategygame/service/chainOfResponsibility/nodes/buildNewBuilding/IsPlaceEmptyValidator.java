@@ -3,6 +3,7 @@ package macior.strategygame.service.chainOfResponsibility.nodes.buildNewBuilding
 import macior.strategygame.game.BoardManagement.AreaUnit;
 import macior.strategygame.game.BoardManagement.Buildings.buildings.Building;
 import macior.strategygame.game.PlayersManagement.Player;
+import macior.strategygame.models.game.playersControls.BuildingRequest;
 import macior.strategygame.service.chainOfResponsibility.models.BuildNewBuildingModel;
 import macior.strategygame.service.chainOfResponsibility.models.ChainModel;
 import macior.strategygame.service.chainOfResponsibility.nodes.Node;
@@ -20,7 +21,8 @@ public class IsPlaceEmptyValidator extends Node {
     @Override
     public void applyChanges(ChainModel model) {
         BuildNewBuildingModel buildingModel = (BuildNewBuildingModel)model;
-        Building building = mapper.getBuilding(buildingModel.AREA_UNIT, buildingModel.REQUEST.getPlace());
+        BuildingRequest request = (BuildingRequest)buildingModel.REQUEST;
+        Building building = mapper.getBuilding(buildingModel.AREA_UNIT, request.getPlace());
         if (building != null){
             model.RESPONSE.setStatus(GameErrors.BUILDING_PLACE_NOT_EMPTY);
         }

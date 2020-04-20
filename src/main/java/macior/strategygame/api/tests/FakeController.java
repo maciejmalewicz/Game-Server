@@ -16,9 +16,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class FakeController {
 
-    @Autowired
-    CodeChangingNode node;
-
     private ChainOfResponsibility chain;
 
     @Autowired
@@ -47,7 +44,7 @@ public class FakeController {
                         buildingPriceGetter,
                         paymentExecutor,
                         wrapperSetter,
-                        eventStarter //todo - change it to service!!! Works <3
+                        eventStarter //todo delete it!
                 }
         );
     }

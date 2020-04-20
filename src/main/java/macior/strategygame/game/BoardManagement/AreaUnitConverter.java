@@ -60,6 +60,8 @@ public class AreaUnitConverter {
             out.OWNER = owner.getNick();
         }
 
+        out.ARMY = unit.getArmy();
+
         out.BUILDING_QUEUE = new BuildingQueueMessage();
         for (BuildingConcernedEvent event: unit.getBuildingQueue().getEvents()){
             int place = unit.getPlace(event.getBuilding());

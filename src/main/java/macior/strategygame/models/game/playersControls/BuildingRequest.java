@@ -3,9 +3,8 @@ package macior.strategygame.models.game.playersControls;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import macior.strategygame.game.BoardManagement.Location;
 
-public class BuildingRequest {
+public class BuildingRequest extends AreaConcernedRequest {
 
-    private Location location;
     private int place;
     private int building;
 
@@ -15,9 +14,6 @@ public class BuildingRequest {
         this.location = location;
         this.place = place;
         this.building = building;
-    }
-    public Location getLocation() {
-        return location;
     }
 
     public int getPlace() {

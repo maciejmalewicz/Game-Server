@@ -22,14 +22,10 @@ public class BuildingPriceGetter extends Node {
     @Override
     public void applyChanges(ChainModel model) {
         BuildNewBuildingModel buildingModel = (BuildNewBuildingModel)model;
-        BuildingConfig config = mapper.getConfiguration(buildingModel.REQUEST.getBuilding());
+        BuildingRequest request = (BuildingRequest) buildingModel.REQUEST;
+
+        BuildingConfig config = mapper.getConfiguration(request.getBuilding());
         ResourceSet price = config.LEVEL1_COST;
         buildingModel.PRICE =  price.canPurchase(buildingModel.PLAYER);
-    }
-
-    private ResourceSet getPrice(Player player, BuildingRequest buildingRequest){
-        BuildingConfig config = mapper.getConfiguration(buildingRequest.getBuilding());
-        ResourceSet price = config.LEVEL1_COST;
-        return price.canPurchase(player);
     }
 }

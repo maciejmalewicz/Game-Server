@@ -10,12 +10,16 @@ import macior.strategygame.game.PlayersManagement.Laboratory.PlayersUpgradesSet;
 import macior.strategygame.game.PlayersManagement.Laboratory.Upgrades.Upgrades;
 import macior.strategygame.game.PlayersManagement.Player;
 import macior.strategygame.game.PostponedEvents.EventFactory;
-import macior.strategygame.game.PostponedEvents.buildingConcernedEvents.BuildingConcernedEvent;
 import macior.strategygame.game.PostponedEvents.buildingConcernedEvents.WallsUpgradeEvent;
 import macior.strategygame.game.Utilities.ResourceSet;
 import macior.strategygame.models.game.configuration.GameConfiguration;
+import macior.strategygame.models.game.playersControls.AreaConcernedRequest;
 import macior.strategygame.models.game.playersControls.TimeResponse;
 import macior.strategygame.service.UserValidationService;
+import macior.strategygame.service.chainOfResponsibility.ChainOfResponsibility;
+import macior.strategygame.service.chainOfResponsibility.models.UpgradeWallsModel;
+import macior.strategygame.service.chainOfResponsibility.nodes.*;
+import macior.strategygame.service.chainOfResponsibility.nodes.upgradeWalls.*;
 import macior.strategygame.service.utilities.mapper.PlayerGameMapperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,57 +36,99 @@ public class UpgradeWallsService {
     @Autowired
     private GameConfiguration configuration;
 
-    public TimeResponse upgradeWalls(String code, Location location){
-        TimeResponse response = new TimeResponse();
-        int id = validationService.validateAndGetId(code, response);
-        if (id == -1){
-            response.setStatus(-1);
-            return response;
-        }
+    private ChainOfResponsibility chain;
 
-        Player player = mapper.getPlayerById(id);
-        if (player == null){
-            response.setStatus(-2);
-            return response;
-        }
+    @Autowired
+    public UpgradeWallsService(CodeChangingNode codeChangingNode,
+                               PlayerRetrievingNode playerRetrievingNode,
+                               UpgradeWallsRequestValidator requestValidator,
+                               AreaUnitValidator areaUnitValidator,
+                               UpgradeWallsBuildingGetter buildingGetter,
+                               LastEventGetter lastEventGetter,
+                               UpgradeWallsLevelsGetter levelsGetter,
+                               UpgradeWallsLevelValidator levelValidator,
+                               UpgradeWallsTimeGetter timeGetter,
+                               TimeValidator timeValidator,
+                               UpgradeWallsPriceGetter priceGetter,
+                               PaymentExecutor paymentExecutor,
+                               UpgradeWallsEventStarter eventStarter
+                               //todo rest of this
+                               ){
+        chain = new ChainOfResponsibility(new Node[]{
+                codeChangingNode,
+                playerRetrievingNode,
+                requestValidator,
+                areaUnitValidator,
+                buildingGetter,
+                lastEventGetter,
+                levelsGetter,
+                levelValidator,
+                timeGetter,
+                timeValidator,
+                priceGetter,
+                paymentExecutor,
+                eventStarter
+        });
 
-        if (!isRequestValid(location)){
-            response.setStatus(-3);
-            return response;
-        }
+    }
 
-        AreaUnit unit = player.getGame().getBoard().getAreaUnit(location);
-        if (!ownsAreaUnit(unit, player)){
-            response.setStatus(-4);
-            return response;
-        }
+    public TimeResponse upgradeWalls(String code, AreaConcernedRequest request){
 
-        int level = getUpgradingLevel(unit);
-        if (level == -1){
-            response.setStatus(-5);
-            return response;
-        }
-
-        ResourceSet price = getPriceToPay(level, player);
-        if (price == null){
-            response.setStatus(-6);
-            return response;
-        }
-
-        int timeWhenFinishes = getTimeWhenFinishes(level, player);
-        if (timeWhenFinishes == -1){
-            response.setStatus(-7);
-            return response;
-        }
-
-        response.setFinishingTime(timeWhenFinishes);
-
-        payThePrice(price, player);
-
-        Building building = getBuilding(level, unit);
-        addToEvents(level, unit, timeWhenFinishes, building);
-        //todo: test and fix bugs - there will be some
-        return response;
+        UpgradeWallsModel model = new UpgradeWallsModel();
+        model.CODE = code;
+        model.REQUEST = request;
+        model.RESPONSE = new TimeResponse();
+        return (TimeResponse) chain.execute(model);
+//        TimeResponse response = new TimeResponse();
+//        int id = validationService.validateAndGetId(code, response);
+//        if (id == -1){
+//            response.setStatus(-1);
+//            return response;
+//        }
+//
+//        Player player = mapper.getPlayerById(id);
+//        if (player == null){
+//            response.setStatus(-2);
+//            return response;
+//        }
+//
+//        if (!isRequestValid(location)){
+//            response.setStatus(-3);
+//            return response;
+//        }
+//
+//        AreaUnit unit = player.getGame().getBoard().getAreaUnit(location);
+//        if (!ownsAreaUnit(unit, player)){
+//            response.setStatus(-4);
+//            return response;
+//        }
+//
+//        int level = getUpgradingLevel(unit);
+//        if (level == -1){
+//            response.setStatus(-5);
+//            return response;
+//        }
+//
+//        ResourceSet price = getPriceToPay(level, player);
+//        if (price == null){
+//            response.setStatus(-6);
+//            return response;
+//        }
+//
+//        int timeWhenFinishes = getTimeWhenFinishes(level, player);
+//        if (timeWhenFinishes == -1){
+//            response.setStatus(-7);
+//            return response;
+//        }
+//
+//        response.setFinishingTime(timeWhenFinishes);
+//
+//        payThePrice(price, player);
+//
+//        Building building = getBuilding(level, unit);
+//        addToEvents(level, unit, timeWhenFinishes, building);
+//        //todo: test and fix bugs - there will be some
+//        return response;
 
     }
 

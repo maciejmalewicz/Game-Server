@@ -16,7 +16,7 @@ public class NewBuildingsUpgradesValidator extends Node {
     public void applyChanges(ChainModel model) {
         BuildNewBuildingModel buildNewBuildingModel = (BuildNewBuildingModel)model;
         PlayersUpgradesSet upgrades = buildNewBuildingModel.PLAYER.getUpgradesSet();
-        BuildingRequest request = ((BuildNewBuildingModel) model).REQUEST;
+        BuildingRequest request = (BuildingRequest) ((BuildNewBuildingModel) model).REQUEST;
         if (request.getBuilding() == 6 && !upgrades.upgraded(Upgrades.TANKS)){
             model.RESPONSE.setStatus(GameErrors.TANKS_NOT_UPGRADED);
         }

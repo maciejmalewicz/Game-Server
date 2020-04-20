@@ -1,6 +1,7 @@
 package macior.strategygame.game.BoardManagement;
 
 import macior.strategygame.game.BoardManagement.Buildings.buildings.Building;
+import macior.strategygame.game.BoardManagement.Buildings.buildings.UnderConstructionBuilding;
 import macior.strategygame.game.PostponedEvents.buildingConcernedEvents.BuildingConcernedEvent;
 
 import java.util.*;
@@ -30,9 +31,16 @@ public class BuildingQueue {
         Iterator<BuildingConcernedEvent> iterator = events.descendingIterator();
         while (iterator.hasNext()){
             BuildingConcernedEvent event = iterator.next();
-            if (event.getBuilding() == building){
+
+            Building eventBuilding = event.getBuilding();
+            if (eventBuilding.getClass() == UnderConstructionBuilding.class){
+                eventBuilding = ((UnderConstructionBuilding)eventBuilding).getBuildingUnderConstruction();
+            }
+
+            if (eventBuilding == building){
                 return event;
             }
+
         }
         return null;
     }
