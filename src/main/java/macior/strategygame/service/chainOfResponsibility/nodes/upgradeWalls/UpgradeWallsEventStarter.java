@@ -7,7 +7,6 @@ import macior.strategygame.game.BoardManagement.Buildings.buildings.smallBuildin
 import macior.strategygame.game.BoardManagement.Location;
 import macior.strategygame.game.PostponedEvents.EventFactory;
 import macior.strategygame.game.PostponedEvents.buildingConcernedEvents.BuildingConcernedEvent;
-import macior.strategygame.game.PostponedEvents.buildingConcernedEvents.BuildingConstructionEvent;
 import macior.strategygame.service.chainOfResponsibility.models.ChainModel;
 import macior.strategygame.service.chainOfResponsibility.models.UpgradeWallsModel;
 import macior.strategygame.service.chainOfResponsibility.nodes.Node;
@@ -31,7 +30,7 @@ public class UpgradeWallsEventStarter extends Node {
                     wallsModel.NEXT_LEVEL, wallsModel.AREA_UNIT, 6);
         }
         wallsModel.PLAYER.getGame().getEventHandler().addEvent(event);
-        wallsModel.AREA_UNIT.getBuildingQueue().pushEvent(event);
+        wallsModel.AREA_UNIT.getEventsQueue().pushEvent(event);
     }
 
     private UnderConstructionBuilding setUnderConstructionBuilding(UpgradeWallsModel wallsModel, Walls walls){

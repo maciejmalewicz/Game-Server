@@ -5,7 +5,7 @@ import macior.strategygame.models.game.messages.event_messages.BuildingConcerned
 import java.util.ArrayList;
 import java.util.List;
 
-public class BuildingQueueMessage {
+public class AreaEventsMessage {
 
     private List<BuildingConcernedEventMessage> events = new ArrayList<>();
 

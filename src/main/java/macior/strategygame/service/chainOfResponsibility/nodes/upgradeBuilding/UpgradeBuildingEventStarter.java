@@ -24,6 +24,6 @@ public class UpgradeBuildingEventStarter extends Node {
 
         //adding to event handling queues
         upgradeModel.PLAYER.getGame().getEventHandler().addEvent(event);
-        upgradeModel.AREA_UNIT.getBuildingQueue().pushEvent(event);
+        upgradeModel.AREA_UNIT.getEventsQueue().pushEvent(event);
     }
 }

@@ -1,6 +1,6 @@
 package macior.strategygame;
 
-import macior.strategygame.game.BoardManagement.BuildingQueue;
+import macior.strategygame.game.BoardManagement.AreaEventsQueue;
 import macior.strategygame.game.PostponedEvents.PostponedPrinter;
 import org.junit.jupiter.api.Test;
 
@@ -8,7 +8,7 @@ public class EventsTests {
 
     @Test
     public void testQueues(){
-        BuildingQueue buildingQueue = new BuildingQueue();
+        AreaEventsQueue buildingQueue = new AreaEventsQueue();
         PostponedPrinter printer1 = new PostponedPrinter(20);
         PostponedPrinter printer2 = new PostponedPrinter(10);
         PostponedPrinter printer3 = new PostponedPrinter(30);

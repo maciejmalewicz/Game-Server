@@ -2,9 +2,10 @@ package macior.strategygame.game.BoardManagement;
 
 import macior.strategygame.game.BoardManagement.Buildings.buildings.Building;
 import macior.strategygame.game.PlayersManagement.Player;
+import macior.strategygame.game.PostponedEvents.PostponedEvent;
 import macior.strategygame.game.PostponedEvents.buildingConcernedEvents.BuildingConcernedEvent;
 import macior.strategygame.models.game.messages.AreaUnitMessage;
-import macior.strategygame.models.game.messages.BuildingQueueMessage;
+import macior.strategygame.models.game.messages.AreaEventsMessage;
 import macior.strategygame.models.game.messages.OwnedAreaUnitMessage;
 import macior.strategygame.models.game.messages.WallsMessage;
 import org.springframework.stereotype.Component;
@@ -62,12 +63,17 @@ public class AreaUnitConverter {
 
         out.ARMY = unit.getArmy();
 
-        out.BUILDING_QUEUE = new BuildingQueueMessage();
-        for (BuildingConcernedEvent event: unit.getBuildingQueue().getEvents()){
-            int place = unit.getPlace(event.getBuilding());
-            out.BUILDING_QUEUE.add(event.toMessage(place));
+        out.AREA_EVENTS = new AreaEventsMessage();
+        for (PostponedEvent event: unit.getEventsQueue().getEvents()){
+
+            if (event instanceof BuildingConcernedEvent){
+                BuildingConcernedEvent buildingEvent = (BuildingConcernedEvent)event;
+                int place = unit.getPlace(buildingEvent.getBuilding());
+                out.AREA_EVENTS.add(buildingEvent.toMessage(place));
+            }
+
         }
-        Collections.sort(out.BUILDING_QUEUE.getEvents());
+        Collections.sort(out.AREA_EVENTS.getEvents());
 
         return out;
     }

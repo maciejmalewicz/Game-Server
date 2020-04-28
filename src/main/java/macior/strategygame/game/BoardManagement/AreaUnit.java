@@ -18,16 +18,16 @@ public class AreaUnit {
     private Building eastBuilding = null;
 
     private Army army = new Army();
-    private BuildingQueue buildingQueue = new BuildingQueue();
+    private AreaEventsQueue eventsQueue = new AreaEventsQueue();
 
 
 
-    public BuildingQueue getBuildingQueue() {
-        return buildingQueue;
+    public AreaEventsQueue getEventsQueue() {
+        return eventsQueue;
     }
 
-    public void setBuildingQueue(BuildingQueue buildingQueue) {
-        this.buildingQueue = buildingQueue;
+    public void setEventsQueue(AreaEventsQueue eventsQueue) {
+        this.eventsQueue = eventsQueue;
     }
 
     public Building getWalls() {

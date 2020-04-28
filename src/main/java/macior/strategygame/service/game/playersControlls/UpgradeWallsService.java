@@ -207,7 +207,7 @@ public class UpgradeWallsService {
     private void addToEvents(int level, AreaUnit unit, int time, Building building){
         EventFactory factory = unit.getOwner().getGame().getEventFactory();
         WallsUpgradeEvent event = factory.generateWallsUpgradeEvent(time, building, level, unit);
-        unit.getBuildingQueue().pushEvent(event);
+        unit.getEventsQueue().pushEvent(event);
         unit.getOwner().getGame().getEventHandler().addEvent(event);
     }
 

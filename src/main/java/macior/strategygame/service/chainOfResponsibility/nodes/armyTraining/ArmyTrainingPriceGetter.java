@@ -5,6 +5,10 @@ import macior.strategygame.game.BoardManagement.Buildings.buildings.smallBuildin
 import macior.strategygame.game.BoardManagement.Buildings.buildings.smallBuildings.mechFactory.MechFactory;
 import macior.strategygame.game.BoardManagement.Buildings.buildings.smallBuildings.mechFactory.TankFactory;
 import macior.strategygame.game.BoardManagement.Buildings.configurationObjects.smallBuildings.mechFactories.MechFactoryConfig;
+import macior.strategygame.game.PlayersManagement.Laboratory.PlayersUpgradesSet;
+import macior.strategygame.game.PlayersManagement.Laboratory.Upgrades.ArmyUpgrades.AdvancedDroids;
+import macior.strategygame.game.PlayersManagement.Laboratory.Upgrades.ImprovementUpgrades.AdvancedPhysics;
+import macior.strategygame.game.PlayersManagement.Laboratory.Upgrades.Upgrades;
 import macior.strategygame.game.Utilities.ResourceSet;
 import macior.strategygame.models.game.configuration.GameConfiguration;
 import macior.strategygame.models.game.playersControls.ArmyTrainingRequest;
@@ -32,6 +36,8 @@ public class ArmyTrainingPriceGetter extends Node {
         int singleMechCost = getSingleMechCost(request);
         int costQuantityMultiplier = quantityGetter.getProductionCostQuantity(trainingModel.FACTORY_CONFIG, request);
         int totalCost = singleMechCost*costQuantityMultiplier;
+        //applying perks from upgrades (advanced droids)
+        totalCost = applyUpgradesDiscounts(trainingModel.PLAYER.getUpgradesSet(), request, totalCost);
 
         ResourceSet resources = new ResourceSet(totalCost, 0 ,0);
         trainingModel.PRICE = resources.canPurchase(trainingModel.PLAYER);
@@ -48,5 +54,18 @@ public class ArmyTrainingPriceGetter extends Node {
             return gameConfiguration.getArmyBalanceConfig().getCannonsConfig().METAL_COST;
         }
         return 10000;
+    }
+
+    private int applyUpgradesDiscounts(PlayersUpgradesSet upgrades, ArmyTrainingRequest request, int price){
+        if (request.unitType != 1){
+            return price;
+        }
+
+        AdvancedDroids upgradeConfig = gameConfiguration.getUpgradesConfig().getArmyUpgradesConfig().getAdvancedDroids();
+        if (upgrades.upgraded(Upgrades.ADVANCED_DROIDS)){
+            price = (int)(price*(1-upgradeConfig.PRODUCTION_COST_REDUCTION));
+        }
+
+        return price;
     }
 }

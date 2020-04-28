@@ -1,10 +1,9 @@
 package macior.strategygame.game.PostponedEvents.buildingConcernedEvents;
 
 import macior.strategygame.game.BoardManagement.Buildings.buildings.Building;
-import macior.strategygame.game.PostponedEvents.PostponedEvent;
 import macior.strategygame.models.game.messages.event_messages.BuildingConcernedEventMessage;
 
-public abstract class BuildingConcernedEvent extends PostponedEvent {
+public abstract class BuildingConcernedEvent extends macior.strategygame.game.PostponedEvents.PostponedEvent {
 
     protected Building building;
     public abstract BuildingConcernedEventMessage toMessage(int place);

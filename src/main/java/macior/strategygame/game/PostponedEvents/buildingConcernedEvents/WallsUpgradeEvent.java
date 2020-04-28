@@ -3,7 +3,6 @@ package macior.strategygame.game.PostponedEvents.buildingConcernedEvents;
 import macior.strategygame.game.BoardManagement.AreaUnit;
 import macior.strategygame.game.BoardManagement.Buildings.buildings.Building;
 import macior.strategygame.game.BoardManagement.Buildings.buildings.UnderConstructionBuilding;
-import macior.strategygame.game.BoardManagement.Location;
 import macior.strategygame.game.PlayersManagement.Notifications.FinishedWallsNotification;
 import macior.strategygame.game.PlayersManagement.Notifications.NotificationBase;
 import macior.strategygame.models.game.messages.event_messages.BuildingConcernedEventMessage;
@@ -38,7 +37,7 @@ public class WallsUpgradeEvent extends BuildingConcernedEvent {
 
     @Override
     protected void doHappen() {
-        areaUnit.getBuildingQueue().removeEvent(this);
+        areaUnit.getEventsQueue().removeEvent(this);
         if (level == 1){
             buildWalls();
         } else {

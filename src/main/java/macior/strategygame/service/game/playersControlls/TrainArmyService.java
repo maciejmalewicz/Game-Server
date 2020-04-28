@@ -3,18 +3,18 @@ package macior.strategygame.service.game.playersControlls;
 import macior.strategygame.models.game.playersControls.ArmyTrainingRequest;
 import macior.strategygame.models.game.playersControls.TimeResponse;
 import macior.strategygame.service.chainOfResponsibility.ChainOfResponsibility;
-import macior.strategygame.service.chainOfResponsibility.nodes.AreaUnitValidator;
-import macior.strategygame.service.chainOfResponsibility.nodes.CodeChangingNode;
-import macior.strategygame.service.chainOfResponsibility.nodes.Node;
-import macior.strategygame.service.chainOfResponsibility.nodes.PlayerRetrievingNode;
+import macior.strategygame.service.chainOfResponsibility.models.ArmyTrainingModel;
+import macior.strategygame.service.chainOfResponsibility.nodes.*;
 import macior.strategygame.service.chainOfResponsibility.nodes.armyTraining.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+//todo: test and fix eventual bugs, update angular part so it works (maybe test using angular part)
+//todo: should work properly
 @Service
 public class TrainArmyService {
 
-    private ChainOfResponsibility chainOfResponsibility;
+    private ChainOfResponsibility chain;
 
     @Autowired
     public TrainArmyService(CodeChangingNode codeChangingNode,
@@ -25,10 +25,14 @@ public class TrainArmyService {
                             ArmyTrainingUpgradesValidator upgradesValidator,
                             ArmyTrainingConfigurationGetter configurationGetter,
                             ArmyTrainingPriceGetter priceGetter,
-                            ArmyTrainingTimeGetter timeGetter
+                            ArmyTrainingEventGetter eventGetter,
+                            ArmyTrainingTimeGetter timeGetter,
+                            TimeValidator timeValidator,
+                            PaymentExecutor paymentExecutor,
+                            ArmyTrainingEventStarter eventStarter
                             ){
 
-        chainOfResponsibility = new ChainOfResponsibility( new Node[]{
+        chain = new ChainOfResponsibility( new Node[]{
                 codeChangingNode,
                 playerRetrievingNode,
                 armyTrainingRequestValidator,
@@ -37,11 +41,20 @@ public class TrainArmyService {
                 upgradesValidator,
                 configurationGetter,
                 priceGetter,
-                timeGetter
+                eventGetter,
+                timeGetter,
+                timeValidator,
+                paymentExecutor,
+                eventStarter
         });
     }
 
     public TimeResponse trainArmy(String code, ArmyTrainingRequest request){
-        return null;
+        TimeResponse response = new TimeResponse();
+        ArmyTrainingModel model = new ArmyTrainingModel();
+        model.CODE = code;
+        model.REQUEST = request;
+        model.RESPONSE = response;
+        return (TimeResponse)chain.execute(model);
     }
 }

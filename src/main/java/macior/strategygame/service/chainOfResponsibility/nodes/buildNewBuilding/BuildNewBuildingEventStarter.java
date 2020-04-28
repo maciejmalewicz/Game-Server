@@ -21,7 +21,7 @@ public class BuildNewBuildingEventStarter extends Node {
 
         EventFactory factory = player.getGame().getEventFactory();
         BuildingConstructionEvent eventToAdd = factory.generateBuildingConstructionEvent(finishTime, building);
-        building.getAreaUnit().getBuildingQueue().pushEvent(eventToAdd);
+        building.getAreaUnit().getEventsQueue().pushEvent(eventToAdd);
         player.getGame().getEventHandler().addEvent(eventToAdd);
     }
 }

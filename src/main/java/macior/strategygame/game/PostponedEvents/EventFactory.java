@@ -3,6 +3,7 @@ package macior.strategygame.game.PostponedEvents;
 import macior.strategygame.game.BoardManagement.AreaUnit;
 import macior.strategygame.game.BoardManagement.Buildings.buildings.Building;
 import macior.strategygame.game.BoardManagement.Buildings.buildings.UnderConstructionBuilding;
+import macior.strategygame.game.PostponedEvents.armyConcernedEvents.ArmyTrainingEvent;
 import macior.strategygame.game.PostponedEvents.buildingConcernedEvents.BuildingConstructionEvent;
 import macior.strategygame.game.PostponedEvents.buildingConcernedEvents.BuildingUpgradeEvent;
 import macior.strategygame.game.PostponedEvents.buildingConcernedEvents.WallsUpgradeEvent;
@@ -29,6 +30,12 @@ public class EventFactory {
 
     public WallsUpgradeEvent generateWallsUpgradeEvent(int time, Building building, int level, AreaUnit unit){
         WallsUpgradeEvent event = new WallsUpgradeEvent(time, building, unit, level);
+        event.setId(generateId());
+        return event;
+    }
+
+    public ArmyTrainingEvent generateArmyTrainingEvent(int time, AreaUnit areaUnit, int unitType, int quantity){
+        ArmyTrainingEvent event = new ArmyTrainingEvent(time, areaUnit, unitType, quantity);
         event.setId(generateId());
         return event;
     }
