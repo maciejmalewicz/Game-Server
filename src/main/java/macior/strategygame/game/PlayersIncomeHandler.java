@@ -4,7 +4,6 @@ import macior.strategygame.game.BoardManagement.AreaUnit;
 import macior.strategygame.game.BoardManagement.Board;
 import macior.strategygame.game.BoardManagement.BoardSettings;
 import macior.strategygame.game.BoardManagement.Buildings.buildings.Building;
-import macior.strategygame.game.BoardManagement.Buildings.buildings.bigBuildings.BigBuilding;
 import macior.strategygame.game.BoardManagement.Buildings.buildings.bigBuildings.resourceFactories.BigBuildingMaterialsFactory;
 import macior.strategygame.game.BoardManagement.Buildings.buildings.bigBuildings.resourceFactories.BigElectricityFactory;
 import macior.strategygame.game.BoardManagement.Buildings.buildings.bigBuildings.resourceFactories.BigFactory;
@@ -22,8 +21,6 @@ import macior.strategygame.models.game.configuration.BigBuildingsConfig;
 import macior.strategygame.models.game.configuration.GameConfiguration;
 import macior.strategygame.models.game.configuration.ImprovementUpgradesConfig;
 import macior.strategygame.models.game.configuration.SmallBuildingsConfig;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 
 public class PlayersIncomeHandler {
 
@@ -97,15 +94,15 @@ public class PlayersIncomeHandler {
         //for single resources
         if (upgradesSet.upgraded(Upgrades.MINING_DRILL)){
             bonusRatio = ic.getMiningDrill().PRODUCTION_BONUS;
-            ratios.metalRatio += bonusRatio;
+            ratios.firstRatio += bonusRatio;
         }
         if (upgradesSet.upgraded(Upgrades.EXCAVATOR)){
             bonusRatio = ic.getExcavator().PRODUCTION_BONUS;
-            ratios.buildingMaterialsRatio += bonusRatio;
+            ratios.secondRatio += bonusRatio;
         }
         if (upgradesSet.upgraded(Upgrades.ADVANCED_PHYSICS)){
             bonusRatio = ic.getAdvancedPhysics().PRODUCTION_BONUS;
-            ratios.electricityRatio += bonusRatio;
+            ratios.thirdRatio += bonusRatio;
         }
         //todo A.I.
         toChange.multiplyResources(ratios);

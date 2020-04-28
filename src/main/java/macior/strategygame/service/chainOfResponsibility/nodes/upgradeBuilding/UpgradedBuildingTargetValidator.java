@@ -25,6 +25,9 @@ public class UpgradedBuildingTargetValidator extends Node {
         AreaUnit unit = upgradeModel.AREA_UNIT;
 
         Building toUpgrade = mapper.getBuilding(unit, request.getPlace());
+        if (toUpgrade == null){
+            model.RESPONSE.setStatus(GameErrors.NO_BUILDING_FOUND);
+        }
         if (toUpgrade.getClass() == UnderConstructionBuilding.class){
             toUpgrade = ((UnderConstructionBuilding)toUpgrade).getBuildingUnderConstruction();
         }

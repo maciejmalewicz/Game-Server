@@ -14,7 +14,7 @@ public class TimeValidator extends Node{
     @Override
     public void applyChanges(ChainModel model) {
         PlayerChangesModel buildingModel = (PlayerChangesModel) model;
-        if (MAX_TIME < buildingModel.FINISHING_TIME){
+        if (MAX_TIME < buildingModel.FINISHING_TIME || buildingModel.FINISHING_TIME < 0){
             buildingModel.RESPONSE.setStatus(GameErrors.NOT_ENOUGH_TIME);
         }
     }

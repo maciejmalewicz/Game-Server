@@ -18,8 +18,9 @@ public class AreaUnit {
     private Building eastBuilding = null;
 
     private Army army = new Army();
-
     private BuildingQueue buildingQueue = new BuildingQueue();
+
+
 
     public BuildingQueue getBuildingQueue() {
         return buildingQueue;

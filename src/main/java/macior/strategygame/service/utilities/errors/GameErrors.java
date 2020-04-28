@@ -16,6 +16,11 @@ public class GameErrors {
     public final static int TANKS_NOT_UPGRADED = -25;
     public final static int CANNONS_NOT_UPGRADED = -26;
     public final static int BUILDING_PLACE_NOT_EMPTY = -27;
+    public final static int DROIDS_FACTORY_NOT_FOUND = -29;
+    public final static int TANKS_FACTORY_NOT_FOUND = -29;
+    public final static int CANNONS_FACTORY_NOT_FOUND = -30;
+    public final static int ASSEMBLY_LINES_NOT_UPGRADED = -31;
+    public final static int MASS_PRODUCTION_NOT_UPGRADED = -32;
 
 
 }

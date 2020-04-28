@@ -33,9 +33,9 @@ public class ResourceSet {
     }
 
     public void multiplyResources(RatioSet ratios){
-        METAL = (int)(METAL*ratios.metalRatio);
-        BUILDING_MATERIALS = (int)(BUILDING_MATERIALS*ratios.buildingMaterialsRatio);
-        ELECTRICITY = (int)(ELECTRICITY*ratios.electricityRatio);
+        METAL = (int)(METAL*ratios.firstRatio);
+        BUILDING_MATERIALS = (int)(BUILDING_MATERIALS*ratios.secondRatio);
+        ELECTRICITY = (int)(ELECTRICITY*ratios.thirdRatio);
     }
 
     public void substractResources(ResourceSet setToSubstract){
