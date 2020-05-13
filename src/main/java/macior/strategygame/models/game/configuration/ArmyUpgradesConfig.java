@@ -26,7 +26,7 @@ public class ArmyUpgradesConfig {
 
     @Autowired
     @Qualifier("tanksBean")
-    private Tanks tanksBean;
+    private Tanks tanks;
 
     @Autowired
     @Qualifier("mobilityBean")
@@ -85,12 +85,12 @@ public class ArmyUpgradesConfig {
         this.massProduction = massProduction;
     }
 
-    public Tanks getTanksBean() {
-        return tanksBean;
+    public Tanks getTanks() {
+        return tanks;
     }
 
-    public void setTanksBean(Tanks tanksBean) {
-        this.tanksBean = tanksBean;
+    public void setTanks(Tanks tanks) {
+        this.tanks = tanks;
     }
 
     public Mobility getMobility() {

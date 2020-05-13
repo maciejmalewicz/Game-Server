@@ -50,9 +50,9 @@ public class ArmyTrainingConfigurationGetter extends Node {
         if (request.unitType == 1){
             return config.getDroidsConfig();
         } else if (request.unitType == 2){
-            return config.getDroidsConfig();
+            return config.getTanksConfig();
         } else if (request.unitType == 3){
-            return config.getDroidsConfig();
+            return config.getCannonsConfig();
         }
         return null;
     }

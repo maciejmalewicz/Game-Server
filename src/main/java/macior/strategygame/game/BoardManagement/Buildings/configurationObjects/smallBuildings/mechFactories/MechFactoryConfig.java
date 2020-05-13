@@ -13,6 +13,23 @@ public class MechFactoryConfig extends SmallBuildingConfig {
     public int LEVEL1_MASS_PRODUCTION;
     public int LEVEL2_MASS_PRODUCTION;
 
+    public int getQuantity(int productionType, int level){
+        if (productionType == 1 && level == 1){
+            return LEVEL1_REGULAR_PRODUCTION;
+        } else if (productionType == 1 && level == 2){
+            return LEVEL2_REGULAR_PRODUCTION;
+        } else if (productionType == 2 && level == 1){
+            return LEVEL1_BIG_PRODUCTION;
+        } else if (productionType == 2 && level == 2){
+            return LEVEL2_BIG_PRODUCTION;
+        } else if (productionType == 3 && level == 1){
+            return LEVEL1_MASS_PRODUCTION;
+        } else if (productionType == 3 && level == 2){
+            return LEVEL2_MASS_PRODUCTION;
+        }
+        return 0;
+    }
+
 
 
 }

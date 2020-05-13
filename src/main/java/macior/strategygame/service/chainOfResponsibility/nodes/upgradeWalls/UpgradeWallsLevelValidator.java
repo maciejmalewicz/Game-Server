@@ -1,7 +1,6 @@
 package macior.strategygame.service.chainOfResponsibility.nodes.upgradeWalls;
 
 import macior.strategygame.game.BoardManagement.Buildings.configurationObjects.smallBuildings.WallsConfig;
-import macior.strategygame.game.PostponedEvents.buildingConcernedEvents.WallsUpgradeEvent;
 import macior.strategygame.service.chainOfResponsibility.models.ChainModel;
 import macior.strategygame.service.chainOfResponsibility.models.UpgradeWallsModel;
 import macior.strategygame.service.chainOfResponsibility.nodes.Node;

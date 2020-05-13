@@ -18,4 +18,20 @@ public class ArmyUpdateNotification extends NotificationBase {
     public String initializeLabel() {
         return "ARMY_UPDATE";
     }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public Army getArmy() {
+        return army;
+    }
+
+    public void setArmy(Army army) {
+        this.army = army;
+    }
 }

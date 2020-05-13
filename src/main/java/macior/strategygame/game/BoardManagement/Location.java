@@ -2,6 +2,8 @@ package macior.strategygame.game.BoardManagement;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.Objects;
+
 public class Location {
 
     private int row;
@@ -31,5 +33,19 @@ public class Location {
     @Override
     public String toString(){
         return "row: " + row + ", column: " + column;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Location location = (Location) o;
+        return row == location.row &&
+                column == location.column;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(row, column);
     }
 }

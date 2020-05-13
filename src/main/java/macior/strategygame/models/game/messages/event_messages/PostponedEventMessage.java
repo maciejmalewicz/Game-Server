@@ -1,8 +1,13 @@
 package macior.strategygame.models.game.messages.event_messages;
 
-public class PostponedEventMessage implements Comparable<BuildingConcernedEventMessage> {
+public abstract class PostponedEventMessage implements Comparable<PostponedEventMessage> {
 
     protected int finishingTime;
+    protected String label;
+
+    public PostponedEventMessage(){
+        label = initializeLabel();
+    }
 
     public int getFinishingTime() {
         return finishingTime;
@@ -12,8 +17,18 @@ public class PostponedEventMessage implements Comparable<BuildingConcernedEventM
         this.finishingTime = finishingTime;
     }
 
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
     @Override
-    public int compareTo(BuildingConcernedEventMessage other) {
+    public int compareTo(PostponedEventMessage other) {
         return finishingTime - other.finishingTime;
     }
+
+    protected abstract String initializeLabel();
 }

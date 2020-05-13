@@ -50,13 +50,16 @@ public class AreaEventsQueue {
         return null;
     }
 
-    public synchronized ArmyTrainingEvent getLastArmyTrainingEvent(){
+    public synchronized ArmyTrainingEvent getLastArmyTrainingEvent(int unitType){
         Iterator<PostponedEvent> iterator = events.descendingIterator();
         while (iterator.hasNext()){
             PostponedEvent event = iterator.next();
             //ignore all other events
             if (event.getClass() == ArmyTrainingEvent.class){
-                return (ArmyTrainingEvent)event;
+                ArmyTrainingEvent trainingEvent = (ArmyTrainingEvent)event;
+                if (trainingEvent.getUnitType() == unitType){
+                    return trainingEvent;
+                }
             }
         }
         return null;

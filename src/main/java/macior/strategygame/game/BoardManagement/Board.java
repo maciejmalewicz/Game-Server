@@ -115,7 +115,7 @@ public class Board {
 //            for (AreaUnit unit : row){
 //                System.out.println(unit);
 //                try {
-//                    System.out.println(unit.getAreaUnit());
+//                    System.out.println(unit.getSendingAreaUnit());
 //                } catch (NullPointerException exc){
 //                    System.out.println(":(");
 //                }

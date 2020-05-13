@@ -7,6 +7,7 @@ import macior.strategygame.game.PlayersManagement.Notifications.ArmyUpdateNotifi
 import macior.strategygame.game.PlayersManagement.Notifications.NotificationBase;
 import macior.strategygame.game.PlayersManagement.Notifications.NotificationsInbox;
 import macior.strategygame.game.PostponedEvents.PostponedEvent;
+import macior.strategygame.models.game.messages.event_messages.ArmyTrainingEventMessage;
 
 public class ArmyTrainingEvent extends PostponedEvent {
 
@@ -21,6 +22,14 @@ public class ArmyTrainingEvent extends PostponedEvent {
         this.quantity = quantity;
     }
 
+    public ArmyTrainingEventMessage toMessage(){
+        ArmyTrainingEventMessage message = new ArmyTrainingEventMessage();
+        message.setFinishingTime(getFinishingTime());
+        message.setQuantity(quantity);
+        message.setUnitType(unitType);
+        return message;
+    }
+
     @Override
     protected NotificationBase doNotification() {
         NotificationsInbox inbox = area.getOwner().getInbox();
@@ -31,6 +40,7 @@ public class ArmyTrainingEvent extends PostponedEvent {
 
     @Override
     protected void doHappen() {
+        area.getEventsQueue().removeEvent(this);
         Army army = area.getArmy();
         switch (unitType){
             case 1:

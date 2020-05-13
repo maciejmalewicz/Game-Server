@@ -64,16 +64,7 @@ public class TimeManager {
     }
 
     public int getPostponedEventTime(int postponingDuration){
-        int time = this.secondsFromStart + postponingDuration;
-        if (time > GAME_DURATION){
-            return -1;
-        }
         return this.secondsFromStart + postponingDuration;
-    }
-
-    //if player will make it before game ends
-    public boolean canStillBuild(int time){
-        return time <= GAME_DURATION;
     }
 
 }

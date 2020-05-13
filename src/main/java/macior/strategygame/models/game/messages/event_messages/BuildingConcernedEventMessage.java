@@ -25,5 +25,10 @@ public class BuildingConcernedEventMessage extends PostponedEventMessage {
         this.place = place;
     }
 
+    @Override
+    protected String initializeLabel() {
+        return "BUILDING_EVENT";
+    }
+
 
 }

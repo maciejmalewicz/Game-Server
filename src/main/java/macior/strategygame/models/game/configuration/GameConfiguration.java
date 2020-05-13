@@ -1,5 +1,6 @@
 package macior.strategygame.models.game.configuration;
 
+import macior.strategygame.game.MainConfiguration.MainConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,6 +18,9 @@ public class GameConfiguration {
 
     @Autowired
     private ArmyBalanceConfig armyBalanceConfig;
+
+    @Autowired
+    private MainConfig mainConfig;
 
     public UpgradesConfig getUpgradesConfig() {
         return upgradesConfig;
@@ -48,5 +52,13 @@ public class GameConfiguration {
 
     public void setArmyBalanceConfig(ArmyBalanceConfig armyBalanceConfig) {
         this.armyBalanceConfig = armyBalanceConfig;
+    }
+
+    public MainConfig getMainConfig() {
+        return mainConfig;
+    }
+
+    public void setMainConfig(MainConfig mainConfig) {
+        this.mainConfig = mainConfig;
     }
 }

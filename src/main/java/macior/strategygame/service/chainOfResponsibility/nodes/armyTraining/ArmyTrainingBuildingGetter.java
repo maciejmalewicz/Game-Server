@@ -59,7 +59,7 @@ public class ArmyTrainingBuildingGetter extends Node {
         }
 
         Building east = areaUnit.getEastBuilding();
-        if (west != null && east.getClass() == c){
+        if (east != null && east.getClass() == c){
             return east;
         }
 

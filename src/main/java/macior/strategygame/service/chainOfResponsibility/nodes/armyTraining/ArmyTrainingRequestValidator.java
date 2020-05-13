@@ -22,6 +22,11 @@ public class ArmyTrainingRequestValidator extends Node {
 
         ArmyTrainingRequest request = (ArmyTrainingRequest)trainingModel.REQUEST;
 
+        if (request.getLocation() == null){
+            model.RESPONSE.setStatus(GameErrors.BAD_REQUEST);
+            return;
+        }
+
         if (request.productionType < 1 || request.productionType > 3){
             model.RESPONSE.setStatus(GameErrors.BAD_REQUEST);
             return;

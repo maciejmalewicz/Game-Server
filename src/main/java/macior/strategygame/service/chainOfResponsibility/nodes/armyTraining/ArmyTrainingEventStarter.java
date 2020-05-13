@@ -1,6 +1,7 @@
 package macior.strategygame.service.chainOfResponsibility.nodes.armyTraining;
 
 import macior.strategygame.game.BoardManagement.AreaEventsQueue;
+import macior.strategygame.game.BoardManagement.Buildings.buildings.smallBuildings.mechFactory.MechFactory;
 import macior.strategygame.game.PostponedEvents.EventFactory;
 import macior.strategygame.game.PostponedEvents.EventHandler;
 import macior.strategygame.game.PostponedEvents.armyConcernedEvents.ArmyTrainingEvent;
@@ -23,7 +24,8 @@ public class ArmyTrainingEventStarter extends Node {
         ArmyTrainingModel trainingModel = (ArmyTrainingModel)model;
         EventFactory eventFactory = trainingModel.PLAYER.getGame().getEventFactory();
         ArmyTrainingRequest request = (ArmyTrainingRequest)trainingModel.REQUEST;
-        int quantity = armyQuantityGetter.getProductionCostQuantity(trainingModel.FACTORY_CONFIG, request);
+        int quantity = armyQuantityGetter.getProductionQuantity(trainingModel.FACTORY_CONFIG,
+                (MechFactory) trainingModel.FACTORY, request.productionType);
 
         ArmyTrainingEvent event = eventFactory.generateArmyTrainingEvent(
                 trainingModel.FINISHING_TIME,

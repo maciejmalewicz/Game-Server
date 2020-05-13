@@ -6,6 +6,7 @@ import macior.strategygame.game.TimeManager;
 import macior.strategygame.models.game.configuration.ArmyUpgradesConfig;
 import macior.strategygame.models.game.configuration.GameConfiguration;
 import macior.strategygame.models.game.playersControls.ArmyTrainingRequest;
+import macior.strategygame.models.game.playersControls.TimeResponse;
 import macior.strategygame.service.chainOfResponsibility.models.ArmyTrainingModel;
 import macior.strategygame.service.chainOfResponsibility.models.ChainModel;
 import macior.strategygame.service.chainOfResponsibility.nodes.Node;
@@ -26,6 +27,7 @@ public class ArmyTrainingTimeGetter extends Node {
     public void applyChanges(ChainModel model) {
         ArmyTrainingModel trainingModel = (ArmyTrainingModel)model;
         ArmyTrainingRequest request = (ArmyTrainingRequest)trainingModel.REQUEST;
+        TimeResponse timeResponse = (TimeResponse)trainingModel.RESPONSE;
 
         double basicTime = trainingModel.MECH_CONFIG.DURATION;
         int quantity = quantityGetter.getProductionCostQuantity(trainingModel.FACTORY_CONFIG, request);
@@ -33,13 +35,18 @@ public class ArmyTrainingTimeGetter extends Node {
         //for droids, apply some duration perks/penalties
         totalTime = applyDurationBonuses(trainingModel.PLAYER.getUpgradesSet(), request, totalTime);
 
+        int finishingTime;
         if (trainingModel.EVENT == null){
             TimeManager timeManager = trainingModel.PLAYER.getGame().getTimeManager();
-            trainingModel.FINISHING_TIME = timeManager.getPostponedEventTime(totalTime);
+            finishingTime = timeManager.getPostponedEventTime(totalTime);
+
         } else {
             int lastEventFinishingTime = trainingModel.EVENT.getFinishingTime();
-            trainingModel.FINISHING_TIME = lastEventFinishingTime + totalTime;
+            finishingTime = lastEventFinishingTime + totalTime;
         }
+
+        trainingModel.FINISHING_TIME = finishingTime;
+        timeResponse.setFinishingTime(finishingTime);
     }
 
     private int applyDurationBonuses(PlayersUpgradesSet upgrades, ArmyTrainingRequest request, int totalTime){
