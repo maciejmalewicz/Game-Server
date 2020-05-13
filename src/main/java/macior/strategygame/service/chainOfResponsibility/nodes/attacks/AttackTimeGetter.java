@@ -1,19 +1,17 @@
-package macior.strategygame.service.chainOfResponsibility.nodes.armyTransfers;
+package macior.strategygame.service.chainOfResponsibility.nodes.attacks;
 
 import macior.strategygame.game.MainConfiguration.MainConfig;
 import macior.strategygame.game.TimeManager;
-import macior.strategygame.models.game.configuration.GameConfiguration;
-import macior.strategygame.models.game.playersControls.ArmyTransferRequest;
+import macior.strategygame.models.game.playersControls.AttackRequest;
 import macior.strategygame.models.game.playersControls.TimeResponse;
 import macior.strategygame.service.chainOfResponsibility.models.ArmyTransferModel;
 import macior.strategygame.service.chainOfResponsibility.models.ChainModel;
 import macior.strategygame.service.chainOfResponsibility.nodes.Node;
-import macior.strategygame.service.chainOfResponsibility.sharedUtilities.TimeGetter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ArmyTransferTimeGetter extends Node {
+public class AttackTimeGetter extends Node {
 
     @Autowired
     private MainConfig configuration;
@@ -21,14 +19,14 @@ public class ArmyTransferTimeGetter extends Node {
     @Override
     public void applyChanges(ChainModel model) {
         ArmyTransferModel transferModel = (ArmyTransferModel)model;
-        ArmyTransferRequest request = (ArmyTransferRequest)transferModel.REQUEST;
-        int pathLength = request.getPath().length - 1;
-        TimeManager timeManager = ((ArmyTransferModel) model).PLAYER.getGame().getTimeManager();
+        AttackRequest request = (AttackRequest)transferModel.REQUEST;
+        TimeManager timeManager = transferModel.PLAYER.getGame().getTimeManager();
+        int pathLength = request.getPath().length-1;
 
-        //per every link between areas we have to wait few seconds
-        int marchingDuration = configuration.MARCHING_TIME*pathLength;
+        int duration = pathLength*configuration.MARCHING_TIME;
+        duration += configuration.ATTACKING_TIME;
 
-        transferModel.FINISHING_TIME = timeManager.getPostponedEventTime(marchingDuration);
+        transferModel.FINISHING_TIME = timeManager.getPostponedEventTime(duration);
 
         TimeResponse timeResponse = (TimeResponse)transferModel.RESPONSE;
         timeResponse.setFinishingTime(transferModel.FINISHING_TIME);

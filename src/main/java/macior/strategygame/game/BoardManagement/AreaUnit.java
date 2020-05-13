@@ -20,8 +20,6 @@ public class AreaUnit {
     private Army army = new Army();
     private AreaEventsQueue eventsQueue = new AreaEventsQueue();
 
-
-
     public AreaEventsQueue getEventsQueue() {
         return eventsQueue;
     }

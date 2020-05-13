@@ -1,14 +1,17 @@
 package macior.strategygame.game.PostponedEvents;
 
 import macior.strategygame.game.BattlesManagement.Army;
+import macior.strategygame.game.BattlesManagement.Attack;
 import macior.strategygame.game.BoardManagement.AreaUnit;
 import macior.strategygame.game.BoardManagement.Buildings.buildings.Building;
 import macior.strategygame.game.BoardManagement.Buildings.buildings.UnderConstructionBuilding;
 import macior.strategygame.game.PlayersManagement.Player;
 import macior.strategygame.game.PostponedEvents.armyConcernedEvents.ArmyTrainingEvent;
 import macior.strategygame.game.PostponedEvents.armyConcernedEvents.ArmyTransferEvent;
+import macior.strategygame.game.PostponedEvents.armyConcernedEvents.AttackEvent;
 import macior.strategygame.game.PostponedEvents.buildingConcernedEvents.BuildingConstructionEvent;
 import macior.strategygame.game.PostponedEvents.buildingConcernedEvents.BuildingUpgradeEvent;
+import macior.strategygame.service.game.battles.BattleStartingService;
 
 public class EventFactory {
 
@@ -44,5 +47,9 @@ public class EventFactory {
         return event;
     }
 
-
+    public AttackEvent generateAttackEvent(int time, Attack attack, BattleStartingService service){
+        AttackEvent event = new AttackEvent(time, attack, service);
+        event.setId(generateId());
+        return event;
+    }
 }

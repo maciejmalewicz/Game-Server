@@ -1,7 +1,7 @@
-package macior.strategygame.service.chainOfResponsibility.nodes.armyTransfers;
+package macior.strategygame.service.chainOfResponsibility.nodes.attacks;
 
 import macior.strategygame.game.BoardManagement.Location;
-import macior.strategygame.models.game.playersControls.ArmyTransferRequest;
+import macior.strategygame.models.game.playersControls.AttackRequest;
 import macior.strategygame.service.chainOfResponsibility.models.ArmyTransferModel;
 import macior.strategygame.service.chainOfResponsibility.models.ChainModel;
 import macior.strategygame.service.chainOfResponsibility.nodes.Node;
@@ -12,21 +12,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ArmyTransferPathValidator extends Node {
+public class AttackPathValidator extends Node {
 
     @Autowired
-    private AreaUnitOwnershipValidator validator;
+    private AreaUnitOwnershipValidator ownershipValidator;
 
     @Autowired
     private PathValidation pathValidator;
 
-    //checks is tha path is valid, but does not check is the path is the shortest
-    //this is tha job for clients part
     @Override
     public void applyChanges(ChainModel model) {
         ArmyTransferModel transferModel = (ArmyTransferModel)model;
-        ArmyTransferRequest request = (ArmyTransferRequest)transferModel.REQUEST;
+        AttackRequest request = (AttackRequest)transferModel.REQUEST;
         Location[] path = request.getPath();
+
         if (!pathValidator.isLongEnough(path)){
             setError(model);
             return;
@@ -37,22 +36,19 @@ public class ArmyTransferPathValidator extends Node {
             return;
         }
 
-        //if all elements belong to the player
-        for (Location location : path){
-            if (!validator.isLocationOwnedBy(transferModel.PLAYER, location)){
+        for (int i = 0; i < path.length-2; i++){
+            if (!ownershipValidator.isLocationOwnedBy(transferModel.PLAYER, path[i])){
                 setError(model);
                 return;
             }
         }
 
-        //if all elements are neighbours, so they together make a chain
         if (!pathValidator.areAllNeighbours(path)){
             setError(model);
             return;
         }
+
     }
-
-
     private void setError(ChainModel model){
         model.RESPONSE.setStatus(GameErrors.WRONG_PATH);
     }

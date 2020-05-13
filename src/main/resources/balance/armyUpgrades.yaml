@@ -113,7 +113,7 @@ solarPanels:
   RESEARCH_TIME:
     minutes: 1
     seconds: 15
-  TRAVELING_COST_REDUCTION: 0.3
+  ATTACKING_COST_REDUCTION: 0.4
   REQUIREMENTS: [0]
 
 

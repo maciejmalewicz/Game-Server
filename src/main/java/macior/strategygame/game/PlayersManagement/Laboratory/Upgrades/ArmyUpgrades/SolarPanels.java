@@ -2,8 +2,6 @@ package macior.strategygame.game.PlayersManagement.Laboratory.Upgrades.ArmyUpgra
 
 
 import macior.strategygame.game.PlayersManagement.Laboratory.Upgrades.Upgrade;
-import macior.strategygame.game.Utilities.ResourceSet;
-import macior.strategygame.game.Utilities.Time;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
@@ -11,7 +9,7 @@ import java.util.Arrays;
 @Component
 public class SolarPanels extends Upgrade {
 
-    public double TRAVELING_COST_REDUCTION;
+    public double ATTACKING_COST_REDUCTION;
     public SolarPanels(){
 //        value = 0.3;
 //
@@ -25,6 +23,6 @@ public class SolarPanels extends Upgrade {
 
     @Override
     public String toString(){
-        return COST + " " + Arrays.toString(REQUIREMENTS) + " " + RESEARCH_TIME + " " + TRAVELING_COST_REDUCTION;
+        return COST + " " + Arrays.toString(REQUIREMENTS) + " " + RESEARCH_TIME + " " + ATTACKING_COST_REDUCTION;
     }
 }

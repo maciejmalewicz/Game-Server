@@ -16,5 +16,9 @@ cannonsConfig:
   METAL_COST: 9
   MARCHING_ELECTRICITY_COST: 4.0
   DURATION: 4.0
-  ATTACK: 3
-  DEFENCE: 10
+  ATTACK: 10
+  DEFENCE: 15
+
+desertBotsConfig:
+  ATTACK: 7
+  DEFENCE: 15

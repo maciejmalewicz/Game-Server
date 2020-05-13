@@ -25,6 +25,7 @@ public class GameErrors {
     public final static int NEGATIVE_ARMY_AMOUNT = -34;
     public final static int EMPTY_ARMY = -35;
     public final static int TOO_BIG_ARMY = -36;
-
+    public final static int ATTACKING_OWN_AREA = -37;
+    public final static int NO_COMMANDER = -38;
 
 }

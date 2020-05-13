@@ -35,4 +35,9 @@ public class ArmyBalanceConfigurationBeans {
         return new BeanFactory<CannonsConfig>().getBean(getMainMap(), CannonsConfig.class);
     }
 
+    @Bean
+    public DesertBotsConfig desertBotsConfigBean(){
+        return new BeanFactory<DesertBotsConfig>().getBean(getMainMap(), DesertBotsConfig.class);
+    }
+
 }

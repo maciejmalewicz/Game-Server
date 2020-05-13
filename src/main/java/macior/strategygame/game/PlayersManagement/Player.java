@@ -15,7 +15,17 @@ public class Player {
     private Game game;
     private NotificationsInbox inbox = new NotificationsInbox();
 
+    private boolean hasCommander = false;
     private double bonusFromAI = 0;
+
+
+    public boolean hasCommander() {
+        return hasCommander;
+    }
+
+    public void setCommander(boolean hasCommander) {
+        this.hasCommander = hasCommander;
+    }
 
     public double getBonusFromAI() {
         return bonusFromAI;
