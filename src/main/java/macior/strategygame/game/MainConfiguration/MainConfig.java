@@ -13,4 +13,9 @@ public class MainConfig {
     public double SPAWN_CURVATURE_COEFFICIENT;
 
     public double COMMANDER_BOT_ATTACK_BONUS;
+
+    public double MIN_LUCK_COEFFICIENT;
+    public double MAX_LUCK_COEFFICIENT;
+
+    public double DAMAGE_CURVATURE_COEFFICIENT;
 }

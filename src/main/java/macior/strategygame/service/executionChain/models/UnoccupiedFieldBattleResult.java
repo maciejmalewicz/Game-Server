@@ -1,4 +1,4 @@
 package macior.strategygame.service.executionChain.models;
 
-public class UnoccupiedFieldBattleResult {
+public class UnoccupiedFieldBattleResult extends BattleResult {
 }

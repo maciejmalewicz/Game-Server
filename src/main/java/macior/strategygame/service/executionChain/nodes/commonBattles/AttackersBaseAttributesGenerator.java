@@ -31,7 +31,7 @@ public class AttackersBaseAttributesGenerator extends ExecutionNode<BattleModel>
         double droidsDefence = model.ATTACKERS_STRENGTH_SET.DROIDS_DEFENCE
                 * model.ATTACKERS_BONUS_DEFENCE_RATIOS.firstRatio;
 
-        double tanksDefence = model.ATTACKERS_STRENGTH_SET.DROIDS_DEFENCE
+        double tanksDefence = model.ATTACKERS_STRENGTH_SET.TANKS_DEFENCE
                 * model.ATTACKERS_BONUS_DEFENCE_RATIOS.secondRatio;
 
         double cannonsDefence = model.ATTACKERS_STRENGTH_SET.CANNONS_DEFENCE

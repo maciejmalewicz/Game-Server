@@ -11,7 +11,7 @@ import macior.strategygame.game.PostponedEvents.armyConcernedEvents.ArmyTransfer
 import macior.strategygame.game.PostponedEvents.armyConcernedEvents.AttackEvent;
 import macior.strategygame.game.PostponedEvents.buildingConcernedEvents.BuildingConstructionEvent;
 import macior.strategygame.game.PostponedEvents.buildingConcernedEvents.BuildingUpgradeEvent;
-import macior.strategygame.service.game.battles.BattleStartingService;
+import macior.strategygame.service.game.battles.BattleService;
 
 public class EventFactory {
 
@@ -47,7 +47,7 @@ public class EventFactory {
         return event;
     }
 
-    public AttackEvent generateAttackEvent(int time, Attack attack, BattleStartingService service){
+    public AttackEvent generateAttackEvent(int time, Attack attack, BattleService service){
         AttackEvent event = new AttackEvent(time, attack, service);
         event.setId(generateId());
         return event;

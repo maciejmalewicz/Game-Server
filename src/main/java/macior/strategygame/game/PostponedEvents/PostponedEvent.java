@@ -5,7 +5,7 @@ import macior.strategygame.models.game.messages.event_messages.PostponedEventMes
 
 public abstract class PostponedEvent implements Comparable<PostponedEvent>{
 
-    protected abstract NotificationBase doNotification();
+    protected abstract void doNotification();
     protected abstract void doHappen();
     protected byte id;
 

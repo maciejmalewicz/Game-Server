@@ -4,5 +4,6 @@ public class AreaUnitMessage {
 
     public String OWNER;
     public BuildingMessage MAIN_BUILDING;
+    public AreaEventsMessage AREA_EVENTS;
 
 }

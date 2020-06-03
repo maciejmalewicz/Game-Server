@@ -6,6 +6,7 @@ import macior.strategygame.game.PlayersManagement.Notifications.ArmyUpdateNotifi
 import macior.strategygame.game.PlayersManagement.Notifications.NotificationBase;
 import macior.strategygame.game.PlayersManagement.Player;
 import macior.strategygame.game.PostponedEvents.PostponedEvent;
+import macior.strategygame.models.game.messages.event_messages.ArmyTransferEventMessage;
 
 public class ArmyTransferEvent extends PostponedEvent {
 
@@ -23,11 +24,10 @@ public class ArmyTransferEvent extends PostponedEvent {
     }
 
     @Override
-    protected NotificationBase doNotification() {
+    protected void doNotification() {
         Army army = targetArea.getArmy();
         ArmyUpdateNotification notification = new ArmyUpdateNotification(targetArea.getLocation(), army);
         targetArea.getOwner().getInbox().addNotification(notification);
-        return notification;
     }
 
     @Override
@@ -36,6 +36,17 @@ public class ArmyTransferEvent extends PostponedEvent {
         toUpdate.addDroids(army.getDroids());
         toUpdate.addTanks(army.getTanks());
         toUpdate.addCannons(army.getCannons());
+        sendingAreaUnit.getEventsQueue().removeEvent(this);
+        targetArea.getEventsQueue().removeEvent(this);
+    }
+
+    public ArmyTransferEventMessage toMessage(){
+        ArmyTransferEventMessage message = new ArmyTransferEventMessage();
+        message.setArmy(army);
+        message.setFrom(sendingAreaUnit.getLocation());
+        message.setTo(targetArea.getLocation());
+        message.setFinishingTime(getFinishingTime());
+        return message;
     }
 
     public AreaUnit getSendingAreaUnit() {

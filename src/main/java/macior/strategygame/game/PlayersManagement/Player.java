@@ -15,7 +15,8 @@ public class Player {
     private Game game;
     private NotificationsInbox inbox = new NotificationsInbox();
 
-    private boolean hasCommander = false;
+    //todo change
+    private boolean hasCommander = true;
     private double bonusFromAI = 0;
 
 

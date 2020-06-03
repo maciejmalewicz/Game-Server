@@ -31,26 +31,24 @@ public class BuildingUpgradeEvent extends BuildingConcernedEvent {
     }
 
     @Override
-    protected NotificationBase doNotification() {
+    protected void doNotification() {
         FinishedUpgradeNotification notification = new FinishedUpgradeNotification();
         notification.setLocation(areaUnit.getLocation());
         notification.setPlace(place);
         notification.setLevel(level);
         if (building instanceof BigBuilding){
-            return notifyAllPlayers(notification);
+            notifyAllPlayers(notification);
         }
-        return notifyOwner(notification);
+        notifyOwner(notification);
     }
 
     //building big stuff is not a secret
-    protected NotificationBase notifyAllPlayers(FinishedUpgradeNotification notification){
+    protected void notifyAllPlayers(FinishedUpgradeNotification notification){
         areaUnit.getOwner().getGame().getPlayersSet().notifyAllPlayers(notification);
-        return notification;
     }
 
-    protected NotificationBase notifyOwner(FinishedUpgradeNotification notification){
+    protected void notifyOwner(FinishedUpgradeNotification notification){
         areaUnit.getOwner().getInbox().addNotification(notification);
-        return notification;
     }
 
     @Override

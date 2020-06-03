@@ -20,7 +20,7 @@ public class BuildingConstructionEvent extends BuildingConcernedEvent {
     }
 
     @Override
-    protected NotificationBase doNotification() {
+    protected void doNotification() {
         FinishedBuildingNotification notification = new FinishedBuildingNotification();
         UnderConstructionBuilding b = (UnderConstructionBuilding)building;
         notification.setBuilding(b.getBuildingUnderConstruction().toMessage());
@@ -29,7 +29,6 @@ public class BuildingConstructionEvent extends BuildingConcernedEvent {
 
         //get inbox of owner of area unit, where the building has been built
         b.getAreaUnit().getOwner().getInbox().addNotification(notification);
-        return notification;
     }
 
     @Override

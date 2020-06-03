@@ -9,7 +9,7 @@ import macior.strategygame.models.game.playersControls.AttackRequest;
 import macior.strategygame.service.chainOfResponsibility.models.ArmyTransferModel;
 import macior.strategygame.service.chainOfResponsibility.models.ChainModel;
 import macior.strategygame.service.chainOfResponsibility.nodes.Node;
-import macior.strategygame.service.game.battles.BattleStartingService;
+import macior.strategygame.service.game.battles.BattleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 public class AttackEventStarter extends Node {
 
     @Autowired
-    private BattleStartingService battleStarter;
+    private BattleService battleStarter;
 
 
     @Override

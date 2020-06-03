@@ -9,8 +9,8 @@ public class BattleResultGetter extends ExecutionNode<BattleModel> {
 
     @Override
     public void execute(BattleModel model) {
-        double attackersHits = ((double)model.ATTACKERS_ATTACK)/((double)model.DEFENDERS_DEFENCE);
-        double defendersHits = ((double)model.DEFENDERS_ATTACK)/((double)model.ATTACKERS_DEFENCE);
+        double attackersHits = ((double)model.DEFENDERS_DEFENCE)/((double)model.ATTACKERS_ATTACK);
+        double defendersHits = ((double)model.ATTACKERS_DEFENCE)/((double)model.DEFENDERS_ATTACK);
 
         if (attackersHits < defendersHits){
             model.ATTACKER_HAS_WON = true;
@@ -23,6 +23,5 @@ public class BattleResultGetter extends ExecutionNode<BattleModel> {
         } else {
             model.BATTLE_RESULT = defendersHits/attackersHits;
         }
-
     }
 }

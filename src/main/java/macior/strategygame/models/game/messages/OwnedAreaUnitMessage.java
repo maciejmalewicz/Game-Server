@@ -9,7 +9,7 @@ public class OwnedAreaUnitMessage extends AreaUnitMessage {
     public BuildingMessage WEST_BUILDING;
     public BuildingMessage EAST_BUILDING;
     public WallsMessage WALLS;
-    public AreaEventsMessage AREA_EVENTS;
+//    public AreaEventsMessage AREA_EVENTS;
     public Army ARMY;
 
 }

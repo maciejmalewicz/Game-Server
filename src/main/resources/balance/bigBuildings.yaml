@@ -200,3 +200,21 @@ bigElectricityFactoryConfig:
   LEVEL2_PRODUCTION: 25
   LEVEL3_PRODUCTION: 45
   LEVEL4_PRODUCTION: 75
+
+buildingConfig2:
+  MAX_LEVEL: 4
+  LEVEL_ATTRIBUTES:
+    - COST:
+        METAL: 20
+        BUILDING_MATERIALS: 30
+        ELECTRICITY: 40
+      BUILDING_TIME:
+        minutes: 1
+        seconds: 10
+    - COST:
+        METAL: 20
+        BUILDING_MATERIALS: 30
+        ELECTRICITY: 40
+      BUILDING_TIME:
+        minutes: 1
+        seconds: 10

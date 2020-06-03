@@ -2,6 +2,7 @@ package macior.strategygame.game.BoardManagement.Buildings.configurationBeans;
 
 import macior.strategygame.game.BoardManagement.Buildings.buildings.bigBuildings.Rocket;
 import macior.strategygame.game.BoardManagement.Buildings.buildings.bigBuildings.resourceFactories.BigElectricityFactory;
+import macior.strategygame.game.BoardManagement.Buildings.configurationObjects.bigBuildings.BuildingConfig2;
 import macior.strategygame.game.BoardManagement.Buildings.configurationObjects.bigBuildings.MainTowerConfig;
 import macior.strategygame.game.BoardManagement.Buildings.configurationObjects.bigBuildings.RocketConfig;
 import macior.strategygame.game.BoardManagement.Buildings.configurationObjects.bigBuildings.TowerConfig;
@@ -61,6 +62,13 @@ public class BigBuildingsConfiguration {
     public BigElectricityFactoryConfig electricityFactoryBean(){
         return new BeanFactory<BigElectricityFactoryConfig>().getBean(getMainMap(),
                 BigElectricityFactoryConfig.class);
+    }
+
+    @Bean
+    public BuildingConfig2 building2Bean(){
+        BuildingConfig2 out = new BeanFactory<BuildingConfig2>()
+                .getBean(getMainMap(), BuildingConfig2.class);
+        return out;
     }
 
     //todo: this thing is done, now the same for small buildings (including walls) :D

@@ -18,8 +18,8 @@ public class AIUpgradeEvent extends PostponedEvent {
     }
 
     @Override
-    protected NotificationBase doNotification() {
-        return null;
+    protected void doNotification() {
+
     }
 
     @Override

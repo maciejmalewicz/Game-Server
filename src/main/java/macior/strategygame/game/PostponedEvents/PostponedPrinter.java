@@ -16,8 +16,8 @@ public class PostponedPrinter extends PostponedEvent {
     }
 
     @Override
-    public NotificationBase doNotification() {
-        return null;
+    public void doNotification() {
+
     }
 
     @Override

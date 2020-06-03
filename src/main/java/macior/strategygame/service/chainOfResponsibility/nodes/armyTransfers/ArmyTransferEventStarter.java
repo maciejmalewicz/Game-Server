@@ -29,10 +29,12 @@ public class ArmyTransferEventStarter extends Node {
                 transferModel.PLAYER,
                 request.getArmy());
 
-        AreaEventsQueue eventQueue = transferModel.AREA_UNIT.getEventsQueue();
+        AreaEventsQueue sendersEventQueue = transferModel.AREA_UNIT.getEventsQueue();
         EventHandler eventHandler = transferModel.PLAYER.getGame().getEventHandler();
+        AreaEventsQueue receiversEventQueue = transferModel.TARGET_AREA_UNIT.getEventsQueue();
 
-        eventQueue.pushEvent(event);
+        sendersEventQueue.pushEvent(event);
         eventHandler.addEvent(event);
+        receiversEventQueue.pushEvent(event);
     }
 }

@@ -9,7 +9,7 @@ public class PlayersUpgradesSet {
 
     public PlayersUpgradesSet(){
         int[] upgraded = {Upgrades.TANKS, Upgrades.CANNONS, Upgrades.ASSEMBLY_LINES, Upgrades.MASS_PRODUCTION,
-        Upgrades.POWER_IN_SIMPLICITY};
+        Upgrades.POWER_IN_SIMPLICITY, Upgrades.MOBILITY, Upgrades.MINESWEEPERS, Upgrades.BATTLE_FORMATION};
         for (int a: upgraded){
             upgrades[a] = true;
         }

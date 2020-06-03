@@ -31,11 +31,10 @@ public class ArmyTrainingEvent extends PostponedEvent {
     }
 
     @Override
-    protected NotificationBase doNotification() {
+    protected void doNotification() {
         NotificationsInbox inbox = area.getOwner().getInbox();
         ArmyUpdateNotification notification = new ArmyUpdateNotification(area.getLocation(), area.getArmy());
         inbox.addNotification(notification);
-        return notification;
     }
 
     @Override

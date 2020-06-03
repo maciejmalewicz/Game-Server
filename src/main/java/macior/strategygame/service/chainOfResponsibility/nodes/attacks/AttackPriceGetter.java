@@ -36,7 +36,7 @@ public class AttackPriceGetter extends Node {
 
         double tanksCost
                 = configuration.getArmyBalanceConfig().getTanksConfig().MARCHING_ELECTRICITY_COST
-                * toSend.getDroids();
+                * toSend.getTanks();
         marchingCost += tanksCost;
 
         double cannonsCost

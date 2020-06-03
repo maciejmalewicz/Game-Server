@@ -4,6 +4,7 @@ import macior.strategygame.game.BoardManagement.Buildings.buildings.Building;
 import macior.strategygame.game.PlayersManagement.Player;
 import macior.strategygame.game.PostponedEvents.PostponedEvent;
 import macior.strategygame.game.PostponedEvents.armyConcernedEvents.ArmyTrainingEvent;
+import macior.strategygame.game.PostponedEvents.armyConcernedEvents.ArmyTransferEvent;
 import macior.strategygame.game.PostponedEvents.buildingConcernedEvents.BuildingConcernedEvent;
 import macior.strategygame.models.game.messages.AreaUnitMessage;
 import macior.strategygame.models.game.messages.AreaEventsMessage;
@@ -25,67 +26,76 @@ public class AreaUnitConverter {
         }
     }
 
-    public AreaUnitMessage convertOwnedAreaUnit(AreaUnit unit){
+    public OwnedAreaUnitMessage convertOwnedAreaUnit(AreaUnit unit){
         OwnedAreaUnitMessage out = new OwnedAreaUnitMessage();
-        Building bigBuilding = unit.getBigBuilding();
-        if (bigBuilding != null){
-            out.MAIN_BUILDING = bigBuilding.toMessage();
-        }
-
-        Building northBuilding = unit.getNorthBuilding();
-        if (northBuilding != null){
-            out.NORTH_BUILDING = northBuilding.toMessage();
-        }
-
-        Building southBuilding = unit.getSouthBuilding();
-        if (southBuilding != null){
-            out.SOUTH_BUILDING = southBuilding.toMessage();
-        }
-
-        Building westBuilding = unit.getWestBuilding();
-        if (westBuilding != null){
-            out.WEST_BUILDING = westBuilding.toMessage();
-        }
-
-        Building eastBuilding = unit.getEastBuilding();
-        if (eastBuilding != null){
-            out.EAST_BUILDING = eastBuilding.toMessage();
-        }
-
-        Building walls = unit.getWalls();
-        if (walls != null){
-            out.WALLS = (WallsMessage) walls.toMessage();
-        }
-
+        attackBuildings(unit, out);
         Player owner = unit.getOwner();
         if (owner != null){
             out.OWNER = owner.getNick();
         }
-
         out.ARMY = unit.getArmy();
+        attachOwnedAreaUnitEvents(unit, out);
 
-        out.AREA_EVENTS = new AreaEventsMessage();
+        return out;
+    }
+
+    private void attachOwnedAreaUnitEvents(AreaUnit unit, OwnedAreaUnitMessage message){
+        message.AREA_EVENTS = new AreaEventsMessage();
         for (PostponedEvent event: unit.getEventsQueue().getEvents()){
 
             if (event instanceof BuildingConcernedEvent){
                 BuildingConcernedEvent buildingEvent = (BuildingConcernedEvent)event;
                 int place = unit.getPlace(buildingEvent.getBuilding());
-                out.AREA_EVENTS.add(buildingEvent.toMessage(place));
+                message.AREA_EVENTS.add(buildingEvent.toMessage(place));
 
             } else if (event instanceof ArmyTrainingEvent) {
                 ArmyTrainingEvent trainingEvent = (ArmyTrainingEvent)event;
-                out.AREA_EVENTS.add(trainingEvent.toMessage());
+                message.AREA_EVENTS.add(trainingEvent.toMessage());
+            } else if (event instanceof ArmyTransferEvent){
+                ArmyTransferEvent transferEvent = (ArmyTransferEvent)event;
+                message.AREA_EVENTS.add(transferEvent.toMessage());
             }
 
         }
-        Collections.sort(out.AREA_EVENTS.getEvents());
+        Collections.sort(message.AREA_EVENTS.getEvents());
+    }
 
-        return out;
+    private void attackBuildings(AreaUnit unit, OwnedAreaUnitMessage message){
+        Building bigBuilding = unit.getBigBuilding();
+        if (bigBuilding != null){
+            message.MAIN_BUILDING = bigBuilding.toMessage();
+        }
+
+        Building northBuilding = unit.getNorthBuilding();
+        if (northBuilding != null){
+            message.NORTH_BUILDING = northBuilding.toMessage();
+        }
+
+        Building southBuilding = unit.getSouthBuilding();
+        if (southBuilding != null){
+            message.SOUTH_BUILDING = southBuilding.toMessage();
+        }
+
+        Building westBuilding = unit.getWestBuilding();
+        if (westBuilding != null){
+            message.WEST_BUILDING = westBuilding.toMessage();
+        }
+
+        Building eastBuilding = unit.getEastBuilding();
+        if (eastBuilding != null){
+            message.EAST_BUILDING = eastBuilding.toMessage();
+        }
+
+        Building walls = unit.getWalls();
+        if (walls != null){
+            message.WALLS = (WallsMessage) walls.toMessage();
+        }
     }
 
     public AreaUnitMessage convertOtherAreaUnit(AreaUnit unit){
         AreaUnitMessage out = new AreaUnitMessage();
         Building bigBuilding = unit.getBigBuilding();
+        out.AREA_EVENTS = new AreaEventsMessage();
         if (bigBuilding != null){
             out.MAIN_BUILDING = unit.getBigBuilding().toMessage();
         }
@@ -95,4 +105,6 @@ public class AreaUnitConverter {
         }
         return out;
     }
+
+
 }
