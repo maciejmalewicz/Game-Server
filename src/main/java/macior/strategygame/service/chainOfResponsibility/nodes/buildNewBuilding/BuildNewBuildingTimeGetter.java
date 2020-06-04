@@ -40,7 +40,7 @@ public class BuildNewBuildingTimeGetter extends Node {
 
     private int getTimeWhenFinishes(Player player, BuildingRequest request){
         BuildingConfig config = buildingsMapper.getConfiguration(request.getBuilding());
-        int seconds = config.LEVEL1_BUILDING_TIME.toSeconds();
+        int seconds = config.getTime(1).toSeconds();
         seconds = applyDurationDiscounts(seconds, request, player.getUpgradesSet());
         int sec = player.getGame().getTimeManager().getPostponedEventTime(seconds);
         return sec;

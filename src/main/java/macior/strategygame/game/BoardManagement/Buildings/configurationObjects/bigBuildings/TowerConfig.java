@@ -1,23 +1,14 @@
 package macior.strategygame.game.BoardManagement.Buildings.configurationObjects.bigBuildings;
 
-public class TowerConfig extends BigBuildingConfig {
+import macior.strategygame.game.BoardManagement.Buildings.configurationObjects.BuildingConfig;
+import macior.strategygame.game.BoardManagement.Buildings.configurationObjects.levelConfigs.TowerLevelAttributesConfig;
 
-    //base defence
-    public int LEVEL1_PROTECTION;
-    public int LEVEL2_PROTECTION;
-    public int LEVEL3_PROTECTION;
-    public int LEVEL4_PROTECTION;
+public class TowerConfig extends BuildingConfig <TowerLevelAttributesConfig> {
 
-    //base damage
-    public int LEVEL1_DAMAGE;
-    public int LEVEL2_DAMAGE;
-    public int LEVEL3_DAMAGE;
-    public int LEVEL4_DAMAGE;
+    public TowerLevelAttributesConfig[] LEVEL_ATTRIBUTES;
 
-    //bonus to units defence
-    public double LEVEL1_BONUS;
-    public double LEVEL2_BONUS;
-    public double LEVEL3_BONUS;
-    public double LEVEL4_BONUS;
-
+    @Override
+    public TowerLevelAttributesConfig[] getLevelAttributes() {
+        return LEVEL_ATTRIBUTES;
+    }
 }

@@ -1,8 +1,5 @@
 package macior.strategygame.game.BoardManagement.Buildings.configurationBeans;
 
-import macior.strategygame.game.BoardManagement.Buildings.buildings.bigBuildings.Rocket;
-import macior.strategygame.game.BoardManagement.Buildings.buildings.bigBuildings.resourceFactories.BigElectricityFactory;
-import macior.strategygame.game.BoardManagement.Buildings.configurationObjects.bigBuildings.BuildingConfig2;
 import macior.strategygame.game.BoardManagement.Buildings.configurationObjects.bigBuildings.MainTowerConfig;
 import macior.strategygame.game.BoardManagement.Buildings.configurationObjects.bigBuildings.RocketConfig;
 import macior.strategygame.game.BoardManagement.Buildings.configurationObjects.bigBuildings.TowerConfig;
@@ -12,11 +9,7 @@ import macior.strategygame.game.BoardManagement.Buildings.configurationObjects.b
 import macior.strategygame.game.Utilities.BeanFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.yaml.snakeyaml.Yaml;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.HashMap;
 
 @Configuration
@@ -34,42 +27,43 @@ public class BigBuildingsConfiguration {
 
     @Bean
     public RocketConfig rocketBean(){
-        return new BeanFactory<RocketConfig>().getBean(getMainMap(), RocketConfig.class);
+        RocketConfig config = new BeanFactory<RocketConfig>().getBean(getMainMap(), RocketConfig.class);
+        return config;
     }
 
     @Bean
     public TowerConfig towerBean(){
-        return new BeanFactory<TowerConfig>().getBean(getMainMap(), TowerConfig.class);
+        TowerConfig config = new BeanFactory<TowerConfig>().getBean(getMainMap(), TowerConfig.class);
+        return config;
     }
 
     @Bean
     public MainTowerConfig mainTowerBean(){
-        return new BeanFactory<MainTowerConfig>().getBean(getMainMap(), MainTowerConfig.class);
+        MainTowerConfig config = new BeanFactory<MainTowerConfig>().getBean(getMainMap(), MainTowerConfig.class);
+        return config;
     }
 
     @Bean
     public BigMetalFactoryConfig metalFactoryBean(){
-        return new BeanFactory<BigMetalFactoryConfig>().getBean(getMainMap(), BigMetalFactoryConfig.class);
+        BigMetalFactoryConfig config = new BeanFactory<BigMetalFactoryConfig>().getBean(getMainMap(), BigMetalFactoryConfig.class);
+        return config;
     }
 
     @Bean
     public BigBuildingMaterialsFactoryConfig buildingMaterialsFactoryBean(){
-        return new BeanFactory<BigBuildingMaterialsFactoryConfig>().getBean(getMainMap(),
+        BigBuildingMaterialsFactoryConfig config =  new BeanFactory<BigBuildingMaterialsFactoryConfig>().getBean(getMainMap(),
                 BigBuildingMaterialsFactoryConfig.class);
+        return config;
     }
 
     @Bean
     public BigElectricityFactoryConfig electricityFactoryBean(){
-        return new BeanFactory<BigElectricityFactoryConfig>().getBean(getMainMap(),
+        BigElectricityFactoryConfig config =  new BeanFactory<BigElectricityFactoryConfig>().getBean(getMainMap(),
                 BigElectricityFactoryConfig.class);
+        return config;
     }
 
-    @Bean
-    public BuildingConfig2 building2Bean(){
-        BuildingConfig2 out = new BeanFactory<BuildingConfig2>()
-                .getBean(getMainMap(), BuildingConfig2.class);
-        return out;
-    }
+
 
     //todo: this thing is done, now the same for small buildings (including walls) :D
     // and configuration will be set

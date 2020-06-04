@@ -15,13 +15,7 @@ public class ArmyQuantityGetter {
 
     public int getProductionCostQuantity(MechFactoryConfig factoryConfig, ArmyTrainingRequest request){
         int productionType = request.productionType;
-        if (productionType == 1){
-            return factoryConfig.LEVEL1_REGULAR_PRODUCTION;
-        } else if (productionType == 2){
-            return factoryConfig.LEVEL1_BIG_PRODUCTION;
-        } else {
-            return factoryConfig.LEVEL1_MASS_PRODUCTION;
-        }
+        return factoryConfig.getQuantity(productionType, 1);
     }
 
     public int getProductionQuantity(MechFactoryConfig factoryConfig, MechFactory factory, int productionType){

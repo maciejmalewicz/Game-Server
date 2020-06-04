@@ -25,7 +25,7 @@ public class BuildingPriceGetter extends Node {
         BuildingRequest request = (BuildingRequest) buildingModel.REQUEST;
 
         BuildingConfig config = mapper.getConfiguration(request.getBuilding());
-        ResourceSet price = config.LEVEL1_COST;
+        ResourceSet price = config.getCost(1);
         buildingModel.PRICE =  price.canPurchase(buildingModel.PLAYER);
     }
 }

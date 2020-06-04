@@ -1,25 +1,19 @@
 package macior.strategygame.game.BoardManagement.Buildings.configurationObjects.smallBuildings.resourceFactories;
 
-import macior.strategygame.game.BoardManagement.Buildings.configurationObjects.smallBuildings.SmallBuildingConfig;
+import macior.strategygame.game.BoardManagement.Buildings.configurationObjects.BuildingConfig;
+import macior.strategygame.game.BoardManagement.Buildings.configurationObjects.levelConfigs.LevelAttributesConfig;
+import macior.strategygame.game.BoardManagement.Buildings.configurationObjects.levelConfigs.ResourceFactoryLevelAttributesConfig;
 
-public class SmallFactoryConfig extends SmallBuildingConfig {
+public class SmallFactoryConfig extends BuildingConfig <ResourceFactoryLevelAttributesConfig>{
 
-    public int LEVEL1_PRODUCTION;
-    public int LEVEL2_PRODUCTION;
-    public int LEVEL3_PRODUCTION;
-    public int LEVEL4_PRODUCTION;
+    public ResourceFactoryLevelAttributesConfig[] LEVEL_ATTRIBUTES;
+
+    @Override
+    public ResourceFactoryLevelAttributesConfig[] getLevelAttributes() {
+        return LEVEL_ATTRIBUTES;
+    }
 
     public int getProduction(int level){
-        switch (level){
-            case 1:
-                return LEVEL1_PRODUCTION;
-            case 2:
-                return LEVEL2_PRODUCTION;
-            case 3:
-                return LEVEL3_PRODUCTION;
-            case 4:
-                return LEVEL4_PRODUCTION;
-        }
-        return 0;
+        return LEVEL_ATTRIBUTES[level-1].PRODUCTION;
     }
 }

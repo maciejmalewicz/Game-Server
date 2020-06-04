@@ -2,5 +2,5 @@ package macior.strategygame.game.BoardManagement.Buildings.configurationObjects.
 
 import macior.strategygame.game.BoardManagement.Buildings.configurationObjects.BuildingConfig;
 
-public class BigBuildingConfig extends BuildingConfig {
+public abstract class BigBuildingConfig extends BuildingConfig {
 }

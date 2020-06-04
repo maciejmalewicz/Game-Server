@@ -1,205 +1,242 @@
 rocketConfig:
   MAX_LEVEL: 1
-  LEVEL2_TOWER_RELOADING_TIME:
-    minutes: 0
-    seconds: 40
-  LEVEL3_TOWER_RELOADING_TIME:
-    minutes: 1
-    seconds: 0
-  LEVEL4_TOWER_RELOADING_TIME:
-    minutes: 1
-    seconds: 30
+  LEVEL_ATTRIBUTES:
+    #level 1
+    - LEVEL1_TOWER_RELOADING_TIME:
+        minutes: 0
+        seconds: 20
+      LEVEL2_TOWER_RELOADING_TIME:
+        minutes: 0
+        seconds: 40
+      LEVEL3_TOWER_RELOADING_TIME:
+        minutes: 1
+        seconds: 0
+      LEVEL4_TOWER_RELOADING_TIME:
+        minutes: 1
+        seconds: 30
+      COST:
+        METAL: 0
+        BUILDING_MATERIALS: 0
+        ELECTRICITY: 0
+      BUILDING_TIME:
+        minutes: 0
+        seconds: 0
 
 towerConfig:
   MAX_LEVEL: 4
-  LEVEL1_COST:
-    METAL: 1000
-    BUILDING_MATERIALS: 3000
-    ELECTRICITY: 800
-  LEVEL2_COST:
-    METAL: 200
-    BUILDING_MATERIALS: 700
-    ELECTRICITY: 100
-  LEVEL3_COST:
-    METAL: 300
-    BUILDING_MATERIALS: 1200
-    ELECTRICITY: 180
-  LEVEL4_COST:
-    METAL: 400
-    BUILDING_MATERIALS: 2200
-    ELECTRICITY: 240
-  LEVEL1_BUILDING_TIME:
-    minutes: 2
-    seconds: 0
-  LEVEL2_BUILDING_TIME:
-    minutes: 0
-    seconds: 20
-  LEVEL3_BUILDING_TIME:
-    minutes: 0
-    seconds: 50
-  LEVEL4_BUILDING_TIME:
-    minutes: 1
-    seconds: 30
-  LEVEL1_PROTECTION: 200
-  LEVEL2_PROTECTION: 800
-  LEVEL3_PROTECTION: 1800
-  LEVEL4_PROTECTION: 3500
-  LEVEL1_DAMAGE: 20
-  LEVEL2_DAMAGE: 80
-  LEVEL3_DAMAGE: 180
-  LEVEL4_DAMAGE: 350
-  LEVEL1_BONUS: 0.05
-  LEVEL2_BONUS: 0.1
-  LEVEL3_BONUS: 0.15
-  LEVEL4_BONUS: 0.25
+  LEVEL_ATTRIBUTES:
+    #level 1
+    - COST:
+        METAL: 1000
+        BUILDING_MATERIALS: 3000
+        ELECTRICITY: 800
+      BUILDING_TIME:
+        minutes: 2
+        seconds: 0
+      PROTECTION: 200
+      DAMAGE: 20
+      BONUS: 0.05
+    #level 2
+    - COST:
+        METAL: 200
+        BUILDING_MATERIALS: 700
+        ELECTRICITY: 100
+      BUILDING_TIME:
+        minutes: 0
+        seconds: 20
+      PROTECTION: 800
+      DAMAGE: 80
+      BONUS: 0.1
+    #level 3
+    - COST:
+        METAL: 300
+        BUILDING_MATERIALS: 1200
+        ELECTRICITY: 180
+      BUILDING_TIME:
+        minutes: 0
+        seconds: 50
+      PROTECTION: 1800
+      DAMAGE: 180
+      BONUS: 0.15
+    #level 4
+    - COST:
+        METAL: 400
+        BUILDING_MATERIALS: 2200
+        ELECTRICITY: 240
+      BUILDING_TIME:
+        minutes: 1
+        seconds: 30
+      PROTECTION: 3500
+      DAMAGE: 350
+      BONUS: 0.25
 
 mainTowerConfig:
   MAX_LEVEL: 4
-  LEVEL1_COST:
-    METAL: 0
-    BUILDING_MATERIALS: 0
-    ELECTRICITY: 0
-  LEVEL2_COST:
-    METAL: 200
-    BUILDING_MATERIALS: 700
-    ELECTRICITY: 100
-  LEVEL3_COST:
-    METAL: 300
-    BUILDING_MATERIALS: 1200
-    ELECTRICITY: 180
-  LEVEL4_COST:
-    METAL: 400
-    BUILDING_MATERIALS: 2200
-    ELECTRICITY: 240
-  LEVEL1_BUILDING_TIME:
-    minutes: 2
-    seconds: 0
-  LEVEL2_BUILDING_TIME:
-    minutes: 0
-    seconds: 20
-  LEVEL3_BUILDING_TIME:
-    minutes: 0
-    seconds: 50
-  LEVEL4_BUILDING_TIME:
-    minutes: 1
-    seconds: 30
-  LEVEL1_PROTECTION: 500
-  LEVEL2_PROTECTION: 1500
-  LEVEL3_PROTECTION: 3000
-  LEVEL4_PROTECTION: 4500
-  LEVEL1_DAMAGE: 50
-  LEVEL2_DAMAGE: 150
-  LEVEL3_DAMAGE: 300
-  LEVEL4_DAMAGE: 450
-  LEVEL1_BONUS: 0.1
-  LEVEL2_BONUS: 0.2
-  LEVEL3_BONUS: 0.25
-  LEVEL4_BONUS: 0.3
+  LEVEL_ATTRIBUTES:
+    #level 1
+    - COST:
+        METAL: 0
+        BUILDING_MATERIALS: 0
+        ELECTRICITY: 0
+      BUILDING_TIME:
+        minutes: 0
+        seconds: 0
+      PROTECTION: 500
+      DAMAGE: 50
+      BONUS: 0.1
+    #level 2
+    - COST:
+        METAL: 200
+        BUILDING_MATERIALS: 700
+        ELECTRICITY: 100
+      BUILDING_TIME:
+        minutes: 0
+        seconds: 20
+      PROTECTION: 1500
+      DAMAGE: 150
+      BONUS: 0.2
+    #level 3
+    - COST:
+        METAL: 300
+        BUILDING_MATERIALS: 1200
+        ELECTRICITY: 180
+      BUILDING_TIME:
+        minutes: 0
+        seconds: 50
+      PROTECTION: 3000
+      DAMAGE: 300
+      BONUS: 0.25
+    #level 4
+    - COST:
+        METAL: 400
+        BUILDING_MATERIALS: 2200
+        ELECTRICITY: 240
+      BUILDING_TIME:
+        minutes: 1
+        seconds: 30
+      PROTECTION: 4500
+      DAMAGE: 450
+      BONUS: 0.3
 
 bigMetalFactoryConfig:
   MAX_LEVEL: 4
-  LEVEL1_COST:
-    METAL: 1000
-    BUILDING_MATERIALS: 2500
-    ELECTRICITY: 1500
-  LEVEL2_COST:
-    METAL: 200
-    BUILDING_MATERIALS: 600
-    ELECTRICITY: 450
-  LEVEL3_COST:
-    METAL: 500
-    BUILDING_MATERIALS: 1500
-    ELECTRICITY: 900
-  LEVEL4_COST:
-    METAL: 800
-    BUILDING_MATERIALS: 2000
-    ELECTRICITY: 1200
-  LEVEL1_BUILDING_TIME:
-    minutes: 2
-    seconds: 0
-  LEVEL2_BUILDING_TIME:
-    minutes: 0
-    seconds: 10
-  LEVEL3_BUILDING_TIME:
-    minutes: 0
-    seconds: 30
-  LEVEL4_BUILDING_TIME:
-    minutes: 1
-    seconds: 0
-  LEVEL1_PRODUCTION: 15
-  LEVEL2_PRODUCTION: 25
-  LEVEL3_PRODUCTION: 45
-  LEVEL4_PRODUCTION: 75
+  LEVEL_ATTRIBUTES:
+    #level 1
+    - COST:
+        METAL: 1000
+        BUILDING_MATERIALS: 2500
+        ELECTRICITY: 1500
+      BUILDING_TIME:
+        minutes: 2
+        seconds: 0
+      PRODUCTION: 15
+    #level 2
+    - COST:
+        METAL: 200
+        BUILDING_MATERIALS: 650
+        ELECTRICITY: 450
+      BUILDING_TIME:
+        minutes: 0
+        seconds: 10
+      PRODUCTION: 25
+    #level 3
+    - COST:
+        METAL: 500
+        BUILDING_MATERIALS: 1500
+        ELECTRICITY: 900
+      BUILDING_TIME:
+        minutes: 0
+        seconds: 30
+      PRODUCTION: 45
+    #level 4
+    - COST:
+        METAL: 800
+        BUILDING_MATERIALS: 2000
+        ELECTRICITY: 1200
+      BUILDING_TIME:
+        minutes: 1
+        seconds: 0
+      PRODUCTION: 75
 
 bigBuildingMaterialsFactoryConfig:
   MAX_LEVEL: 4
-  LEVEL1_COST:
-    METAL: 1500
-    BUILDING_MATERIALS: 1000
-    ELECTRICITY: 2500
-  LEVEL2_COST:
-    METAL: 450
-    BUILDING_MATERIALS: 200
-    ELECTRICITY: 600
-  LEVEL3_COST:
-    METAL: 900
-    BUILDING_MATERIALS: 500
-    ELECTRICITY: 1500
-  LEVEL4_COST:
-    METAL: 1200
-    BUILDING_MATERIALS: 800
-    ELECTRICITY: 2000
-  LEVEL1_BUILDING_TIME:
-    minutes: 2
-    seconds: 0
-  LEVEL2_BUILDING_TIME:
-    minutes: 0
-    seconds: 10
-  LEVEL3_BUILDING_TIME:
-    minutes: 0
-    seconds: 30
-  LEVEL4_BUILDING_TIME:
-    minutes: 1
-    seconds: 0
-  LEVEL1_PRODUCTION: 15
-  LEVEL2_PRODUCTION: 25
-  LEVEL3_PRODUCTION: 45
-  LEVEL4_PRODUCTION: 75
+  LEVEL_ATTRIBUTES:
+    #level 1
+    - COST:
+        METAL: 1500
+        BUILDING_MATERIALS: 1000
+        ELECTRICITY: 2500
+      BUILDING_TIME:
+        minutes: 2
+        seconds: 0
+      PRODUCTION: 15
+    #level 2
+    - COST:
+        METAL: 450
+        BUILDING_MATERIALS: 200
+        ELECTRICITY: 650
+      BUILDING_TIME:
+        minutes: 0
+        seconds: 10
+      PRODUCTION: 25
+    #level 3
+    - COST:
+        METAL: 900
+        BUILDING_MATERIALS: 500
+        ELECTRICITY: 1500
+      BUILDING_TIME:
+        minutes: 0
+        seconds: 30
+      PRODUCTION: 45
+    #level 4
+    - COST:
+        METAL: 1200
+        BUILDING_MATERIALS: 800
+        ELECTRICITY: 2000
+      BUILDING_TIME:
+        minutes: 1
+        seconds: 0
+      PRODUCTION: 75
 
 bigElectricityFactoryConfig:
   MAX_LEVEL: 4
-  LEVEL1_COST:
-    METAL: 2500
-    BUILDING_MATERIALS: 1500
-    ELECTRICITY: 1000
-  LEVEL2_COST:
-    METAL: 600
-    BUILDING_MATERIALS: 450
-    ELECTRICITY: 200
-  LEVEL3_COST:
-    METAL: 1500
-    BUILDING_MATERIALS: 900
-    ELECTRICITY: 500
-  LEVEL4_COST:
-    METAL: 2000
-    BUILDING_MATERIALS: 1200
-    ELECTRICITY: 800
-  LEVEL1_BUILDING_TIME:
-    minutes: 2
-    seconds: 0
-  LEVEL2_BUILDING_TIME:
-    minutes: 0
-    seconds: 10
-  LEVEL3_BUILDING_TIME:
-    minutes: 0
-    seconds: 30
-  LEVEL4_BUILDING_TIME:
-    minutes: 1
-    seconds: 0
-  LEVEL1_PRODUCTION: 15
-  LEVEL2_PRODUCTION: 25
-  LEVEL3_PRODUCTION: 45
-  LEVEL4_PRODUCTION: 75
+  LEVEL_ATTRIBUTES:
+    #level 1
+    - COST:
+        METAL: 2500
+        BUILDING_MATERIALS: 1500
+        ELECTRICITY: 1000
+      BUILDING_TIME:
+        minutes: 2
+        seconds: 0
+      PRODUCTION: 15
+    #level 2
+    - COST:
+        METAL: 600
+        BUILDING_MATERIALS: 450
+        ELECTRICITY: 200
+      BUILDING_TIME:
+        minutes: 0
+        seconds: 10
+      PRODUCTION: 25
+    #level 3
+    - COST:
+        METAL: 1500
+        BUILDING_MATERIALS: 900
+        ELECTRICITY: 500
+      BUILDING_TIME:
+        minutes: 0
+        seconds: 30
+      PRODUCTION: 45
+    #level 4
+    - COST:
+        METAL: 2000
+        BUILDING_MATERIALS: 1200
+        ELECTRICITY: 800
+      BUILDING_TIME:
+        minutes: 1
+        seconds: 0
+      PRODUCTION: 75
 
 buildingConfig2:
   MAX_LEVEL: 4
