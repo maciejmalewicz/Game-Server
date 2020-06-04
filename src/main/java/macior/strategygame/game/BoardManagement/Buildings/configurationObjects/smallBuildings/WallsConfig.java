@@ -5,11 +5,11 @@ import macior.strategygame.game.BoardManagement.Buildings.configurationObjects.l
 
 public class WallsConfig extends BuildingConfig <WallsLevelAttributesConfig> {
 
-    public WallsLevelAttributesConfig LEVEL_ATTRIBUTES;
+    public WallsLevelAttributesConfig[] LEVEL_ATTRIBUTES;
 
     @Override
     public WallsLevelAttributesConfig[] getLevelAttributes() {
-        return new WallsLevelAttributesConfig[0];
+        return LEVEL_ATTRIBUTES;
     }
 
 }

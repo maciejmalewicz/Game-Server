@@ -30,38 +30,45 @@ public class SmallBuildingsConfiguration {
 
     @Bean
     public SmallMetalFactoryConfig smallMetalFactoryBean(){
-        return new BeanFactory<SmallMetalFactoryConfig>().getBean(getMainMap(), SmallMetalFactoryConfig.class);
+        SmallMetalFactoryConfig config = new BeanFactory<SmallMetalFactoryConfig>().getBean(getMainMap(), SmallMetalFactoryConfig.class);
+        return config;
     }
 
     @Bean
     public SmallBuildingMaterialsFactoryConfig smallBuildingMaterialsFactoryBean(){
-        return new BeanFactory<SmallBuildingMaterialsFactoryConfig>().getBean(getMainMap(), SmallBuildingMaterialsFactoryConfig.class);
+        SmallBuildingMaterialsFactoryConfig config = new BeanFactory<SmallBuildingMaterialsFactoryConfig>().getBean(getMainMap(), SmallBuildingMaterialsFactoryConfig.class);
+        return config;
     }
 
     @Bean
     public SmallElectricityFactoryConfig smallElectricityFactoryBean(){
-        return new BeanFactory<SmallElectricityFactoryConfig>().getBean(getMainMap(), SmallElectricityFactoryConfig.class);
+        SmallElectricityFactoryConfig config = new BeanFactory<SmallElectricityFactoryConfig>().getBean(getMainMap(), SmallElectricityFactoryConfig.class);
+        return config;
     }
 
     @Bean
     public WallsConfig wallsBean(){
-        return new BeanFactory<WallsConfig>().getBean(getMainMap(), WallsConfig.class);
+        WallsConfig config = new BeanFactory<WallsConfig>().getBean(getMainMap(), WallsConfig.class);
+        return config;
     }
 
     @Bean
     public ObservatoryConfig observatoryBean(){
-        return new BeanFactory<ObservatoryConfig>().getBean(getMainMap(), ObservatoryConfig.class);
+        ObservatoryConfig config = new BeanFactory<ObservatoryConfig>().getBean(getMainMap(), ObservatoryConfig.class);
+        return config;
     }
 
     @Bean
     public DroidFactoryConfig droidFactoryBean(){
-        return new BeanFactory<DroidFactoryConfig>().getBean(getMainMap(), DroidFactoryConfig.class);
+        DroidFactoryConfig config = new BeanFactory<DroidFactoryConfig>().getBean(getMainMap(), DroidFactoryConfig.class);
+        return config;
     }
 
 
     @Bean
     public TankFactoryConfig tankFactoryBean(){
-        return new BeanFactory<TankFactoryConfig>().getBean(getMainMap(), TankFactoryConfig.class);
+        TankFactoryConfig config = new BeanFactory<TankFactoryConfig>().getBean(getMainMap(), TankFactoryConfig.class);
+        return config;
     }
 
     @Bean
