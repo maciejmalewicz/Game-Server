@@ -1,5 +1,7 @@
 package macior.strategygame.service.pipelines.nodes.armyTraining;
 
+import executionChains.ChainNode;
+import executionChains.chainExecutors.ChainExecutor;
 import macior.strategygame.game.PlayersManagement.Laboratory.PlayersUpgradesSet;
 import macior.strategygame.game.PlayersManagement.Laboratory.Upgrades.Upgrades;
 import macior.strategygame.game.TimeManager;
@@ -15,7 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ArmyTrainingTimeGetter extends Node {
+public class ArmyTrainingTimeGetter extends ChainNode<ArmyTrainingModel> {
 
     @Autowired
     private GameConfiguration configuration;
@@ -24,28 +26,27 @@ public class ArmyTrainingTimeGetter extends Node {
     private ArmyQuantityGetter quantityGetter;
 
     @Override
-    public void applyChanges(ChainModel model) {
-        ArmyTrainingModel trainingModel = (ArmyTrainingModel)model;
-        ArmyTrainingRequest request = (ArmyTrainingRequest)trainingModel.REQUEST;
-        TimeResponse timeResponse = (TimeResponse)trainingModel.RESPONSE;
+    public void execute(ArmyTrainingModel model, ChainExecutor executor) {
+        ArmyTrainingRequest request = (ArmyTrainingRequest)model.REQUEST;
+        TimeResponse timeResponse = (TimeResponse)model.RESPONSE;
 
-        double basicTime = trainingModel.MECH_CONFIG.DURATION;
-        int quantity = quantityGetter.getProductionCostQuantity(trainingModel.FACTORY_CONFIG, request);
+        double basicTime = model.MECH_CONFIG.DURATION;
+        int quantity = quantityGetter.getProductionCostQuantity(model.FACTORY_CONFIG, request);
         int totalTime = (int)(Math.ceil(basicTime*quantity));
         //for droids, apply some duration perks/penalties
-        totalTime = applyDurationBonuses(trainingModel.PLAYER.getUpgradesSet(), request, totalTime);
+        totalTime = applyDurationBonuses(model.PLAYER.getUpgradesSet(), request, totalTime);
 
         int finishingTime;
-        if (trainingModel.EVENT == null){
-            TimeManager timeManager = trainingModel.PLAYER.getGame().getTimeManager();
+        if (model.EVENT == null){
+            TimeManager timeManager = model.PLAYER.getGame().getTimeManager();
             finishingTime = timeManager.getPostponedEventTime(totalTime);
 
         } else {
-            int lastEventFinishingTime = trainingModel.EVENT.getFinishingTime();
+            int lastEventFinishingTime = model.EVENT.getFinishingTime();
             finishingTime = lastEventFinishingTime + totalTime;
         }
 
-        trainingModel.FINISHING_TIME = finishingTime;
+        model.FINISHING_TIME = finishingTime;
         timeResponse.setFinishingTime(finishingTime);
     }
 
@@ -67,6 +68,7 @@ public class ArmyTrainingTimeGetter extends Node {
         totalTime = (int)(totalTime*(1-discount));
         return totalTime;
     }
+
 
 
 }

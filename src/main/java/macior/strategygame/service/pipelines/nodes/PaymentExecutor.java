@@ -1,21 +1,23 @@
 package macior.strategygame.service.pipelines.nodes;
 
+import executionChains.ChainNode;
+import executionChains.chainExecutors.ChainExecutor;
 import macior.strategygame.service.pipelines.models.ChainModel;
 import macior.strategygame.service.pipelines.models.PlayerChangesModel;
 import macior.strategygame.service.utilities.errors.GameErrors;
 import org.springframework.stereotype.Component;
 
 @Component
-public class PaymentExecutor extends Node {
+public class PaymentExecutor extends ChainNode<PlayerChangesModel> {
 
     //send an error if player can't afford it
     @Override
-    public void applyChanges(ChainModel model){
-        PlayerChangesModel buildingModel = (PlayerChangesModel) model;
-        if (buildingModel.PRICE == null){
-            buildingModel.RESPONSE.setStatus(GameErrors.NOT_ENOUGH_RESOURCES);
+    public void execute(PlayerChangesModel model, ChainExecutor executor) {
+        if (model.PRICE == null){
+            model.RESPONSE.setStatus(GameErrors.NOT_ENOUGH_RESOURCES);
+            executor.stop();
         } else {
-            buildingModel.PLAYER.getResources().substractResources(buildingModel.PRICE);
+            model.PLAYER.getResources().substractResources(model.PRICE);
         }
     }
 }

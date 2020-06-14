@@ -1,5 +1,7 @@
 package macior.strategygame.service.pipelines.nodes.armyTransfers;
 
+import executionChains.ChainNode;
+import executionChains.chainExecutors.ChainExecutor;
 import macior.strategygame.game.BattlesManagement.Army;
 import macior.strategygame.game.PlayersManagement.Player;
 import macior.strategygame.game.Utilities.ResourceSet;
@@ -12,16 +14,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ArmyTransferPriceGetter extends Node {
+public class ArmyTransferPriceGetter extends ChainNode<ArmyTransferModel> {
 
     @Autowired
     private GameConfiguration configuration;
 
     @Override
-    public void applyChanges(ChainModel model) {
-        ArmyTransferModel transferModel = (ArmyTransferModel)model;
-        ArmyTransferRequest request = (ArmyTransferRequest)transferModel.REQUEST;
-        transferModel.PRICE = getPriceToPay(request.getArmy(), transferModel.PLAYER);
+    public void execute(ArmyTransferModel model, ChainExecutor executor) {
+        ArmyTransferRequest request = (ArmyTransferRequest)model.REQUEST;
+        model.PRICE = getPriceToPay(request.getArmy(), model.PLAYER);
     }
 
     private ResourceSet getPriceToPay(Army toSend, Player buyer){

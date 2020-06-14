@@ -1,5 +1,7 @@
 package macior.strategygame.service.pipelines.nodes.armyTraining;
 
+import executionChains.ChainNode;
+import executionChains.chainExecutors.ChainExecutor;
 import macior.strategygame.game.BoardManagement.AreaUnit;
 import macior.strategygame.game.BoardManagement.Buildings.buildings.Building;
 import macior.strategygame.game.BoardManagement.Buildings.buildings.smallBuildings.mechFactory.CannonFactory;
@@ -13,30 +15,32 @@ import macior.strategygame.service.utilities.errors.GameErrors;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ArmyTrainingBuildingGetter extends Node {
+public class ArmyTrainingBuildingGetter extends ChainNode<ArmyTrainingModel> {
 
     @Override
-    public void applyChanges(ChainModel model) {
-        ArmyTrainingModel trainingModel = (ArmyTrainingModel)model;
-        ArmyTrainingRequest armyTrainingRequest = (ArmyTrainingRequest) trainingModel.REQUEST;
+    public void execute(ArmyTrainingModel model, ChainExecutor executor) {
+        ArmyTrainingRequest armyTrainingRequest = (ArmyTrainingRequest) model.REQUEST;
 
         if (armyTrainingRequest.unitType == 1){
-            trainingModel.FACTORY = getFactory(trainingModel.AREA_UNIT, DroidFactory.class);
-            if (trainingModel.FACTORY == null) {
+            model.FACTORY = getFactory(model.AREA_UNIT, DroidFactory.class);
+            if (model.FACTORY == null) {
+                executor.stop();
                 model.RESPONSE.setStatus(GameErrors.DROIDS_FACTORY_NOT_FOUND);
             }
         }
 
         if (armyTrainingRequest.unitType == 2){
-            trainingModel.FACTORY = getFactory(trainingModel.AREA_UNIT, TankFactory.class);
-            if (trainingModel.FACTORY == null) {
+            model.FACTORY = getFactory(model.AREA_UNIT, TankFactory.class);
+            if (model.FACTORY == null) {
+                executor.stop();
                 model.RESPONSE.setStatus(GameErrors.TANKS_FACTORY_NOT_FOUND);
             }
         }
 
         if (armyTrainingRequest.unitType == 3){
-            trainingModel.FACTORY = getFactory(trainingModel.AREA_UNIT, CannonFactory.class);
-            if (trainingModel.FACTORY == null) {
+            model.FACTORY = getFactory(model.AREA_UNIT, CannonFactory.class);
+            if (model.FACTORY == null) {
+                executor.stop();
                 model.RESPONSE.setStatus(GameErrors.CANNONS_FACTORY_NOT_FOUND);
             }
         }
@@ -65,4 +69,6 @@ public class ArmyTrainingBuildingGetter extends Node {
 
         return null;
     }
+
+
 }

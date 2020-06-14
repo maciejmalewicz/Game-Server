@@ -1,5 +1,7 @@
 package macior.strategygame.service.pipelines.nodes.armyTraining;
 
+import executionChains.ChainNode;
+import executionChains.chainExecutors.ChainExecutor;
 import macior.strategygame.game.BoardManagement.AreaEventsQueue;
 import macior.strategygame.game.BoardManagement.Buildings.buildings.smallBuildings.mechFactory.MechFactory;
 import macior.strategygame.game.PostponedEvents.EventFactory;
@@ -14,27 +16,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ArmyTrainingEventStarter extends Node {
+public class ArmyTrainingEventStarter extends ChainNode<ArmyTrainingModel> {
 
     @Autowired
     private ArmyQuantityGetter armyQuantityGetter;
 
     @Override
-    public void applyChanges(ChainModel model) {
-        ArmyTrainingModel trainingModel = (ArmyTrainingModel)model;
-        EventFactory eventFactory = trainingModel.PLAYER.getGame().getEventFactory();
-        ArmyTrainingRequest request = (ArmyTrainingRequest)trainingModel.REQUEST;
-        int quantity = armyQuantityGetter.getProductionQuantity(trainingModel.FACTORY_CONFIG,
-                (MechFactory) trainingModel.FACTORY, request.productionType);
+    public void execute(ArmyTrainingModel model, ChainExecutor executor) {
+        EventFactory eventFactory = model.PLAYER.getGame().getEventFactory();
+        ArmyTrainingRequest request = (ArmyTrainingRequest)model.REQUEST;
+        int quantity = armyQuantityGetter.getProductionQuantity(model.FACTORY_CONFIG,
+                (MechFactory) model.FACTORY, request.productionType);
 
         ArmyTrainingEvent event = eventFactory.generateArmyTrainingEvent(
-                trainingModel.FINISHING_TIME,
-                trainingModel.AREA_UNIT,
+                model.FINISHING_TIME,
+                model.AREA_UNIT,
                 request.unitType,
                 quantity);
 
-        EventHandler eventHandler = trainingModel.PLAYER.getGame().getEventHandler();
-        AreaEventsQueue eventsQueue = trainingModel.AREA_UNIT.getEventsQueue();
+        EventHandler eventHandler = model.PLAYER.getGame().getEventHandler();
+        AreaEventsQueue eventsQueue = model.AREA_UNIT.getEventsQueue();
 
         eventHandler.addEvent(event);
         eventsQueue.pushEvent(event);

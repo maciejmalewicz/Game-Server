@@ -1,5 +1,6 @@
 package macior.strategygame.service.game.playersControlls;
 
+import executionChains.Chain;
 import macior.strategygame.models.game.configuration.GameConfiguration;
 import macior.strategygame.models.game.playersControls.AreaConcernedRequest;
 import macior.strategygame.models.game.playersControls.TimeResponse;
@@ -24,7 +25,7 @@ public class UpgradeWallsService {
     @Autowired
     private GameConfiguration configuration;
 
-    private ChainOfResponsibility chain;
+    private Chain<UpgradeWallsModel> chain;
 
     @Autowired
     public UpgradeWallsService(CodeChangingNode codeChangingNode,
@@ -42,7 +43,7 @@ public class UpgradeWallsService {
                                UpgradeWallsEventStarter eventStarter
                                //todo rest of this
                                ){
-        chain = new ChainOfResponsibility(new Node[]{
+        chain = new Chain<>(
                 codeChangingNode,
                 playerRetrievingNode,
                 requestValidator,
@@ -56,16 +57,15 @@ public class UpgradeWallsService {
                 priceGetter,
                 paymentExecutor,
                 eventStarter
-        });
-
+        );
     }
 
     public TimeResponse upgradeWalls(String code, AreaConcernedRequest request){
-
         UpgradeWallsModel model = new UpgradeWallsModel();
         model.CODE = code;
         model.REQUEST = request;
         model.RESPONSE = new TimeResponse();
-        return (TimeResponse) chain.execute(model);
+        chain.executeDefaultOrdered(model);
+        return (TimeResponse) model.RESPONSE;
     }
 }

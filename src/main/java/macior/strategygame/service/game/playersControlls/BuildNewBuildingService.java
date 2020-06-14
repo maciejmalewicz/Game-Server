@@ -1,5 +1,6 @@
 package macior.strategygame.service.game.playersControlls;
 
+import executionChains.Chain;
 import macior.strategygame.models.game.playersControls.BuildingRequest;
 import macior.strategygame.models.game.playersControls.TimeResponse;
 import macior.strategygame.service.pipelines.ChainOfResponsibility;
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class BuildNewBuildingService {
 
-    private ChainOfResponsibility chain;
+    private Chain<BuildNewBuildingModel> chain;
 
     @Autowired
     public BuildNewBuildingService(CodeChangingNode codeChangingNode,
@@ -27,8 +28,7 @@ public class BuildNewBuildingService {
                           PaymentExecutor paymentExecutor,
                           BuildNewBuildingWrapperSetter wrapperSetter,
                           BuildNewBuildingEventStarter eventStarter){
-        chain = new ChainOfResponsibility(
-                new Node[]{
+        chain = new Chain<>(
                         codeChangingNode,
                         playerRetrievingNode,
                         buildNewBuildingRequestValidator,
@@ -41,7 +41,6 @@ public class BuildNewBuildingService {
                         paymentExecutor,
                         wrapperSetter,
                         eventStarter
-                }
         );
     }
 
@@ -50,7 +49,8 @@ public class BuildNewBuildingService {
         model.CODE = code;
         model.RESPONSE = new TimeResponse();
         model.REQUEST = request;
-        return (TimeResponse) chain.execute(model);
+        chain.executeDefaultOrdered(model);
+        return (TimeResponse) model.RESPONSE;
 
     }
 }

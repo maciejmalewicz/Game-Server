@@ -1,5 +1,7 @@
 package macior.strategygame.service.pipelines.nodes.upgradeBuilding;
 
+import executionChains.ChainNode;
+import executionChains.chainExecutors.ChainExecutor;
 import macior.strategygame.game.BoardManagement.Buildings.configurationObjects.BuildingConfig;
 import macior.strategygame.game.BoardManagement.Buildings.configurationObjects.smallBuildings.resourceFactories.SmallFactoryConfig;
 import macior.strategygame.game.PlayersManagement.Laboratory.PlayersUpgradesSet;
@@ -12,17 +14,17 @@ import macior.strategygame.service.utilities.errors.GameErrors;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UpgradeBuildingLevelValidator extends Node {
+public class UpgradeBuildingLevelValidator extends ChainNode<UpgradeBuildingModel> {
 
     @Override
-    public void applyChanges(ChainModel model) {
-        UpgradeBuildingModel upgradeModel = (UpgradeBuildingModel)model;
-        BuildingConfig config = upgradeModel.BUILDING_CONFIG;
-        Player player = upgradeModel.PLAYER;
+    public void execute(UpgradeBuildingModel model, ChainExecutor executor) {
+        BuildingConfig config = model.BUILDING_CONFIG;
+        Player player = model.PLAYER;
 
         int currentMaxLevel = getCurrentMaxLevel(config, player.getUpgradesSet());
-        if (upgradeModel.NEXT_LEVEL > currentMaxLevel){
-            upgradeModel.RESPONSE.setStatus(GameErrors.LEVEL_TOO_HIGH);
+        if (model.NEXT_LEVEL > currentMaxLevel){
+            executor.stop();
+            model.RESPONSE.setStatus(GameErrors.LEVEL_TOO_HIGH);
         }
     }
 
@@ -37,4 +39,6 @@ public class UpgradeBuildingLevelValidator extends Node {
         }
         return level;
     }
+
+
 }

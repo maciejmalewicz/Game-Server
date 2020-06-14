@@ -1,5 +1,7 @@
 package macior.strategygame.service.pipelines.nodes.buildNewBuilding;
 
+import executionChains.ChainNode;
+import executionChains.chainExecutors.ChainExecutor;
 import macior.strategygame.game.BoardManagement.Buildings.configurationObjects.BuildingConfig;
 import macior.strategygame.game.PlayersManagement.Laboratory.PlayersUpgradesSet;
 import macior.strategygame.game.PlayersManagement.Laboratory.Upgrades.Upgrades;
@@ -16,7 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class BuildNewBuildingTimeGetter extends Node {
+public class BuildNewBuildingTimeGetter extends ChainNode<BuildNewBuildingModel> {
 
     @Autowired
     private PlayerGameMapperService mapper;
@@ -28,22 +30,20 @@ public class BuildNewBuildingTimeGetter extends Node {
     private GameConfiguration configuration;
 
     @Override
-    public void applyChanges(ChainModel model) {
-        BuildNewBuildingModel buildingModel = (BuildNewBuildingModel)model;
-        BuildingRequest request = (BuildingRequest)buildingModel.REQUEST;
+    public void execute(BuildNewBuildingModel model, ChainExecutor executor) {
+        BuildingRequest request = (BuildingRequest)model.REQUEST;
         //updating model
-        buildingModel.FINISHING_TIME = getTimeWhenFinishes(buildingModel.PLAYER, request);
+        model.FINISHING_TIME = getTimeWhenFinishes(model.PLAYER, request);
         //updating response
-        TimeResponse response = (TimeResponse)buildingModel.RESPONSE;
-        response.setFinishingTime(buildingModel.FINISHING_TIME);
+        TimeResponse response = (TimeResponse)model.RESPONSE;
+        response.setFinishingTime(model.FINISHING_TIME);
     }
 
     private int getTimeWhenFinishes(Player player, BuildingRequest request){
         BuildingConfig config = buildingsMapper.getConfiguration(request.getBuilding());
         int seconds = config.getTime(1).toSeconds();
         seconds = applyDurationDiscounts(seconds, request, player.getUpgradesSet());
-        int sec = player.getGame().getTimeManager().getPostponedEventTime(seconds);
-        return sec;
+        return player.getGame().getTimeManager().getPostponedEventTime(seconds);
     }
 
     private int applyDurationDiscounts(int time, BuildingRequest request, PlayersUpgradesSet upgrades){
@@ -58,4 +58,6 @@ public class BuildNewBuildingTimeGetter extends Node {
         }
         return (int)((1-discount)*time);
     }
+
+
 }

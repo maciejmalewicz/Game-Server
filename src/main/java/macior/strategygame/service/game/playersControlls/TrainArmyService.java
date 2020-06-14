@@ -1,5 +1,6 @@
 package macior.strategygame.service.game.playersControlls;
 
+import executionChains.Chain;
 import macior.strategygame.models.game.playersControls.ArmyTrainingRequest;
 import macior.strategygame.models.game.playersControls.TimeResponse;
 import macior.strategygame.service.pipelines.ChainOfResponsibility;
@@ -9,12 +10,10 @@ import macior.strategygame.service.pipelines.nodes.armyTraining.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-//todo: test and fix eventual bugs, update angular part so it works (maybe test using angular part)
-//todo: should work properly
 @Service
 public class TrainArmyService {
 
-    private ChainOfResponsibility chain;
+    private Chain<ArmyTrainingModel> chain;
 
     @Autowired
     public TrainArmyService(CodeChangingNode codeChangingNode,
@@ -32,7 +31,7 @@ public class TrainArmyService {
                             ArmyTrainingEventStarter eventStarter
                             ){
 
-        chain = new ChainOfResponsibility( new Node[]{
+        chain = new Chain<>(
                 codeChangingNode,
                 playerRetrievingNode,
                 armyTrainingRequestValidator,
@@ -46,7 +45,7 @@ public class TrainArmyService {
                 timeValidator,
                 paymentExecutor,
                 eventStarter
-        });
+        );
     }
 
     public TimeResponse trainArmy(String code, ArmyTrainingRequest request){
@@ -55,6 +54,7 @@ public class TrainArmyService {
         model.CODE = code;
         model.REQUEST = request;
         model.RESPONSE = response;
-        return (TimeResponse)chain.execute(model);
+        chain.executeDefaultOrdered(model);
+        return (TimeResponse)model.RESPONSE;
     }
 }

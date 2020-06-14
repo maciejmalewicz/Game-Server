@@ -1,5 +1,7 @@
 package macior.strategygame.service.pipelines.nodes.attacks;
 
+import executionChains.ChainNode;
+import executionChains.chainExecutors.ChainExecutor;
 import macior.strategygame.models.game.playersControls.AttackRequest;
 import macior.strategygame.service.pipelines.models.ArmyTransferModel;
 import macior.strategygame.service.pipelines.models.ChainModel;
@@ -10,20 +12,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AttackTargetAreaUnitValidator extends Node {
+public class AttackTargetAreaUnitValidator extends ChainNode<ArmyTransferModel> {
 
     @Autowired
     private AreaUnitOwnershipValidator validator;
 
     @Override
-    public void applyChanges(ChainModel model) {
-        ArmyTransferModel transferModel = (ArmyTransferModel)model;
-        AttackRequest request = (AttackRequest)transferModel.REQUEST;
+    public void execute(ArmyTransferModel model, ChainExecutor executor) {
+        AttackRequest request = (AttackRequest)model.REQUEST;
 
-        transferModel.TARGET_AREA_UNIT = transferModel.PLAYER.getGame().getBoard()
+        model.TARGET_AREA_UNIT = model.PLAYER.getGame().getBoard()
                 .getAreaUnit(request.getTargetLocation());
 
-        if (validator.isAreaOwnedBy(transferModel.PLAYER, transferModel.TARGET_AREA_UNIT)){
+        if (validator.isAreaOwnedBy(model.PLAYER, model.TARGET_AREA_UNIT)){
+            executor.stop();
             model.RESPONSE.setStatus(GameErrors.ATTACKING_OWN_AREA);
         }
     }

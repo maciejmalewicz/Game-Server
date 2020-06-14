@@ -1,5 +1,7 @@
 package macior.strategygame.service.pipelines.nodes.upgradeWalls;
 
+import executionChains.ChainNode;
+import executionChains.chainExecutors.ChainExecutor;
 import macior.strategygame.game.BoardManagement.AreaUnit;
 import macior.strategygame.game.BoardManagement.Buildings.buildings.Building;
 import macior.strategygame.game.BoardManagement.Buildings.buildings.UnderConstructionBuilding;
@@ -13,24 +15,23 @@ import macior.strategygame.service.pipelines.nodes.Node;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UpgradeWallsEventStarter extends Node {
+public class UpgradeWallsEventStarter extends ChainNode<UpgradeWallsModel> {
 
     @Override
-    public void applyChanges(ChainModel model) {
-        UpgradeWallsModel wallsModel = (UpgradeWallsModel)model;
-        Building building = wallsModel.BUILDING_UPGRADED;
+    public void execute(UpgradeWallsModel model, ChainExecutor executor) {
+        Building building = model.BUILDING_UPGRADED;
         BuildingConcernedEvent event;
-        EventFactory eventFactory = wallsModel.PLAYER.getGame().getEventFactory();
+        EventFactory eventFactory = model.PLAYER.getGame().getEventFactory();
         if (building == null){
             Walls walls = new Walls();
-            UnderConstructionBuilding ucb = setUnderConstructionBuilding(wallsModel, walls);
-            event = eventFactory.generateBuildingConstructionEvent(wallsModel.FINISHING_TIME, ucb);
+            UnderConstructionBuilding ucb = setUnderConstructionBuilding(model, walls);
+            event = eventFactory.generateBuildingConstructionEvent(model.FINISHING_TIME, ucb);
         } else {
-            event = eventFactory.generateBuildingUpgradeEvent(wallsModel.FINISHING_TIME, wallsModel.BUILDING_UPGRADED,
-                    wallsModel.NEXT_LEVEL, wallsModel.AREA_UNIT, 6);
+            event = eventFactory.generateBuildingUpgradeEvent(model.FINISHING_TIME, model.BUILDING_UPGRADED,
+                    model.NEXT_LEVEL, model.AREA_UNIT, 6);
         }
-        wallsModel.PLAYER.getGame().getEventHandler().addEvent(event);
-        wallsModel.AREA_UNIT.getEventsQueue().pushEvent(event);
+        model.PLAYER.getGame().getEventHandler().addEvent(event);
+        model.AREA_UNIT.getEventsQueue().pushEvent(event);
     }
 
     private UnderConstructionBuilding setUnderConstructionBuilding(UpgradeWallsModel wallsModel, Walls walls){

@@ -1,5 +1,7 @@
 package macior.strategygame.service.pipelines.nodes.armyTransfers;
 
+import executionChains.ChainNode;
+import executionChains.chainExecutors.ChainExecutor;
 import macior.strategygame.models.game.playersControls.ArmyTransferRequest;
 import macior.strategygame.service.pipelines.models.ArmyTransferModel;
 import macior.strategygame.service.pipelines.models.ChainModel;
@@ -8,22 +10,24 @@ import macior.strategygame.service.utilities.errors.GameErrors;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ArmyTransferRequestValidator extends Node {
+public class ArmyTransferRequestValidator extends ChainNode<ArmyTransferModel> {
 
     @Override
-    public void applyChanges(ChainModel model) {
-        ArmyTransferModel transferModel = (ArmyTransferModel)model;
-        if (transferModel.REQUEST == null){
-            transferModel.RESPONSE.setStatus(GameErrors.BAD_REQUEST);
+    public void execute(ArmyTransferModel model, ChainExecutor executor) {
+        if (model.REQUEST == null){
+            executor.stop();
+            model.RESPONSE.setStatus(GameErrors.BAD_REQUEST);
         }
-        ArmyTransferRequest request = (ArmyTransferRequest)transferModel.REQUEST;
+        ArmyTransferRequest request = (ArmyTransferRequest)model.REQUEST;
 
         if (request.getArmy() == null){
-            transferModel.RESPONSE.setStatus(GameErrors.BAD_REQUEST);
+            executor.stop();
+            model.RESPONSE.setStatus(GameErrors.BAD_REQUEST);
         }
 
         if (request.getTargetLocation() == null || request.getLocation() == null){
-            transferModel.RESPONSE.setStatus(GameErrors.BAD_REQUEST);
+            executor.stop();
+            model.RESPONSE.setStatus(GameErrors.BAD_REQUEST);
         }
     }
 }

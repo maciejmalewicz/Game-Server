@@ -1,5 +1,7 @@
 package macior.strategygame.service.pipelines.nodes.armyTransfers;
 
+import executionChains.ChainNode;
+import executionChains.chainExecutors.ChainExecutor;
 import macior.strategygame.game.MainConfiguration.MainConfig;
 import macior.strategygame.game.TimeManager;
 import macior.strategygame.models.game.playersControls.ArmyTransferRequest;
@@ -11,24 +13,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ArmyTransferTimeGetter extends Node {
+public class ArmyTransferTimeGetter extends ChainNode<ArmyTransferModel> {
 
     @Autowired
     private MainConfig configuration;
 
     @Override
-    public void applyChanges(ChainModel model) {
-        ArmyTransferModel transferModel = (ArmyTransferModel)model;
-        ArmyTransferRequest request = (ArmyTransferRequest)transferModel.REQUEST;
+    public void execute(ArmyTransferModel model, ChainExecutor executor) {
+        ArmyTransferRequest request = (ArmyTransferRequest)model.REQUEST;
         int pathLength = request.getPath().length - 1;
-        TimeManager timeManager = ((ArmyTransferModel) model).PLAYER.getGame().getTimeManager();
+        TimeManager timeManager = model.PLAYER.getGame().getTimeManager();
 
         //per every link between areas we have to wait few seconds
         int marchingDuration = configuration.MARCHING_TIME*pathLength;
 
-        transferModel.FINISHING_TIME = timeManager.getPostponedEventTime(marchingDuration);
+        model.FINISHING_TIME = timeManager.getPostponedEventTime(marchingDuration);
 
-        TimeResponse timeResponse = (TimeResponse)transferModel.RESPONSE;
-        timeResponse.setFinishingTime(transferModel.FINISHING_TIME);
+        TimeResponse timeResponse = (TimeResponse)model.RESPONSE;
+        timeResponse.setFinishingTime(model.FINISHING_TIME);
     }
 }

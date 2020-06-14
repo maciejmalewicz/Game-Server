@@ -1,5 +1,7 @@
 package macior.strategygame.service.pipelines.nodes.armyTransfers;
 
+import executionChains.ChainNode;
+import executionChains.chainExecutors.ChainExecutor;
 import macior.strategygame.game.BoardManagement.Location;
 import macior.strategygame.models.game.playersControls.ArmyTransferRequest;
 import macior.strategygame.service.pipelines.models.ArmyTransferModel;
@@ -11,21 +13,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ArmyTransferTargetAreaUnitValidator extends Node {
+public class ArmyTransferTargetAreaUnitValidator extends ChainNode<ArmyTransferModel> {
 
     @Autowired
     private AreaUnitOwnershipValidator validator;
 
     @Override
-    public void applyChanges(ChainModel model) {
-        ArmyTransferModel transferModel = (ArmyTransferModel)model;
-        ArmyTransferRequest request = (ArmyTransferRequest)transferModel.REQUEST;
+    public void execute(ArmyTransferModel model, ChainExecutor executor) {
+        ArmyTransferRequest request = (ArmyTransferRequest)model.REQUEST;
         Location targetLocation = request.getTargetLocation();
 
-        transferModel.TARGET_AREA_UNIT = transferModel.PLAYER.getGame().getBoard()
+        model.TARGET_AREA_UNIT = model.PLAYER.getGame().getBoard()
                 .getAreaUnit(targetLocation);
 
-        if (!validator.isAreaOwnedBy(transferModel.PLAYER, transferModel.TARGET_AREA_UNIT)){
+        if (!validator.isAreaOwnedBy(model.PLAYER, model.TARGET_AREA_UNIT)){
+            executor.stop();
             model.RESPONSE.setStatus(GameErrors.AREA_UNIT_NOT_OWNED);
         }
     }

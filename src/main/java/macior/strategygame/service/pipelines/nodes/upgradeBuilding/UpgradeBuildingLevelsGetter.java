@@ -1,5 +1,7 @@
 package macior.strategygame.service.pipelines.nodes.upgradeBuilding;
 
+import executionChains.ChainNode;
+import executionChains.chainExecutors.ChainExecutor;
 import macior.strategygame.game.BoardManagement.Buildings.buildings.Building;
 import macior.strategygame.game.BoardManagement.Buildings.buildings.UnderConstructionBuilding;
 import macior.strategygame.game.PostponedEvents.buildingConcernedEvents.BuildingConcernedEvent;
@@ -11,16 +13,15 @@ import macior.strategygame.service.pipelines.nodes.Node;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UpgradeBuildingLevelsGetter extends Node {
+public class UpgradeBuildingLevelsGetter extends ChainNode<UpgradeBuildingModel> {
 
     @Override
-    public void applyChanges(ChainModel model) {
-        UpgradeBuildingModel upgradeModel = (UpgradeBuildingModel)model;
-        Building building = upgradeModel.BUILDING_UPGRADED;
-        BuildingConcernedEvent event = upgradeModel.LATEST_EVENT;
+    public void execute(UpgradeBuildingModel model, ChainExecutor executor) {
+        Building building = model.BUILDING_UPGRADED;
+        BuildingConcernedEvent event = model.LATEST_EVENT;
         //unpack wrapper if building hasn't been built yet
-        upgradeModel.CURRENT_UPGRADING_LEVEL = getCurrentUpgradingLevel(building, event);
-        upgradeModel.NEXT_LEVEL = upgradeModel.CURRENT_UPGRADING_LEVEL + 1;
+        model.CURRENT_UPGRADING_LEVEL = getCurrentUpgradingLevel(building, event);
+        model.NEXT_LEVEL = model.CURRENT_UPGRADING_LEVEL + 1;
     }
 
     private int getCurrentUpgradingLevel(Building building, BuildingConcernedEvent event){
@@ -42,4 +43,6 @@ public class UpgradeBuildingLevelsGetter extends Node {
         }
         return -1;
     }
+
+
 }

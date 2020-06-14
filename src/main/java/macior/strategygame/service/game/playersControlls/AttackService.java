@@ -1,5 +1,6 @@
 package macior.strategygame.service.game.playersControlls;
 
+import executionChains.Chain;
 import macior.strategygame.models.game.playersControls.AttackRequest;
 import macior.strategygame.models.game.playersControls.TimeResponse;
 import macior.strategygame.service.pipelines.ChainOfResponsibility;
@@ -15,7 +16,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class AttackService {
 
-    private ChainOfResponsibility chain;
+    private Chain<ArmyTransferModel> chain;
 
     @Autowired
     public AttackService(
@@ -35,7 +36,7 @@ public class AttackService {
        AttackCommanderDecreaser commanderDecreaser,
        AttackEventStarter eventStarter
     ){
-        chain = new ChainOfResponsibility(new Node[]{
+        chain = new Chain<>(
                 codeChangingNode,
                 playerRetrievingNode,
                 requestValidator,
@@ -51,7 +52,7 @@ public class AttackService {
                 armyDecreaser,
                 commanderDecreaser,
                 eventStarter
-        });
+        );
     }
 
     public TimeResponse attack(String code, AttackRequest request){
@@ -60,6 +61,7 @@ public class AttackService {
         model.REQUEST = request;
         model.CODE = code;
         model.RESPONSE = new TimeResponse();
-        return (TimeResponse) chain.execute(model);
+        chain.executeDefaultOrdered(model);
+        return (TimeResponse) model.RESPONSE;
     }
 }

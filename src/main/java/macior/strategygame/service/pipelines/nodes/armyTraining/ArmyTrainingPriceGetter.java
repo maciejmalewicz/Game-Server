@@ -1,5 +1,7 @@
 package macior.strategygame.service.pipelines.nodes.armyTraining;
 
+import executionChains.ChainNode;
+import executionChains.chainExecutors.ChainExecutor;
 import macior.strategygame.game.PlayersManagement.Laboratory.PlayersUpgradesSet;
 import macior.strategygame.game.PlayersManagement.Laboratory.Upgrades.ArmyUpgrades.AdvancedDroids;
 import macior.strategygame.game.PlayersManagement.Laboratory.Upgrades.Upgrades;
@@ -14,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ArmyTrainingPriceGetter extends Node {
+public class ArmyTrainingPriceGetter extends ChainNode<ArmyTrainingModel> {
 
     @Autowired
     private GameConfiguration gameConfiguration;
@@ -23,18 +25,17 @@ public class ArmyTrainingPriceGetter extends Node {
     private ArmyQuantityGetter quantityGetter;
 
     @Override
-    public void applyChanges(ChainModel model) {
-        ArmyTrainingModel trainingModel = (ArmyTrainingModel)model;
-        ArmyTrainingRequest request = (ArmyTrainingRequest)trainingModel.REQUEST;
+    public void execute(ArmyTrainingModel model, ChainExecutor executor) {
+        ArmyTrainingRequest request = (ArmyTrainingRequest)model.REQUEST;
 
         int singleMechCost = getSingleMechCost(request);
-        int costQuantityMultiplier = quantityGetter.getProductionCostQuantity(trainingModel.FACTORY_CONFIG, request);
+        int costQuantityMultiplier = quantityGetter.getProductionCostQuantity(model.FACTORY_CONFIG, request);
         int totalCost = singleMechCost*costQuantityMultiplier;
         //applying perks from upgrades (advanced droids)
-        totalCost = applyUpgradesDiscounts(trainingModel.PLAYER.getUpgradesSet(), request, totalCost);
+        totalCost = applyUpgradesDiscounts(model.PLAYER.getUpgradesSet(), request, totalCost);
 
         ResourceSet resources = new ResourceSet(totalCost, 0 ,0);
-        trainingModel.PRICE = resources.canPurchase(trainingModel.PLAYER);
+        model.PRICE = resources.canPurchase(model.PLAYER);
     }
 
     private int getSingleMechCost(ArmyTrainingRequest request){
@@ -62,4 +63,6 @@ public class ArmyTrainingPriceGetter extends Node {
 
         return price;
     }
+
+
 }

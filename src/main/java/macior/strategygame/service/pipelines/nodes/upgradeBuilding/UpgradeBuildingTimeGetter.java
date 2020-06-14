@@ -1,5 +1,7 @@
 package macior.strategygame.service.pipelines.nodes.upgradeBuilding;
 
+import executionChains.ChainNode;
+import executionChains.chainExecutors.ChainExecutor;
 import macior.strategygame.game.BoardManagement.Buildings.configurationObjects.BuildingConfig;
 import macior.strategygame.models.game.configuration.GameConfiguration;
 import macior.strategygame.models.game.playersControls.TimeResponse;
@@ -11,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UpgradeBuildingTimeGetter extends Node {
+public class UpgradeBuildingTimeGetter extends ChainNode<UpgradeBuildingModel> {
 
     @Autowired
     private GameConfiguration configuration;
@@ -19,16 +21,14 @@ public class UpgradeBuildingTimeGetter extends Node {
     @Autowired
     private TimeGetter timeGetter;
 
-
     @Override
-    public void applyChanges(ChainModel model) {
-        UpgradeBuildingModel upgradeModel = (UpgradeBuildingModel)model;
-        BuildingConfig buildingConfig = upgradeModel.BUILDING_CONFIG;
+    public void execute(UpgradeBuildingModel model, ChainExecutor executor) {
+        BuildingConfig buildingConfig = model.BUILDING_CONFIG;
         //to model
-        upgradeModel.FINISHING_TIME = timeGetter.getTime(upgradeModel, buildingConfig);
+        model.FINISHING_TIME = timeGetter.getTime(model, buildingConfig);
         //to response
-        TimeResponse timeResponse = (TimeResponse)upgradeModel.RESPONSE;
-        timeResponse.setFinishingTime(upgradeModel.FINISHING_TIME);
+        TimeResponse timeResponse = (TimeResponse)model.RESPONSE;
+        timeResponse.setFinishingTime(model.FINISHING_TIME);
     }
 
 //    private int getTime(BuildingUpgradingConcernedModel model, BuildingConfig config){

@@ -1,5 +1,6 @@
 package macior.strategygame.api.tests;
 
+import executionChains.Chain;
 import macior.strategygame.models.account_management.StatusResponse;
 import macior.strategygame.models.game.playersControls.BuildingRequest;
 import macior.strategygame.models.game.playersControls.TimeResponse;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class FakeController {
 
-    private ChainOfResponsibility chain;
+    private Chain<BuildNewBuildingModel> chain;
 
     @Autowired
     public FakeController(CodeChangingNode codeChangingNode,
@@ -29,8 +30,7 @@ public class FakeController {
                           PaymentExecutor paymentExecutor,
                           BuildNewBuildingWrapperSetter wrapperSetter,
                           BuildNewBuildingEventStarter eventStarter){
-        chain = new ChainOfResponsibility(
-                new Node[]{
+        chain = new Chain<>(
                         codeChangingNode,
                         playerRetrievingNode,
                         buildNewBuildingRequestValidator,
@@ -43,7 +43,6 @@ public class FakeController {
                         paymentExecutor,
                         wrapperSetter,
                         eventStarter //todo delete it!
-                }
         );
     }
 
@@ -53,6 +52,7 @@ public class FakeController {
         model.CODE = code;
         model.RESPONSE = new TimeResponse();
         model.REQUEST = request;
-        return chain.execute(model);
+        chain.executeDefaultOrdered(model);
+        return model.RESPONSE;
     }
 }

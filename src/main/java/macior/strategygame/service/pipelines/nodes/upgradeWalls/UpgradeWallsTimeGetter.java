@@ -1,5 +1,7 @@
 package macior.strategygame.service.pipelines.nodes.upgradeWalls;
 
+import executionChains.ChainNode;
+import executionChains.chainExecutors.ChainExecutor;
 import macior.strategygame.models.game.configuration.SmallBuildingsConfig;
 import macior.strategygame.models.game.playersControls.TimeResponse;
 import macior.strategygame.service.pipelines.models.ChainModel;
@@ -10,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UpgradeWallsTimeGetter extends Node {
+public class UpgradeWallsTimeGetter extends ChainNode<UpgradeWallsModel> {
 
     @Autowired
     private SmallBuildingsConfig config;
@@ -19,12 +21,11 @@ public class UpgradeWallsTimeGetter extends Node {
     private TimeGetter timeGetter;
 
     @Override
-    public void applyChanges(ChainModel model) {
-        UpgradeWallsModel wallsModel = (UpgradeWallsModel)model;
+    public void execute(UpgradeWallsModel model, ChainExecutor executor) {
         //to model
-        wallsModel.FINISHING_TIME = timeGetter.getTime(wallsModel, config.getWallsConfig());
+        model.FINISHING_TIME = timeGetter.getTime(model, config.getWallsConfig());
         //to response
-        TimeResponse timeResponse = (TimeResponse)wallsModel.RESPONSE;
-        timeResponse.setFinishingTime(wallsModel.FINISHING_TIME);
+        TimeResponse timeResponse = (TimeResponse)model.RESPONSE;
+        timeResponse.setFinishingTime(model.FINISHING_TIME);
     }
 }

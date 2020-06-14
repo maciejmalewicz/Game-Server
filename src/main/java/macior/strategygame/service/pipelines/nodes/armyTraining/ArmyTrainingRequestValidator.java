@@ -1,5 +1,7 @@
 package macior.strategygame.service.pipelines.nodes.armyTraining;
 
+import executionChains.ChainNode;
+import executionChains.chainExecutors.ChainExecutor;
 import macior.strategygame.models.game.playersControls.ArmyTrainingRequest;
 import macior.strategygame.service.pipelines.models.ArmyTrainingModel;
 import macior.strategygame.service.pipelines.models.ChainModel;
@@ -8,33 +10,36 @@ import macior.strategygame.service.utilities.errors.GameErrors;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ArmyTrainingRequestValidator extends Node {
-
+public class ArmyTrainingRequestValidator extends ChainNode<ArmyTrainingModel> {
 
     @Override
-    public void applyChanges(ChainModel model) {
-        ArmyTrainingModel trainingModel = (ArmyTrainingModel)model;
-
-        if (trainingModel.REQUEST == null){
+    public void execute(ArmyTrainingModel model, ChainExecutor executor) {
+        if (model.REQUEST == null){
             model.RESPONSE.setStatus(GameErrors.BAD_REQUEST);
+            executor.stop();
             return;
         }
 
-        ArmyTrainingRequest request = (ArmyTrainingRequest)trainingModel.REQUEST;
+        ArmyTrainingRequest request = (ArmyTrainingRequest)model.REQUEST;
 
         if (request.getLocation() == null){
             model.RESPONSE.setStatus(GameErrors.BAD_REQUEST);
+            executor.stop();
             return;
         }
 
         if (request.productionType < 1 || request.productionType > 3){
             model.RESPONSE.setStatus(GameErrors.BAD_REQUEST);
+            executor.stop();
             return;
         }
 
         if (request.unitType < 1 || request.unitType > 3){
             model.RESPONSE.setStatus(GameErrors.BAD_REQUEST);
+            executor.stop();
             return;
         }
     }
+
+
 }

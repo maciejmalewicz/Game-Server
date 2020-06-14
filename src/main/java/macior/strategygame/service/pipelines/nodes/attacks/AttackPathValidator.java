@@ -1,5 +1,7 @@
 package macior.strategygame.service.pipelines.nodes.attacks;
 
+import executionChains.ChainNode;
+import executionChains.chainExecutors.ChainExecutor;
 import macior.strategygame.game.BoardManagement.Location;
 import macior.strategygame.models.game.playersControls.AttackRequest;
 import macior.strategygame.service.pipelines.models.ArmyTransferModel;
@@ -12,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AttackPathValidator extends Node {
+public class AttackPathValidator extends ChainNode<ArmyTransferModel> {
 
     @Autowired
     private AreaUnitOwnershipValidator ownershipValidator;
@@ -21,35 +23,38 @@ public class AttackPathValidator extends Node {
     private PathValidation pathValidator;
 
     @Override
-    public void applyChanges(ChainModel model) {
-        ArmyTransferModel transferModel = (ArmyTransferModel)model;
-        AttackRequest request = (AttackRequest)transferModel.REQUEST;
+    public void execute(ArmyTransferModel model, ChainExecutor executor) {
+        AttackRequest request = (AttackRequest)model.REQUEST;
         Location[] path = request.getPath();
 
         if (!pathValidator.isLongEnough(path)){
             setError(model);
+            executor.stop();
             return;
         }
 
         if (!pathValidator.areEndsCorrect(request, path)){
             setError(model);
+            executor.stop();
             return;
         }
 
         for (int i = 0; i < path.length-2; i++){
-            if (!ownershipValidator.isLocationOwnedBy(transferModel.PLAYER, path[i])){
+            if (!ownershipValidator.isLocationOwnedBy(model.PLAYER, path[i])){
                 setError(model);
+                executor.stop();
                 return;
             }
         }
 
         if (!pathValidator.areAllNeighbours(path)){
             setError(model);
-            return;
+            executor.stop();
         }
-
     }
     private void setError(ChainModel model){
         model.RESPONSE.setStatus(GameErrors.WRONG_PATH);
     }
+
+
 }

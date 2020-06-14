@@ -1,5 +1,7 @@
 package macior.strategygame.service.pipelines.nodes.armyTraining;
 
+import executionChains.ChainNode;
+import executionChains.chainExecutors.ChainExecutor;
 import macior.strategygame.game.BattlesManagement.configuration.MechConfig;
 import macior.strategygame.game.BoardManagement.Buildings.buildings.smallBuildings.mechFactory.CannonFactory;
 import macior.strategygame.game.BoardManagement.Buildings.buildings.smallBuildings.mechFactory.DroidFactory;
@@ -17,19 +19,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ArmyTrainingConfigurationGetter extends Node {
+public class ArmyTrainingConfigurationGetter extends ChainNode<ArmyTrainingModel> {
 
     @Autowired
     private GameConfiguration gameConfiguration;
 
     @Override
-    public void applyChanges(ChainModel model) {
-        ArmyTrainingModel trainingModel = (ArmyTrainingModel)model;
-        MechFactory factory = (MechFactory)trainingModel.FACTORY;
-        ArmyTrainingRequest request = (ArmyTrainingRequest) trainingModel.REQUEST;
+    public void execute(ArmyTrainingModel model, ChainExecutor executor) {
+        MechFactory factory = (MechFactory)model.FACTORY;
+        ArmyTrainingRequest request = (ArmyTrainingRequest) model.REQUEST;
 
-        trainingModel.FACTORY_CONFIG = getMechFactoryConfig(factory);
-        trainingModel.MECH_CONFIG = getMechConfig(request);
+        model.FACTORY_CONFIG = getMechFactoryConfig(factory);
+        model.MECH_CONFIG = getMechConfig(request);
     }
 
     private MechFactoryConfig getMechFactoryConfig(MechFactory factory){
@@ -56,6 +57,7 @@ public class ArmyTrainingConfigurationGetter extends Node {
         }
         return null;
     }
+
 
 
 }

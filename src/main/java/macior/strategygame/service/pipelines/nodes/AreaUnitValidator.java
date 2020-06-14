@@ -1,5 +1,7 @@
 package macior.strategygame.service.pipelines.nodes;
 
+import executionChains.ChainNode;
+import executionChains.chainExecutors.ChainExecutor;
 import macior.strategygame.models.game.playersControls.AreaConcernedRequest;
 import macior.strategygame.service.pipelines.models.AreaUnitChangingModel;
 import macior.strategygame.service.pipelines.models.ChainModel;
@@ -9,21 +11,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AreaUnitValidator extends Node {
+public class AreaUnitValidator extends ChainNode<AreaUnitChangingModel> {
 
     @Autowired
     private AreaUnitOwnershipValidator validator;
 
     @Override
-    public void applyChanges(ChainModel model) {
-        AreaUnitChangingModel buildingModel = (AreaUnitChangingModel) model;
-        AreaConcernedRequest request = buildingModel.REQUEST;
-
-        buildingModel.AREA_UNIT = buildingModel.PLAYER.getGame().getBoard()
+    public void execute(AreaUnitChangingModel model, ChainExecutor executor) {
+        AreaConcernedRequest request = model.REQUEST;
+        model.AREA_UNIT = model.PLAYER.getGame().getBoard()
                 .getAreaUnit(request.getLocation());
-
-        if (!validator.isAreaOwnedBy(buildingModel.PLAYER, buildingModel.AREA_UNIT)){
-            setError(buildingModel);
+        if (!validator.isAreaOwnedBy(model.PLAYER, model.AREA_UNIT)){
+            executor.stop();
+            setError(model);
         }
     }
 

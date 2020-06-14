@@ -1,5 +1,7 @@
 package macior.strategygame.service.pipelines.nodes.upgradeBuilding;
 
+import executionChains.ChainNode;
+import executionChains.chainExecutors.ChainExecutor;
 import macior.strategygame.game.PlayersManagement.Laboratory.PlayersUpgradesSet;
 import macior.strategygame.game.PlayersManagement.Laboratory.Upgrades.Upgrades;
 import macior.strategygame.game.Utilities.ResourceSet;
@@ -11,17 +13,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UpgradeBuildingPriceGetter extends Node {
+public class UpgradeBuildingPriceGetter extends ChainNode<UpgradeBuildingModel> {
 
     @Autowired
     private GameConfiguration configuration;
 
     @Override
-    public void applyChanges(ChainModel model) {
-        UpgradeBuildingModel upgradeModel = (UpgradeBuildingModel)model;
-        PlayersUpgradesSet upgrades = upgradeModel.PLAYER.getUpgradesSet();
+    public void execute(UpgradeBuildingModel model, ChainExecutor executor) {
+        PlayersUpgradesSet upgrades = model.PLAYER.getUpgradesSet();
 
-        ResourceSet basePrice = upgradeModel.BUILDING_CONFIG.getCost(upgradeModel.NEXT_LEVEL);
+        ResourceSet basePrice = model.BUILDING_CONFIG.getCost(model.NEXT_LEVEL);
 
         if (upgrades.upgraded(Upgrades.ENGINEERING_PATTERNS)) {
             double discount = configuration.getUpgradesConfig().getImprovementUpgradesConfig()
@@ -30,6 +31,6 @@ public class UpgradeBuildingPriceGetter extends Node {
             basePrice.multiplyResources(discount);
         }
 
-        upgradeModel.PRICE = basePrice.canPurchase(upgradeModel.PLAYER);
+        model.PRICE = basePrice.canPurchase(model.PLAYER);
     }
 }
