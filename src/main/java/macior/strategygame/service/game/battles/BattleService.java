@@ -2,8 +2,7 @@ package macior.strategygame.service.game.battles;
 
 import macior.strategygame.game.BattlesManagement.Attack;
 import macior.strategygame.game.BoardManagement.AreaUnitConverter;
-import macior.strategygame.service.executionChain.models.BattleResult;
-import macior.strategygame.service.executionChain.models.UnoccupiedFieldBattleResult;
+import macior.strategygame.service.battlePipelines.models.BattleResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

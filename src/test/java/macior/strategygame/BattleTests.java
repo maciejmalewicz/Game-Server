@@ -1,7 +1,7 @@
 package macior.strategygame;
 
 import macior.strategygame.game.RatioSet;
-import macior.strategygame.service.executionChain.sharedUtilities.DamageRatiosCalculator;
+import macior.strategygame.service.battlePipelines.sharedUtilities.DamageRatiosCalculator;
 import org.junit.jupiter.api.Test;
 
 public class BattleTests {

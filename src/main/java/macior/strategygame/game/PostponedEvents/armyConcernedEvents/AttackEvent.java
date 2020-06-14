@@ -1,14 +1,13 @@
 package macior.strategygame.game.PostponedEvents.armyConcernedEvents;
 
 import macior.strategygame.game.BattlesManagement.Attack;
-import macior.strategygame.game.BoardManagement.AreaEventsQueue;
 import macior.strategygame.game.BoardManagement.AreaUnit;
 import macior.strategygame.game.PlayersManagement.Notifications.AreaDetailsNotification;
 import macior.strategygame.game.PlayersManagement.Notifications.AreaOwnershipNotification;
 import macior.strategygame.game.PlayersManagement.Notifications.NotificationsInbox;
 import macior.strategygame.game.PostponedEvents.PostponedEvent;
 import macior.strategygame.models.game.messages.OwnedAreaUnitMessage;
-import macior.strategygame.service.executionChain.models.BattleResult;
+import macior.strategygame.service.battlePipelines.models.BattleResult;
 import macior.strategygame.service.game.battles.BattleService;
 
 public class AttackEvent extends PostponedEvent {

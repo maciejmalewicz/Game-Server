@@ -1,19 +1,21 @@
 package macior.strategygame.service.game.battles;
 
+import executionChains.Chain;
 import macior.strategygame.game.BattlesManagement.Attack;
-import macior.strategygame.service.executionChain.models.UnoccupiedFieldBattleModel;
-import macior.strategygame.service.executionChain.ExecutionChain;
-import macior.strategygame.service.executionChain.models.UnoccupiedFieldBattleResult;
-import macior.strategygame.service.executionChain.nodes.commonBattles.*;
-import macior.strategygame.service.executionChain.nodes.unoccupiedFieldBattles.*;
-import macior.strategygame.service.executionChain.nodes.ExecutionNode;
+import macior.strategygame.service.battlePipelines.models.UnoccupiedFieldBattleModel;
+import macior.strategygame.service.battlePipelines.models.UnoccupiedFieldBattleResult;
+import macior.strategygame.service.battlePipelines.nodes.commonBattles.*;
+import macior.strategygame.service.battlePipelines.nodes.unoccupiedFieldBattles.DesertBotsGenerator;
+import macior.strategygame.service.battlePipelines.nodes.unoccupiedFieldBattles.DesertBotsStrengthGetter;
+import macior.strategygame.service.battlePipelines.nodes.unoccupiedFieldBattles.MinesweepersBonusHandler;
+import macior.strategygame.service.battlePipelines.nodes.unoccupiedFieldBattles.UnoccupiedAreaUnitChanger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UnoccupiedFieldBattleService {
 
-    private ExecutionChain<UnoccupiedFieldBattleResult, UnoccupiedFieldBattleModel> chain;
+    private Chain<UnoccupiedFieldBattleModel> chain;
 
     @Autowired
     public UnoccupiedFieldBattleService(
@@ -29,7 +31,7 @@ public class UnoccupiedFieldBattleService {
             AttackersArmyDamageDealer attackersArmyDamageDealer,
             UnoccupiedAreaUnitChanger areaUnitChanger
     ){
-        ExecutionNode[] nodes = new ExecutionNode[] {
+        chain = new Chain<>(
                 desertBotsGenerator,
                 attackersStrengthSetGetter,
                 desertBotsStrengthGetter,
@@ -41,23 +43,19 @@ public class UnoccupiedFieldBattleService {
                 damageRatioGetter,
                 attackersArmyDamageDealer,
                 areaUnitChanger
-                //todo test!!!
-        };
-        chain = new ExecutionChain<UnoccupiedFieldBattleResult, UnoccupiedFieldBattleModel>(nodes){
-
-            @Override
-            public UnoccupiedFieldBattleResult extractOutput(UnoccupiedFieldBattleModel model){
-                UnoccupiedFieldBattleResult result = new UnoccupiedFieldBattleResult();
-                result.HAS_ATTACKER_WON = model.ATTACKER_HAS_WON;
-                return result;
-            }
-        };
+        );
     }
 
     public UnoccupiedFieldBattleResult battle(Attack attack){
         UnoccupiedFieldBattleModel model = new UnoccupiedFieldBattleModel();
         model.ATTACK = attack;
-        UnoccupiedFieldBattleResult result = chain.execute(model);
+        chain.executeDefaultOrdered(model);
+        return extractOutput(model);
+    }
+
+    private UnoccupiedFieldBattleResult extractOutput(UnoccupiedFieldBattleModel model){
+        UnoccupiedFieldBattleResult result = new UnoccupiedFieldBattleResult();
+        result.HAS_ATTACKER_WON = model.ATTACKER_HAS_WON;
         return result;
     }
 }

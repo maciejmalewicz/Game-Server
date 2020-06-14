@@ -3,10 +3,9 @@ package macior.strategygame.service.game.playersControlls;
 import executionChains.Chain;
 import macior.strategygame.models.game.playersControls.ArmyTrainingRequest;
 import macior.strategygame.models.game.playersControls.TimeResponse;
-import macior.strategygame.service.pipelines.ChainOfResponsibility;
-import macior.strategygame.service.pipelines.models.ArmyTrainingModel;
-import macior.strategygame.service.pipelines.nodes.*;
-import macior.strategygame.service.pipelines.nodes.armyTraining.*;
+import macior.strategygame.service.playerCommandPipelines.models.ArmyTrainingModel;
+import macior.strategygame.service.playerCommandPipelines.nodes.*;
+import macior.strategygame.service.playerCommandPipelines.nodes.armyTraining.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -3,10 +3,9 @@ package macior.strategygame.service.game.playersControlls;
 import executionChains.Chain;
 import macior.strategygame.models.game.playersControls.BuildingRequest;
 import macior.strategygame.models.game.playersControls.TimeResponse;
-import macior.strategygame.service.pipelines.ChainOfResponsibility;
-import macior.strategygame.service.pipelines.models.BuildNewBuildingModel;
-import macior.strategygame.service.pipelines.nodes.*;
-import macior.strategygame.service.pipelines.nodes.buildNewBuilding.*;
+import macior.strategygame.service.playerCommandPipelines.models.BuildNewBuildingModel;
+import macior.strategygame.service.playerCommandPipelines.nodes.*;
+import macior.strategygame.service.playerCommandPipelines.nodes.buildNewBuilding.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
