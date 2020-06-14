@@ -3,12 +3,10 @@ package macior.strategygame.api.tests;
 import macior.strategygame.models.account_management.StatusResponse;
 import macior.strategygame.models.game.playersControls.BuildingRequest;
 import macior.strategygame.models.game.playersControls.TimeResponse;
-import macior.strategygame.service.chainOfResponsibility.ChainOfResponsibility;
-import macior.strategygame.service.chainOfResponsibility.models.BuildNewBuildingModel;
-import macior.strategygame.service.chainOfResponsibility.models.ChainModel;
-import macior.strategygame.service.chainOfResponsibility.models.PlayerChangesModel;
-import macior.strategygame.service.chainOfResponsibility.nodes.*;
-import macior.strategygame.service.chainOfResponsibility.nodes.buildNewBuilding.*;
+import macior.strategygame.service.pipelines.ChainOfResponsibility;
+import macior.strategygame.service.pipelines.models.BuildNewBuildingModel;
+import macior.strategygame.service.pipelines.nodes.*;
+import macior.strategygame.service.pipelines.nodes.buildNewBuilding.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

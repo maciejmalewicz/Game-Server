@@ -2,11 +2,10 @@ package macior.strategygame.service.game.playersControlls;
 
 import macior.strategygame.models.game.playersControls.ArmyTransferRequest;
 import macior.strategygame.models.game.playersControls.TimeResponse;
-import macior.strategygame.service.chainOfResponsibility.ChainOfResponsibility;
-import macior.strategygame.service.chainOfResponsibility.models.ArmyTransferModel;
-import macior.strategygame.service.chainOfResponsibility.nodes.*;
-import macior.strategygame.service.chainOfResponsibility.nodes.armyTraining.ArmyTrainingEventStarter;
-import macior.strategygame.service.chainOfResponsibility.nodes.armyTransfers.*;
+import macior.strategygame.service.pipelines.ChainOfResponsibility;
+import macior.strategygame.service.pipelines.models.ArmyTransferModel;
+import macior.strategygame.service.pipelines.nodes.*;
+import macior.strategygame.service.pipelines.nodes.armyTransfers.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

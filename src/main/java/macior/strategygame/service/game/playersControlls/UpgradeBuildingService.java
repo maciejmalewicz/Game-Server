@@ -2,10 +2,10 @@ package macior.strategygame.service.game.playersControlls;
 
 import macior.strategygame.models.game.playersControls.TimeResponse;
 import macior.strategygame.models.game.playersControls.UpgradeRequest;
-import macior.strategygame.service.chainOfResponsibility.ChainOfResponsibility;
-import macior.strategygame.service.chainOfResponsibility.models.UpgradeBuildingModel;
-import macior.strategygame.service.chainOfResponsibility.nodes.*;
-import macior.strategygame.service.chainOfResponsibility.nodes.upgradeBuilding.*;
+import macior.strategygame.service.pipelines.ChainOfResponsibility;
+import macior.strategygame.service.pipelines.models.UpgradeBuildingModel;
+import macior.strategygame.service.pipelines.nodes.*;
+import macior.strategygame.service.pipelines.nodes.upgradeBuilding.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

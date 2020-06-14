@@ -27,5 +27,7 @@ target/
 /.nb-gradle/
 build/
 
+passwords.txt
+
 ### VS Code ###
 .vscode/

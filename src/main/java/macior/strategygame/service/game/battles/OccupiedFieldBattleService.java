@@ -1,6 +1,6 @@
 package macior.strategygame.service.game.battles;
 
-import macior.strategygame.service.chainOfResponsibility.ChainOfResponsibility;
+import macior.strategygame.service.pipelines.ChainOfResponsibility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
