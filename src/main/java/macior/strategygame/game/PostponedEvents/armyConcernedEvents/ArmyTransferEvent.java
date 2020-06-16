@@ -2,8 +2,9 @@ package macior.strategygame.game.PostponedEvents.armyConcernedEvents;
 
 import macior.strategygame.game.BattlesManagement.Army;
 import macior.strategygame.game.BoardManagement.AreaUnit;
+import macior.strategygame.game.BoardManagement.Location;
+import macior.strategygame.game.PlayersManagement.Notifications.ArmyTransferNotification;
 import macior.strategygame.game.PlayersManagement.Notifications.ArmyUpdateNotification;
-import macior.strategygame.game.PlayersManagement.Notifications.NotificationBase;
 import macior.strategygame.game.PlayersManagement.Player;
 import macior.strategygame.game.PostponedEvents.PostponedEvent;
 import macior.strategygame.models.game.messages.event_messages.ArmyTransferEventMessage;
@@ -28,6 +29,14 @@ public class ArmyTransferEvent extends PostponedEvent {
         Army army = targetArea.getArmy();
         ArmyUpdateNotification notification = new ArmyUpdateNotification(targetArea.getLocation(), army);
         targetArea.getOwner().getInbox().addNotification(notification);
+
+        Location sendingLocation = sendingAreaUnit.getLocation();
+        Location recevingLocation = targetArea.getLocation();
+        ArmyTransferNotification transferNotification = new ArmyTransferNotification();
+        transferNotification.setArmy(army);
+        transferNotification.setFrom(sendingLocation);
+        transferNotification.setTo(recevingLocation);
+        targetArea.getOwner().getInbox().addNotification(transferNotification);
     }
 
     @Override
