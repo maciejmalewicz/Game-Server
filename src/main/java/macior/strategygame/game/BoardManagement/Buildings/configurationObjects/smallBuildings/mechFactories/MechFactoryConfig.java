@@ -2,7 +2,6 @@ package macior.strategygame.game.BoardManagement.Buildings.configurationObjects.
 
 import macior.strategygame.game.BoardManagement.Buildings.configurationObjects.BuildingConfig;
 import macior.strategygame.game.BoardManagement.Buildings.configurationObjects.levelConfigs.MechFactoryLevelAttributesConfig;
-import macior.strategygame.game.BoardManagement.Buildings.configurationObjects.smallBuildings.SmallBuildingConfig;
 
 public class MechFactoryConfig extends BuildingConfig <MechFactoryLevelAttributesConfig> {
 
@@ -14,7 +13,7 @@ public class MechFactoryConfig extends BuildingConfig <MechFactoryLevelAttribute
     }
 
     public int getQuantity(int productionType, int level){
-        if (level >= MAX_LEVEL){
+        if (level > MAX_LEVEL){
             return 0;
         }
         MechFactoryLevelAttributesConfig selectedLevelAttributes = LEVEL_ATTRIBUTES[level-1];

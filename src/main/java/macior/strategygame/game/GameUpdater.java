@@ -1,7 +1,5 @@
 package macior.strategygame.game;
 
-import java.util.Date;
-
 public class GameUpdater extends Thread {
 
     private Game game;
