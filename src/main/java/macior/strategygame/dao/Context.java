@@ -1,6 +1,5 @@
 package macior.strategygame.dao;
 
-import org.hibernate.Criteria;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -9,7 +8,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaBuilder;
-import java.beans.BeanProperty;
 
 @Configuration
 public class Context {
@@ -34,7 +32,8 @@ public class Context {
         return entityManager;
     }
 
-    @Bean public EntityTransaction transaction(){
+    @Bean
+    public EntityTransaction transaction(){
         return transaction;
     }
 

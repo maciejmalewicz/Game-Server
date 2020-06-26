@@ -51,6 +51,7 @@ public class AreaUnitConverter {
             } else if (event instanceof ArmyTrainingEvent) {
                 ArmyTrainingEvent trainingEvent = (ArmyTrainingEvent)event;
                 message.AREA_EVENTS.add(trainingEvent.toMessage());
+
             } else if (event instanceof ArmyTransferEvent){
                 ArmyTransferEvent transferEvent = (ArmyTransferEvent)event;
                 message.AREA_EVENTS.add(transferEvent.toMessage());
@@ -92,7 +93,7 @@ public class AreaUnitConverter {
         }
     }
 
-    public AreaUnitMessage convertOtherAreaUnit(AreaUnit unit){
+    private AreaUnitMessage convertOtherAreaUnit(AreaUnit unit){
         AreaUnitMessage out = new AreaUnitMessage();
         Building bigBuilding = unit.getBigBuilding();
         out.AREA_EVENTS = new AreaEventsMessage();
@@ -105,6 +106,4 @@ public class AreaUnitConverter {
         }
         return out;
     }
-
-
 }
