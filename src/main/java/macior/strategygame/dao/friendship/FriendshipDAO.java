@@ -64,7 +64,8 @@ public class FriendshipDAO {
             "or (first_friend = ? and second_friend = ?);";
 
     public boolean areFriends(User first, User second){
-        Query query = context.entityManager().createNativeQuery(query2Text);
+        EntityManager manager = context.entityManager();
+        Query query = manager.createNativeQuery(query2Text);
         int firstId = first.getId();
         int secondId = second.getId();
         query.setParameter(1, firstId);

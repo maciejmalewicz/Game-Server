@@ -1,8 +1,6 @@
 package macior.strategygame.dao.account;
 
 import macior.strategygame.dao.Context;
-import macior.strategygame.models.User;
-import macior.strategygame.models.account_management.LoginCode;
 import macior.strategygame.models.account_management.PasswordCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -69,12 +67,13 @@ public class ChangePasswordDAO {
     }
 
     public Optional<PasswordCode> getCode(String code){
-        CriteriaBuilder builder = context.criteriaBuilder();
+        EntityManager manager = context.entityManager();
+        CriteriaBuilder builder = manager.getCriteriaBuilder();
         CriteriaQuery<PasswordCode> criteriaQuery = builder.createQuery(PasswordCode.class);
         Root<PasswordCode> root = criteriaQuery.from(PasswordCode.class);
         Predicate predicate = builder.equal(root.get("code"), code);
         criteriaQuery.where(predicate);
-        Query query = context.entityManager().createQuery(criteriaQuery);
+        Query query = manager.createQuery(criteriaQuery);
         Object object;
         try {
             object = query.getSingleResult();

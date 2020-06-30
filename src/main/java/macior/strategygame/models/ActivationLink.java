@@ -1,10 +1,8 @@
 package macior.strategygame.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import java.util.UUID;
 
 @Entity(name = "activation_link")
 public class ActivationLink {
@@ -12,7 +10,7 @@ public class ActivationLink {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_link")
-    private int id;
+    private Integer id;
 
     @Column(name = "activation_link")
     private String activationLink;
@@ -30,6 +28,10 @@ public class ActivationLink {
 
     }
 
+    public ActivationLink(String login){
+        this.login = login;
+    }
+
     public ActivationLink(@JsonProperty("login") String login,
                           @JsonProperty("password") String password,
                           @JsonProperty("email") String email){
@@ -44,11 +46,11 @@ public class ActivationLink {
         return login + " " + password + " " + email;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -83,4 +85,6 @@ public class ActivationLink {
     public void setEmail(String email) {
         this.email = email;
     }
+
+
 }

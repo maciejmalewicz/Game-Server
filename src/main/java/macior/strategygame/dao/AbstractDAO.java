@@ -1,6 +1,5 @@
 package macior.strategygame.dao;
 
-import macior.strategygame.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.EntityManager;
@@ -18,7 +17,7 @@ public abstract class AbstractDAO <T> {
 
     public void add (T object){
         EntityManager manager = context.entityManager();
-        EntityTransaction transaction = context.transaction();
+        EntityTransaction transaction = manager.getTransaction();
         transaction.begin();
         try {
             manager.persist(object);
@@ -32,7 +31,7 @@ public abstract class AbstractDAO <T> {
 
     public void delete (int id){
         EntityManager manager = context.entityManager();
-        EntityTransaction transaction = context.transaction();
+        EntityTransaction transaction = manager.getTransaction();
         transaction.begin();
         try {
             T object = getById(id).get();
@@ -48,7 +47,7 @@ public abstract class AbstractDAO <T> {
 
     public void update (int id, T toUpdate){
         EntityManager manager = context.entityManager();
-        EntityTransaction transaction = context.transaction();
+        EntityTransaction transaction = manager.getTransaction();
         transaction.begin();
         try {
             T object = getById(id).get();

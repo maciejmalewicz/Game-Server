@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
 import java.util.UUID;
 
 @Service
@@ -71,7 +72,12 @@ public class ActivationLinkService {
         //finally, I try send an email
         UUID code = UUID.randomUUID();
         link.setActivationLink(code.toString());
-        int state = EMAILSender.sendActivationLink(link);
+        int state = 0;
+        try {
+            state = EMAILSender.sendActivationLink(link);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
 
         //if I fail then report an error
         if (state != 0){

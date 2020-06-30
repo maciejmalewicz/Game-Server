@@ -3,13 +3,11 @@ package macior.strategygame.dao.friendship;
 import macior.strategygame.dao.Context;
 import macior.strategygame.models.User;
 import macior.strategygame.models.friends.Invitation;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -42,7 +40,8 @@ public class InvitationDAO {
     }
 
     public List<Invitation> getInvitations(User user){
-        CriteriaBuilder criteriaBuilder = context.criteriaBuilder();
+        EntityManager manager = context.entityManager();
+        CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder();
         CriteriaQuery<Invitation> criteriaQuery = criteriaBuilder.createQuery(Invitation.class);
         Root<Invitation> root  = criteriaQuery.from(Invitation.class);
         Predicate predicate = criteriaBuilder.equal(root.get("receiver"), user.getId());
@@ -52,24 +51,26 @@ public class InvitationDAO {
     }
 
     public List<Invitation> getSentInvitations(User user){
-        CriteriaBuilder criteriaBuilder = context.criteriaBuilder();
+        EntityManager manager = context.entityManager();
+        CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder();
         CriteriaQuery<Invitation> criteriaQuery = criteriaBuilder.createQuery(Invitation.class);
         Root<Invitation> root = criteriaQuery.from(Invitation.class);
         Predicate predicate = criteriaBuilder.equal(root.get("sender"), user.getId());
         criteriaQuery.where(predicate);
-        Query query = context.entityManager().createQuery(criteriaQuery);
+        Query query = manager.createQuery(criteriaQuery);
         return query.getResultList();
     }
 
     public Invitation findInvitation(User sender, User receiver){
-        CriteriaBuilder criteriaBuilder = context.criteriaBuilder();
+        EntityManager manager = context.entityManager();
+        CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder();
         CriteriaQuery<Invitation> criteriaQuery = criteriaBuilder.createQuery(Invitation.class);
         Root<Invitation> root = criteriaQuery.from(Invitation.class);
         Predicate senderPredicate = criteriaBuilder.equal(root.get("sender"), sender.getId());
         Predicate receiverPredicate = criteriaBuilder.equal(root.get("receiver"), receiver.getId());
         Predicate completePredicate = criteriaBuilder.and(senderPredicate, receiverPredicate);
         criteriaQuery.where(completePredicate);
-        Query query = context.entityManager().createQuery(criteriaQuery);
+        Query query = manager.createQuery(criteriaQuery);
         try {
             Invitation invitation = (Invitation) query.getSingleResult();
             return invitation;

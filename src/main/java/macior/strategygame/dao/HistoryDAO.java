@@ -1,7 +1,5 @@
 package macior.strategygame.dao;
 
-import macior.strategygame.game.Game;
-import macior.strategygame.game.PlayersManagement.Player;
 import macior.strategygame.models.User;
 import macior.strategygame.models.game_history_management.GamePassed;
 import macior.strategygame.models.game_history_management.HistoryUnit;
@@ -16,9 +14,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
 
 @Repository("historyDAO")
 public class HistoryDAO {
@@ -33,13 +29,13 @@ public class HistoryDAO {
 //    }
 
     public List<HistoryUnit> getGamesHistory(User user){
-
-        CriteriaBuilder criteriaBuilder = context.criteriaBuilder();
+        EntityManager manager = context.entityManager();
+        CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder();
         CriteriaQuery<PlayerGame> criteria = criteriaBuilder.createQuery(PlayerGame.class);
         Root<PlayerGame> playerGameRoot = criteria.from(PlayerGame.class);
         Predicate idPredicate = criteriaBuilder.equal(playerGameRoot.get("player"), user);
         criteria.where(idPredicate);
-        Query criteriaQuery = context.entityManager().createQuery(criteria);
+        Query criteriaQuery = manager.createQuery(criteria);
         List<PlayerGame> result = criteriaQuery.getResultList();
         List<HistoryUnit> out = new ArrayList<>();
 
@@ -86,12 +82,13 @@ public class HistoryDAO {
     }
 
     private List<PlayerGame> getAttendances(GamePassed game){
-        CriteriaBuilder criteriaBuilder = context.criteriaBuilder();
+        EntityManager manager = context.entityManager();
+        CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder();
         CriteriaQuery<PlayerGame> criteria = criteriaBuilder.createQuery(PlayerGame.class);
         Root<PlayerGame> playerGameRoot = criteria.from(PlayerGame.class);
         Predicate gamePredicate = criteriaBuilder.equal(playerGameRoot.get("game"), game);
         criteria.where(gamePredicate);
-        Query criteriaQuery = context.entityManager().createQuery(criteria);
+        Query criteriaQuery = manager.createQuery(criteria);
         return criteriaQuery.getResultList();
     }
 

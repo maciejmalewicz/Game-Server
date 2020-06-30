@@ -17,10 +17,9 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Repository("activationLinkDAO")
-public class ActivationLinkDAO extends AbstractDAO<ActivationLink> implements IActivationLinkDAO{
+public class ActivationLinkDAO extends AbstractDAO<ActivationLink> {
 
     @Autowired
     private UserDAO userDAO;
@@ -31,12 +30,13 @@ public class ActivationLinkDAO extends AbstractDAO<ActivationLink> implements IA
     }
 
     public int existsInLinks(String login, String mail){ //0-does not, 1-login, 2-mail
-        CriteriaBuilder criteriaBuilder = context.criteriaBuilder();
+        EntityManager manager = context.entityManager();
+        CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder();
         CriteriaQuery<ActivationLink> criteria = criteriaBuilder.createQuery(ActivationLink.class);
         Root<ActivationLink> userRoot = criteria.from(ActivationLink.class);
         Predicate loginPredicate = criteriaBuilder.equal(userRoot.get("login"), login);
         criteria.where(loginPredicate);
-        Query criteriaQuery = context.entityManager().createQuery(criteria);
+        Query criteriaQuery = manager.createQuery(criteria);
         List<User> result = criteriaQuery.getResultList();
         if (result.size() > 0){
             return 1;
@@ -46,7 +46,7 @@ public class ActivationLinkDAO extends AbstractDAO<ActivationLink> implements IA
         Root<ActivationLink> userRoot2 = criteria2.from(ActivationLink.class);
         Predicate emailPredicate = criteriaBuilder.equal(userRoot2.get("email"), mail);
         criteria2.where(emailPredicate);
-        Query criteriaQuery2 = context.entityManager().createQuery(criteria2);
+        Query criteriaQuery2 = manager.createQuery(criteria2);
         result = criteriaQuery2.getResultList();
         if (result.size() > 0){
             return 2;
@@ -56,12 +56,13 @@ public class ActivationLinkDAO extends AbstractDAO<ActivationLink> implements IA
     }
 
     public int existsLogin(String login){
-        CriteriaBuilder criteriaBuilder = context.criteriaBuilder();
+        EntityManager manager = context.entityManager();
+        CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder();
         CriteriaQuery<ActivationLink> criteria = criteriaBuilder.createQuery(ActivationLink.class);
         Root<ActivationLink> userRoot = criteria.from(ActivationLink.class);
         Predicate loginPredicate = criteriaBuilder.equal(userRoot.get("login"), login);
         criteria.where(loginPredicate);
-        Query criteriaQuery = context.entityManager().createQuery(criteria);
+        Query criteriaQuery = manager.createQuery(criteria);
         List<User> result = criteriaQuery.getResultList();
         if (result.size() > 0){
             return 1;
@@ -87,12 +88,14 @@ public class ActivationLinkDAO extends AbstractDAO<ActivationLink> implements IA
     }
 
     public int activate(String link){
-        CriteriaBuilder criteriaBuilder = context.criteriaBuilder();
+        EntityManager manager = context.entityManager();
+        CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder();
+
         CriteriaQuery<ActivationLink> criteria = criteriaBuilder.createQuery(ActivationLink.class);
         Root<ActivationLink> linkRoot = criteria.from(ActivationLink.class);
         Predicate loginPredicate = criteriaBuilder.equal(linkRoot.get("activationLink"), link);
         criteria.where(loginPredicate);
-        Query criteriaQuery = context.entityManager().createQuery(criteria);
+        Query criteriaQuery = manager.createQuery(criteria);
 
         List<ActivationLink> result = criteriaQuery.getResultList();
 

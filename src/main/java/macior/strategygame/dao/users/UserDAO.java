@@ -2,7 +2,6 @@ package macior.strategygame.dao.users;
 
 import macior.strategygame.dao.AbstractDAO;
 import macior.strategygame.dao.Context;
-import macior.strategygame.models.ActivationLink;
 import macior.strategygame.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -33,12 +32,13 @@ public class UserDAO extends AbstractDAO<User> {
     }
 
     public int existsInUsers(String login, String email){ //same as for link
-        CriteriaBuilder criteriaBuilder = context.criteriaBuilder();
+        EntityManager manager = context.entityManager();
+        CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder();
         CriteriaQuery<User> criteria = criteriaBuilder.createQuery(User.class);
         Root<User> userRoot = criteria.from(User.class);
         Predicate loginPredicate = criteriaBuilder.equal(userRoot.get("login"), login);
         criteria.where(loginPredicate);
-        Query criteriaQuery = context.entityManager().createQuery(criteria);
+        Query criteriaQuery = manager.createQuery(criteria);
         List<User> result = criteriaQuery.getResultList();
         if (result.size() > 0){
             return 1;
@@ -48,7 +48,7 @@ public class UserDAO extends AbstractDAO<User> {
         Root<User> userRoot2 = criteria2.from(User.class);
         Predicate emailPredicate = criteriaBuilder.equal(userRoot2.get("email"), email);
         criteria2.where(emailPredicate);
-        Query criteriaQuery2 = context.entityManager().createQuery(criteria2);
+        Query criteriaQuery2 = manager.createQuery(criteria2);
         result = criteriaQuery2.getResultList();
         if (result.size() > 0) {
             return 2;
@@ -57,12 +57,13 @@ public class UserDAO extends AbstractDAO<User> {
     }
 
     public int existsLogin(String login){
-        CriteriaBuilder criteriaBuilder = context.criteriaBuilder();
+        EntityManager manager = context.entityManager();
+        CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder();
         CriteriaQuery<User> criteria = criteriaBuilder.createQuery(User.class);
         Root<User> userRoot = criteria.from(User.class);
         Predicate loginPredicate = criteriaBuilder.equal(userRoot.get("login"), login);
         criteria.where(loginPredicate);
-        Query criteriaQuery = context.entityManager().createQuery(criteria);
+        Query criteriaQuery = manager.createQuery(criteria);
         List<User> result = criteriaQuery.getResultList();
         if (result.size() > 0){
             return 1;
@@ -72,12 +73,13 @@ public class UserDAO extends AbstractDAO<User> {
     }
 
     public User getByLogin(String login){
-        CriteriaBuilder criteriaBuilder = context.criteriaBuilder();
+        EntityManager manager = context.entityManager();
+        CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder();
         CriteriaQuery<User> criteria = criteriaBuilder.createQuery(User.class);
         Root<User> userRoot = criteria.from(User.class);
         Predicate loginPredicate = criteriaBuilder.equal(userRoot.get("login"), login);
         criteria.where(loginPredicate);
-        Query criteriaQuery = context.entityManager().createQuery(criteria);
+        Query criteriaQuery = manager.createQuery(criteria);
         try {
             Object o = criteriaQuery.getSingleResult();
             User user = (User)o;
@@ -89,7 +91,8 @@ public class UserDAO extends AbstractDAO<User> {
 
 
     public Optional<User> getAccount(String login, String password){
-        CriteriaBuilder criteriaBuilder = context.criteriaBuilder();
+        EntityManager manager = context.entityManager();
+        CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder();
         CriteriaQuery<User> criteria = criteriaBuilder.createQuery(User.class);
         Root<User> userRoot = criteria.from(User.class);
         Predicate loginPredicate = criteriaBuilder.equal(userRoot.get("login"), login);
@@ -97,7 +100,7 @@ public class UserDAO extends AbstractDAO<User> {
 
         criteria.where(criteriaBuilder.and(loginPredicate, passwordPredicate));
 
-        Query criteriaQuery = context.entityManager().createQuery(criteria);
+        Query criteriaQuery = manager.createQuery(criteria);
         List<User> result = criteriaQuery.getResultList();
         if (result.size() > 0){
             return Optional.of(result.get(0));

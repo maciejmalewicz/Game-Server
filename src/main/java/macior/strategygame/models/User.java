@@ -1,19 +1,19 @@
 package macior.strategygame.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import macior.strategygame.models.account_management.LoginCode;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.math.BigInteger;
+import java.util.Objects;
 
 @Entity(name = "user_registered")
-
 public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_user")
-    private int id;
+    private Integer id;
 
     @Column(name = "login")
     private String login;
@@ -27,9 +27,16 @@ public class User implements Serializable {
     @Column(name = "experience")
     private Long experience;
 
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "user")
+    private LoginCode loginCode;
+
     public User (@JsonProperty("login") String login, @JsonProperty("password") String password){
         this.login = login;
         this.password = password;
+    }
+
+    public User(String login){
+        this.login = login;
     }
 
     public User(){}
@@ -39,6 +46,19 @@ public class User implements Serializable {
         password = link.getPassword();
         email = link.getEmail();
         experience = 0L;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id == user.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     public User cloneWithLogin(String login){
@@ -63,11 +83,11 @@ public class User implements Serializable {
 
 
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -105,7 +125,14 @@ public class User implements Serializable {
         } else {
             this.experience = experience;
         }
+    }
 
+    public LoginCode getLoginCode() {
+        return loginCode;
+    }
+
+    public void setLoginCode(LoginCode loginCode) {
+        this.loginCode = loginCode;
     }
 
     public String toString(){

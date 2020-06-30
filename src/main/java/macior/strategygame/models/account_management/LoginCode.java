@@ -1,6 +1,5 @@
 package macior.strategygame.models.account_management;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import macior.strategygame.models.User;
 
 import javax.persistence.*;
@@ -12,9 +11,12 @@ import java.util.UUID;
 public class LoginCode implements Serializable {
 
     @Id
-    @OneToOne(fetch = FetchType.LAZY)
-    @MapsId
-    @JoinColumn(name = "id_user")
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_user")
+    private Integer id;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_user", referencedColumnName = "id")
     private User user;
 
     @Column(name = "code")
@@ -27,10 +29,11 @@ public class LoginCode implements Serializable {
 
     }
 
+    public LoginCode(String login){
+        this.login = login;
+    }
+
     public static LoginCode buildLoginCode(String login){
-        if (login == null || login.isEmpty()){
-            return null;
-        }
         LoginCode loginCode = new LoginCode();
         loginCode.setLogin(login);
         loginCode.setCode(UUID.randomUUID().toString());
@@ -59,5 +62,13 @@ public class LoginCode implements Serializable {
 
     public void setLogin(String login) {
         this.login = login;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }
