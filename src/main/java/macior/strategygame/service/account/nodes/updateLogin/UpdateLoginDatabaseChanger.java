@@ -9,7 +9,6 @@ import macior.strategygame.models.account_management.LoginCode;
 import macior.strategygame.service.account.models.ActivateLoginCodeModel;
 import macior.strategygame.service.utilities.errors.MenuErrors;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
@@ -63,14 +62,6 @@ public class UpdateLoginDatabaseChanger extends ChainNode<ActivateLoginCodeModel
             return false;
         }
         return loginCode.getCode().equals(selectedCode);
-    }
-
-    private Optional<LoginCode> getLoginCode(int id, String activationCode){
-        LoginCode loginCode = new LoginCode();
-        loginCode.setCode(activationCode);
-        loginCode.setId(id);
-        Example<LoginCode> example = Example.of(loginCode);
-        return changeLoginDAO.findOne(example);
     }
 
 }

@@ -9,7 +9,6 @@ import macior.strategygame.models.account_management.PasswordCode;
 import macior.strategygame.service.account.models.ActivatePasswordCodeModel;
 import macior.strategygame.service.utilities.errors.MenuErrors;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
@@ -64,11 +63,4 @@ public class UpdatePasswordDatabaseChanger extends ChainNode<ActivatePasswordCod
         return passwordCode.getCode().equals(selectedCode);
     }
 
-    private Optional<PasswordCode> getPasswordCode(int id, String activationCode){
-        PasswordCode passwordCode = new PasswordCode();
-        passwordCode.setId(id);
-        passwordCode.setCode(activationCode);
-        Example<PasswordCode> example = Example.of(passwordCode);
-        return changePasswordDAO.findOne(example);
-    }
 }

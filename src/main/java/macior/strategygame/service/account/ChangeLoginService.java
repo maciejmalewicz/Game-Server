@@ -76,60 +76,6 @@ public class ChangeLoginService {
         return model.RESPONSE;
     }
 
-//    public StatusResponse addCode(String login, String code){
-//        //initialize output data
-//        StatusResponse response = new StatusResponse();
-//        response.setStatus(-1);
-//
-//        //1st node
-//        int userId = mapper.getId(code);
-//        if (userId == -1){
-//            return response;
-//        }
-//
-//        String newCode = mapper.updateCode(code);
-//        response.setCode(newCode);
-//
-//        //2nd and 3rd node
-//        LoginCode loginCode = LoginCode.buildLoginCode(login);
-//
-//
-//        //2nd
-//        if (login.isEmpty() || login.isBlank()){
-//            response.setStatus(1);
-//            return response;
-//        }
-//
-//        //4th node
-//        if (isLoginOccupied(login)){
-//            response.setStatus(-2);
-//            return response;
-//        }
-//
-//        User user = userDAO.getById(userId).orElse(null);
-//
-//        if (user == null || loginCode == null){ //login code is 2nd node
-//            response.setCode("UNKNOWN USER");
-//            return response;
-//        }
-//        loginCode.setUser(user);
-//
-//        int addingStatus = changeLoginDAO.addOrUpdateCode(loginCode);
-//        if (addingStatus == 0){
-//            //todo delete 0 and uncomment on the right
-//            int emailStatus = 0;//EMAILSender.sendChangeLoginLink(loginCode.getCode(), user);
-//            response.setStatus(emailStatus);
-//        } else {
-//            response.setStatus(addingStatus);
-//        }
-//        return response;
-//    }
-
-//    private boolean isLoginOccupied(String login){
-//        return userDAO.exists(Example.of(new User(login, null)))
-//                && activationLinkDAO.exists(Example.of(new ActivationLink(login)))
-//                && changeLoginDAO.exists(Example.of(new LoginCode(login)));
-//    }
 
     public StatusResponse activateCode(String loginCode, String code){
         ActivateLoginCodeModel model = new ActivateLoginCodeModel();
@@ -139,44 +85,5 @@ public class ChangeLoginService {
         updatingChain.executeDefaultOrdered(model);
         return model.RESPONSE;
     }
-
-//    public StatusResponse activateCode(String loginCode, String code){
-//        StatusResponse response = new StatusResponse();
-//
-//        int id = mapper.getId(code);
-//
-//        //validate user first
-//        if (id == -1){
-//            response.setCode("UNKNOWN CODE");
-//            return response;
-//        }
-//
-//        //if ok, generate code
-//        String newCode = mapper.updateCode(code);
-//        response.setCode(newCode);
-//
-//        LoginCode selectedCode = changeLoginDAO.getCode(loginCode).orElse(null);
-//        if (selectedCode == null){
-//            response.setStatus(-2);
-//            return response;
-//        }
-//
-//        response.setStatus(-3);
-//        int result = changeLoginDAO.deleteLogin(selectedCode);
-//        if (result == -1){
-//            return response;
-//        }
-//
-//        User existingUser = userDAO.getById(id).orElse(null);
-//        if (existingUser == null){
-//            return response;
-//        }
-//
-//        User toUpdate = existingUser.cloneWithLogin(selectedCode.getLogin());
-//        userDAO.update(id, toUpdate);
-//
-//        response.setStatus(0);
-//        return response;
-//    }
 
 }
