@@ -1,7 +1,7 @@
 package macior.strategygame.api;
 
 import macior.strategygame.models.ActivationLink;
-import macior.strategygame.service.ActivationLinkService;
+import macior.strategygame.service.registration.ActivationLinkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
