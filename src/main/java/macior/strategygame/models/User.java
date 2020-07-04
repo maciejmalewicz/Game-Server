@@ -2,6 +2,7 @@ package macior.strategygame.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import macior.strategygame.models.account_management.LoginCode;
+import macior.strategygame.models.account_management.PasswordCode;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -29,6 +30,9 @@ public class User implements Serializable {
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "user")
     private LoginCode loginCode;
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "user")
+    private PasswordCode passwordCode;
 
     public User (@JsonProperty("login") String login, @JsonProperty("password") String password){
         this.login = login;
@@ -113,6 +117,14 @@ public class User implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public PasswordCode getPasswordCode() {
+        return passwordCode;
+    }
+
+    public void setPasswordCode(PasswordCode passwordCode) {
+        this.passwordCode = passwordCode;
     }
 
     public Long getExperience() {

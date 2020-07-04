@@ -6,7 +6,8 @@ import macior.strategygame.dao.activationLinks.IActivationLinkDAO;
 import macior.strategygame.dao.users.IUserDAO;
 import macior.strategygame.models.account_management.StatusResponse;
 import macior.strategygame.service.account.models.ActivateLoginCodeModel;
-import macior.strategygame.service.account.models.ChangeLoginModel;
+import macior.strategygame.service.account.models.AddLoginCodeModel;
+import macior.strategygame.service.account.nodes.UserGettingNode;
 import macior.strategygame.service.account.nodes.addLoginCode.*;
 import macior.strategygame.service.account.nodes.updateLogin.UpdateLoginDatabaseChanger;
 import macior.strategygame.service.account.nodes.updateLogin.UpdateLoginRequestValidator;
@@ -30,7 +31,7 @@ public class ChangeLoginService {
     @Autowired
     private ChangeLoginDAO changeLoginDAO;
 
-    private Chain<ChangeLoginModel> addingChain;
+    private Chain<AddLoginCodeModel> addingChain;
 
     private Chain<ActivateLoginCodeModel> updatingChain;
 
@@ -40,6 +41,7 @@ public class ChangeLoginService {
             ChangeLoginRequestValidator requestValidator,
             ChangeLoginGetter changeLoginGetter,
             ChangeLoginOccupiedValidator occupiedValidator,
+            UserGettingNode userGettingNode,
             ChangeLoginCodeAddingNode addingNode,
             ChangeLoginEmailSender emailSender,
 
@@ -51,6 +53,7 @@ public class ChangeLoginService {
                 requestValidator,
                 changeLoginGetter,
                 occupiedValidator,
+                userGettingNode,
                 addingNode,
                 emailSender
         );
@@ -65,7 +68,7 @@ public class ChangeLoginService {
     public StatusResponse addCode(String login, String code){
         //initialize output data
         System.out.println("CHANGE LOGIN");
-        ChangeLoginModel model = new ChangeLoginModel();
+        AddLoginCodeModel model = new AddLoginCodeModel();
         model.CODE = code;
         model.LOGIN = login;
         model.RESPONSE = new StatusResponse();

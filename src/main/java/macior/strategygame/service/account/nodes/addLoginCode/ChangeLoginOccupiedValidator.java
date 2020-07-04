@@ -8,14 +8,14 @@ import macior.strategygame.dao.users.IUserDAO;
 import macior.strategygame.models.ActivationLink;
 import macior.strategygame.models.User;
 import macior.strategygame.models.account_management.LoginCode;
-import macior.strategygame.service.account.models.ChangeLoginModel;
+import macior.strategygame.service.account.models.AddLoginCodeModel;
 import macior.strategygame.service.utilities.errors.MenuErrors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ChangeLoginOccupiedValidator extends ChainNode<ChangeLoginModel> {
+public class ChangeLoginOccupiedValidator extends ChainNode<AddLoginCodeModel> {
 
     @Autowired
     private IUserDAO userDAO;
@@ -27,7 +27,7 @@ public class ChangeLoginOccupiedValidator extends ChainNode<ChangeLoginModel> {
     private ChangeLoginDAO changeLoginDAO;
 
     @Override
-    public void execute(ChangeLoginModel model, ChainExecutor executor) {
+    public void execute(AddLoginCodeModel model, ChainExecutor executor) {
         if (isLoginOccupied(model.LOGIN)){
             model.RESPONSE.setStatus(MenuErrors.LOGIN_OCCUPIED);
             executor.stop();

@@ -10,9 +10,11 @@ import java.util.UUID;
 public class PasswordCode implements Serializable {
 
     @Id
+    @Column(name = "id_user")
+    private Integer id;
+
     @OneToOne(fetch = FetchType.LAZY)
-    @MapsId
-    @JoinColumn(name = "id_user")
+    @JoinColumn(name = "id_user", referencedColumnName = "id")
     private User user;
 
     @Column(name = "password")
@@ -61,5 +63,13 @@ public class PasswordCode implements Serializable {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }
